@@ -35,13 +35,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.bt1:
-			startActivity(new Intent(MainActivity.this,Starta1Activity.class));
+			startActivity(new Intent(MainActivity.this, Starta1Activity.class));
 			break;
 		case R.id.bt2:
-
+			startActivity(new Intent(MainActivity.this, Startb1Activity.class));
 			break;
 		case R.id.bt3:
-
+			startActivity(new Intent(MainActivity.this, Startc1Activity.class));
 			break;
 		case R.id.bt4:
 

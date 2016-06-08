@@ -30,6 +30,14 @@
         </activity>
         <activity android:name=".Starta4Activity" >
         </activity>
+        <activity android:name=".Starta5Activity" >
+        </activity>
+        <activity android:name=".Startb1Activity" >
+        </activity>
+        <activity android:name=".Startc1Activity" >
+        </activity>
+        <activity android:name=".SingleResultActivity2" >
+        </activity>
     </application>
 
 </manifest>

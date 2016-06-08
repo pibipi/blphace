@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,16 @@ public class Starta4Activity extends Activity implements OnClickListener,
 		switch (v.getId()) {
 		case R.id.bt_dropdown:
 			showSpinWindow();
+			break;
+		case R.id.tv_value:
+			showSpinWindow();
+			break;
+		case R.id.next:
+			startActivity(new Intent(Starta4Activity.this,
+					Starta5Activity.class));
+			break;
+		case R.id.back:
+			finish();
 			break;
 		}
 	}

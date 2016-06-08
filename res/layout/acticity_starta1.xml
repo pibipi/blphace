@@ -22,21 +22,50 @@
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
             android:background="#dcdee4" />
+
+        <ImageView
+            android:scaleType="centerInside"
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/back" />
+
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/a1_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" >
 
         <Button
+            android:background="@null"
             android:id="@+id/next"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="79dp"
-            android:text="立即开始" />
+            android:text="开始" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="3dp"
+            android:layout_alignBottom="@+id/next"
+            android:layout_alignLeft="@+id/next"
+            android:background="#b1dfd1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/next"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="109dp"
+            android:background="@drawable/a1_img" />
+
     </RelativeLayout>
 
 </LinearLayout>

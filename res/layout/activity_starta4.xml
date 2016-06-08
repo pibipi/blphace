@@ -10,6 +10,17 @@
         android:layout_weight="11"
         android:background="#ffffff" >
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -24,17 +35,20 @@
             android:background="#dcdee4" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" >
 
         <Button
-            android:layout_width="150dp"
+            android:id="@+id/next"
+            android:layout_width="210dp"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="79dp"
+            android:background="@drawable/a3_btn_background"
+            android:onClick="onClick"
             android:text="开启肌肤测试" />
 
         <TextView
@@ -71,6 +85,7 @@
                     android:ellipsize="end"
                     android:gravity="left|center"
                     android:hint="请选择"
+                    android:onClick="onClick"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:textColor="#ff000000"
@@ -88,21 +103,21 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="15dp"
-                        android:background="@drawable/ic_launcher" />
+                        android:background="@drawable/draw_down" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
 
         <EditText
-            android:layout_centerHorizontal="true"
             android:layout_width="300dp"
             android:layout_height="42dp"
             android:layout_below="@+id/layout"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="26dp"
+            android:background="#ffffff"
             android:ems="10"
-            android:hint="输入你常用的品牌" >
+            android:hint=" 输入你常用的品牌" >
         </EditText>
-
     </RelativeLayout>
 
 </LinearLayout>

@@ -29,7 +29,9 @@ public class Starta2Activity extends Activity implements OnClickListener {
 			startActivity(new Intent(Starta2Activity.this,
 					Starta3Activity.class));
 			break;
-
+		case R.id.back:
+			finish();
+			break;
 		default:
 			break;
 		}

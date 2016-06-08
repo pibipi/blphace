@@ -10,6 +10,17 @@
         android:layout_weight="11"
         android:background="#ffffff" >
 
+        <ImageView
+            android:onClick="onClick"
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -24,19 +35,19 @@
             android:background="#dcdee4" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" >
 
         <Button
             android:id="@+id/next"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="79dp"
-            android:text="下一步" />
+            android:background="@drawable/next" />
     </RelativeLayout>
 
 </LinearLayout>
