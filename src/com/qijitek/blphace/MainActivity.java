@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(MainActivity.this, Starta1Activity.class));
 			break;
 		case R.id.bt2:
-			startActivity(new Intent(MainActivity.this, Startb1Activity.class));
+			startActivity(new Intent(MainActivity.this, Manageb1Activity.class));
 			break;
 		case R.id.bt3:
 			startActivity(new Intent(MainActivity.this, Startc1Activity.class));

@@ -25,10 +25,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alphace.constant.NomalConstant;
-import com.alphace.database.DBHelper;
-import com.alphace.database.FaceData;
-import com.alphace.service.BluetoothLeService;
+import com.qijitek.constant.NomalConstant;
+import com.qijitek.database.DBHelper;
+import com.qijitek.database.FaceData;
+import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.GetTypeUtils;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.view.MyProgressBar;
@@ -55,7 +55,6 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 	private TextView average_type;
 
 	private ImageView back;
-	private ImageView save;
 	private Button share2wechat;
 
 	private int water, oil, light, average, type;
@@ -133,10 +132,10 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 
 		};
 		background = (LinearLayout) findViewById(R.id.background);
-//		Bitmap bmp1 = MyUtils.bytearray2bitmap(getIntent().getByteArrayExtra(
-//				"bmp"));
-//		Bitmap bmp2 = MyUtils.fastblurscale(bmp1, 0.05f, 15);
-//		background.setBackground(new BitmapDrawable(getResources(), bmp2));
+		// Bitmap bmp1 = MyUtils.bytearray2bitmap(getIntent().getByteArrayExtra(
+		// "bmp"));
+		// Bitmap bmp2 = MyUtils.fastblurscale(bmp1, 0.05f, 15);
+		// background.setBackground(new BitmapDrawable(getResources(), bmp2));
 
 		reset_Dialog = new AlertDialog.Builder(SingleResultActivity2.this)
 				.create();
@@ -156,10 +155,8 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		skin_average_progressBar = (MyProgressBar) findViewById(R.id.skin_average_progressBar);
 
 		back = (ImageView) findViewById(R.id.back);
-		save = (ImageView) findViewById(R.id.save);
 		share2wechat = (Button) findViewById(R.id.share2wechat);
 		share2wechat.setOnClickListener(this);
-		save.setOnClickListener(this);
 		back.setOnClickListener(this);
 	}
 
@@ -299,11 +296,9 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.save:
-			saveData();
-			break;
 		case R.id.back:
-			showDialog();
+			finish();
+			// showDialog();
 			break;
 		case R.id.share2wechat:
 			// TODO
@@ -315,17 +310,6 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		}
 	}
 
-	private void saveData() {
-		long time = System.currentTimeMillis();
-		DBHelper dbHelper = new DBHelper(getApplicationContext(), "face", null,
-				1);
-		long row = dbHelper.insert(type, water, oil, light, average, result,
-				time);
-		System.out.println("row插入成功" + row);
-		Toast.makeText(getApplicationContext(), "保存成功", 0).show();
-		save.setClickable(false);
-		save_flag = true;
-	}
 
 	private static IntentFilter makeGattUpdateIntentFilter() {
 		final IntentFilter intentFilter = new IntentFilter();
@@ -440,36 +424,36 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 	}
 
 	private void showDialog() {
-//		if (save_flag) {
-//			finish();
-//			return;
-//		}
-//		reset_Dialog.show();
-//
-//		Window window = reset_Dialog.getWindow();
-//		window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
-//		// window.setWindowAnimations(R.style.mystyle); // 添加动画
-//
-//		reset_Dialog.getWindow().setContentView(R.layout.dialog_not_save);
-//		reset_Dialog.getWindow().findViewById(R.id.yes)
-//				.setOnClickListener(new View.OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						reset_Dialog.dismiss();
-//						saveData();
-//						SingleResultActivity2.this.finish();
-//					}
-//				});
-//		reset_Dialog.getWindow().findViewById(R.id.no)
-//				.setOnClickListener(new View.OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						SingleResultActivity2.this.finish();
-//						reset_Dialog.dismiss();
-//					}
-//				});
-//		reset_Dialog.setCancelable(false);
+		// if (save_flag) {
+		// finish();
+		// return;
+		// }
+		// reset_Dialog.show();
+		//
+		// Window window = reset_Dialog.getWindow();
+		// window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// // window.setWindowAnimations(R.style.mystyle); // 添加动画
+		//
+		// reset_Dialog.getWindow().setContentView(R.layout.dialog_not_save);
+		// reset_Dialog.getWindow().findViewById(R.id.yes)
+		// .setOnClickListener(new View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// reset_Dialog.dismiss();
+		// saveData();
+		// SingleResultActivity2.this.finish();
+		// }
+		// });
+		// reset_Dialog.getWindow().findViewById(R.id.no)
+		// .setOnClickListener(new View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// SingleResultActivity2.this.finish();
+		// reset_Dialog.dismiss();
+		// }
+		// });
+		// reset_Dialog.setCancelable(false);
 	}
 }

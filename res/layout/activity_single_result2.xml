@@ -22,6 +22,7 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:onClick="onClick"
             android:id="@+id/back"
             android:layout_width="60dp"
             android:layout_height="match_parent"
@@ -30,14 +31,6 @@
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
-        <ImageView
-            android:id="@+id/save"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/save_icon" />
     </RelativeLayout>
 
     <LinearLayout

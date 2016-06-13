@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class Startc1Activity extends android.support.v4.app.FragmentActivity
-		implements OnCheckedChangeListener {
+		implements OnCheckedChangeListener, OnClickListener {
 	private FragmentManager fragmentManager;
 	private RadioGroup radioGroup;
 	private ViewPager pager;
@@ -21,7 +23,6 @@ public class Startc1Activity extends android.support.v4.app.FragmentActivity
 	private RadioButton bt1;
 	private RadioButton bt2;
 	private RadioButton bt3;
-	private RadioButton bt4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +118,18 @@ public class Startc1Activity extends android.support.v4.app.FragmentActivity
 		case R.id.bt3:
 			pager.setCurrentItem(2);
 			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.back:
+			finish();
+			break;
+
 		default:
 			break;
 		}

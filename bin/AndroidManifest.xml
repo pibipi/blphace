@@ -16,7 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,11 +32,18 @@
         </activity>
         <activity android:name=".Starta5Activity" >
         </activity>
-        <activity android:name=".Startb1Activity" >
+        <activity android:name=".Manageb1Activity" >
+        </activity>
+        <activity android:name=".Manageb2Activity" >
+        </activity>
+        <activity android:name=".Manageb3Activity" >
         </activity>
         <activity android:name=".Startc1Activity" >
         </activity>
         <activity android:name=".SingleResultActivity2" >
+        </activity>
+        <activity android:name=".CompareResultActivity" >
+             
         </activity>
     </application>
 

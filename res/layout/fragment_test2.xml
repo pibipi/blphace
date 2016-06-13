@@ -12,5 +12,12 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@drawable/test2_img" />
-
+	<ImageView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/multiply_test1"
+	    />
+    
 </RelativeLayout>

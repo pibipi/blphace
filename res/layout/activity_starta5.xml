@@ -22,6 +22,17 @@
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
             android:background="#dcdee4" />
+
+        <ImageView
+            android:onClick="onClick"
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="21dp"
+            android:src="@drawable/next" />
+
     </RelativeLayout>
 
     <LinearLayout

@@ -3,17 +3,20 @@ package com.qijitek.blphace;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class Starta5Activity extends android.support.v4.app.FragmentActivity
-implements OnCheckedChangeListener {
+		implements OnCheckedChangeListener, OnClickListener {
 	private FragmentManager fragmentManager;
 	private RadioGroup radioGroup;
 	private ViewPager pager;
@@ -27,6 +30,7 @@ implements OnCheckedChangeListener {
 		setContentView(R.layout.activity_starta5);
 		init();
 	}
+
 	private void init() {
 		fragmentManager = getSupportFragmentManager();
 		radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -109,5 +113,18 @@ implements OnCheckedChangeListener {
 			break;
 		}
 	}
-	
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.test:
+			startActivity(new Intent(Starta5Activity.this,
+					SingleResultActivity2.class));
+			break;
+
+		default:
+			break;
+		}
+	}
+
 }

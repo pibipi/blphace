@@ -128,18 +128,20 @@ public class RoundProgressBar extends View {
 		 */
 		int centre = getWidth() / 2; // 获取圆心的x坐标
 		int radius = (int) (centre - roundWidth / 2); // 圆环的半径
-		RadialGradient ll = new RadialGradient(centre, centre, roundWidth,
-				new int[] { 0xfff2eded, 0xffccc8c8 }, null, TileMode.REPEAT);
-		paint.setShader(ll);
+//		删阴影
+//		RadialGradient ll = new RadialGradient(centre, centre, roundWidth,
+//				new int[] { 0xfff2eded, 0xffccc8c8 }, null, TileMode.REPEAT);
+//		paint.setShader(ll);
 		paint.setColor(roundColor); // 设置圆环的颜色
 		paint.setStyle(Paint.Style.STROKE); // 设置空心
 		paint.setStrokeWidth(roundWidth); // 设置圆环的宽度
 		paint.setAntiAlias(true); // 消除锯齿
 		canvas.drawCircle(centre, centre, radius, paint); // 画出圆环
-		paint.setShader(null);
-		paint.setColor(0xffffffff);
-		paint.setStrokeWidth(2);
-		canvas.drawCircle(centre, centre, radius - roundWidth * 0.5f - 1, paint);
+//		删内白环
+//		paint.setShader(null);
+//		paint.setColor(0xffffffff);
+//		paint.setStrokeWidth(2);
+//		canvas.drawCircle(centre, centre, radius - roundWidth * 0.5f - 1, paint);
 
 		// paint.setColor(0xffc1bdbd);
 		// paint.setStrokeWidth(roundWidth*0.1f);
