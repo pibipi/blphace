@@ -21,7 +21,8 @@
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
-        <TextView
+        <TextView    android:textColor="#393939"
+                    android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -62,7 +63,7 @@
                 android:paddingTop="5dp"
                 android:text="长草"
                 android:textColor="#727272"
-                android:textSize="14dp" />
+                android:textSize="12dp" />
 
             <RadioButton
                 android:id="@+id/bt2"
@@ -76,7 +77,7 @@
                 android:paddingTop="2dp"
                 android:text="拔草"
                 android:textColor="#727272"
-                android:textSize="14dp" />
+                android:textSize="12dp" />
 
             <RadioButton
                 android:id="@+id/bt3"
@@ -90,7 +91,7 @@
                 android:paddingTop="2dp"
                 android:text="教训"
                 android:textColor="#727272"
-                android:textSize="14dp" />
+                android:textSize="12dp" />
         </RadioGroup>
 
         <android.support.v4.view.ViewPager

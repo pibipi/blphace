@@ -26,7 +26,9 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="我的肌肤信息" />
+            android:text="我的肌肤信息"
+            android:textColor="#393939"
+            android:textSize="12sp" />
 
         <View
             android:layout_width="match_parent"
@@ -35,10 +37,11 @@
             android:background="#dcdee4" />
     </RelativeLayout>
 
-    <RelativeLayout android:background="#ffffff"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="#ffffff" >
 
         <Button
             android:id="@+id/next"
@@ -58,7 +61,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="83dp"
-            android:text="你常用的护肤品牌" />
+            android:text="你常用的护肤品牌"
+            android:textColor="#393939"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:id="@+id/layout"
@@ -76,18 +81,18 @@
                 android:layout_height="42dp" >
 
                 <TextView
-                    android:gravity="center"
                     android:id="@+id/tv_value"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:background="#fff"
                     android:ellipsize="end"
+                    android:gravity="center"
                     android:hint="请选择"
                     android:onClick="onClick"
                     android:singleLine="true"
                     android:textColor="#ff000000"
-                    android:textSize="18dp" />
+                    android:textSize="12dp" />
 
                 <LinearLayout
                     android:id="@+id/bt_dropdown"
@@ -107,15 +112,16 @@
         </LinearLayout>
 
         <EditText
-            android:gravity="center"
             android:layout_width="300dp"
             android:layout_height="42dp"
             android:layout_below="@+id/layout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="16dp"
             android:background="#ffffff"
             android:ems="10"
-            android:hint=" 输入你常用的品牌" >
+            android:gravity="center"
+            android:hint=" 输入你常用的品牌"
+            android:textSize="12sp" >
         </EditText>
     </RelativeLayout>
 

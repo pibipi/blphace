@@ -11,13 +11,13 @@
         android:background="#ffffff" >
 
         <ImageView
-            android:onClick="onClick"
             android:id="@+id/back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:onClick="onClick"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
@@ -61,7 +61,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:drawableTop="@drawable/bt1_img"
-                    android:text="洁面" />
+                    android:text="洁面"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/bt2"
@@ -69,7 +71,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:drawableTop="@drawable/bt2_img"
-                    android:text="化妆水" />
+                    android:text="化妆水"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,7 +87,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:drawableTop="@drawable/bt3_img"
-                    android:text="乳液" />
+                    android:text="乳液"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/bt4"
@@ -91,7 +97,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:drawableTop="@drawable/bt4_img"
-                    android:text="面膜" />
+                    android:text="面膜"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,7 +113,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:drawableTop="@drawable/bt5_img"
-                    android:text="眼部护理" />
+                    android:text="眼部护理"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/bt6"
@@ -113,7 +123,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:drawableTop="@drawable/bt6_img"
-                    android:text="面部精华" />
+                    android:text="面部精华"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

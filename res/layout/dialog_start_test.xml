@@ -17,7 +17,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="进行产品对比请选择" />
+            android:text="进行产品对比请选择"
+            android:textColor="#393939"
+            android:textSize="12sp" />
 
         <View
             android:id="@+id/view1"
@@ -54,6 +56,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/imageView1"
                     android:text="雅诗兰黛青春抗皱滋润晚霜"
+                    android:textColor="#393939"
                     android:textSize="11sp" />
 
                 <CheckBox
@@ -87,6 +90,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/imageView3"
                     android:text="雅诗兰黛鲜活亮彩面霜"
+                    android:textColor="#393939"
                     android:textSize="11sp" />
 
                 <CheckBox

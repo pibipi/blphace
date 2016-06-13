@@ -27,10 +27,10 @@ public class Starta4Activity extends Activity implements OnClickListener,
 		mTView = (TextView) findViewById(R.id.tv_value);
 
 		// 初始化数据
-		mListType.add("aaaaa1");
-		mListType.add("aaaaa2");
-		mListType.add("aaaaa3");
-		mListType.add("aaaaa4");
+		mListType.add("雅诗兰黛");
+		mListType.add("欧莱雅");
+		mListType.add("纯净水");
+		mListType.add("蒸馏水");
 
 		mAdapter = new SpinerAdapter(this, mListType);
 		mAdapter.refreshData(mListType, 0);

@@ -8,9 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,16 +20,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.qijitek.constant.NomalConstant;
-import com.qijitek.database.DBHelper;
 import com.qijitek.database.FaceData;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.GetTypeUtils;
-import com.qijitek.utils.MyUtils;
 import com.qijitek.view.MyProgressBar;
-import com.qijitek.view.RoundProgressBar;
 
 public class SingleResultActivity2 extends Activity implements OnClickListener {
 	private final static String TAG = SingleResultActivity2.class
@@ -302,7 +295,8 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 			break;
 		case R.id.share2wechat:
 			// TODO
-			Toast.makeText(getApplicationContext(), "功能暂未开放", 0).show();
+			startActivity(new Intent(SingleResultActivity2.this,Starta7Activity.class));
+//			Toast.makeText(getApplicationContext(), "功能暂未开放", 0).show();
 			// share2wechatUrl();
 			break;
 		default:

@@ -28,7 +28,9 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="产品对比" />
+            android:text="产品对比"
+            android:textColor="#393939"
+            android:textSize="12sp" />
 
         <View
             android:layout_width="match_parent"
@@ -59,7 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:text="雅诗兰黛" />
+                    android:text="雅诗兰黛"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
 
                 <ImageView
                     android:layout_width="80dp"
@@ -80,7 +84,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:text="雅诗兰黛2" />
+                    android:text="雅诗兰黛2"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
 
                 <ImageView
                     android:layout_width="80dp"
@@ -100,9 +106,9 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="100dp" >
+            android:layout_height="100dp"
+            android:layout_marginTop="15dp" >
 
             <com.qijitek.view.RoundProgressBar
                 android:id="@+id/water_progress1"
@@ -148,7 +154,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/imageView1"
                     android:layout_marginTop="5dp"
-                    android:text="水分" />
+                    android:text="水分"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -200,7 +208,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/imageView2"
                     android:layout_marginTop="5dp"
-                    android:text="油分" />
+                    android:text="油分"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -252,7 +262,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/imageView3"
                     android:layout_marginTop="5dp"
-                    android:text="肤色" />
+                    android:text="肤色"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

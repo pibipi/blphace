@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="要吐槽"
+            android:textColor="#393939"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dcdee4" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#f4f4f4" >
+
+        <RelativeLayout
+            android:id="@+id/r1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#ffffff" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/c2_img3" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/imageView2"
+                    android:text="#话题#"
+                    android:textColor="#727272"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:text="那些年我们一起入过的坑"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/r1"
+            android:layout_marginTop="13dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp" >
+
+                <RelativeLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="15dp" >
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="23dp"
+                        android:text="66"
+                        android:textColor="#727272"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="23dp"
+                        android:src="@drawable/c1_img3" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="11dp"
+                    android:src="@drawable/c2_img1" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/imageView1"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="大SB"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView3"
+                    android:layout_below="@+id/imageView1"
+                    android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp" >
+
+                <RelativeLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="15dp" >
+
+                    <TextView
+                        android:id="@+id/textView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="23dp"
+                        android:text="666"
+                        android:textColor="#727272"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="23dp"
+                        android:src="@drawable/c1_img3" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="11dp"
+                    android:src="@drawable/c2_img2" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/imageView11"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/imageView11"
+                    android:text="二SB"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView31"
+                    android:layout_below="@+id/imageView11"
+                    android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#ffffff" >
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:background="#fafafa"
+                android:ems="10"
+                android:hint="我要吐槽"
+                android:paddingLeft="10dp"
+                android:textColor="#393939"
+                android:textSize="12sp" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="17dp"
+                android:background="@drawable/single_result_btn"
+                android:text="发送"
+                android:textColor="#393939"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

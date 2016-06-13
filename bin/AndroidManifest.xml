@@ -32,13 +32,21 @@
         </activity>
         <activity android:name=".Starta5Activity" >
         </activity>
+        <activity android:name=".Starta7Activity" >
+        </activity>
         <activity android:name=".Manageb1Activity" >
         </activity>
         <activity android:name=".Manageb2Activity" >
         </activity>
         <activity android:name=".Manageb3Activity" >
         </activity>
-        <activity android:name=".Startc1Activity" >
+        <activity android:name=".Socialc1Activity" >
+        </activity>
+        <activity android:name=".Socialc2Activity" >
+        </activity>
+        <activity android:name=".Applyd1Activity" >
+        </activity>
+        <activity android:name=".Applyd2Activity" >
         </activity>
         <activity android:name=".SingleResultActivity2" >
         </activity>
