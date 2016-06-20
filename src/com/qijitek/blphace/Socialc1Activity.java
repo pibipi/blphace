@@ -25,8 +25,6 @@ public class Socialc1Activity extends android.support.v4.app.FragmentActivity
 	private RadioButton bt1;
 	private RadioButton bt2;
 	private RadioButton bt3;
-	
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class Socialc1Activity extends android.support.v4.app.FragmentActivity
 		bt3 = (RadioButton) findViewById(R.id.bt3);
 		pager = (ViewPager) findViewById(R.id.pager);
 		initViewPager();
-		
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -134,7 +132,7 @@ public class Socialc1Activity extends android.support.v4.app.FragmentActivity
 		case R.id.back:
 			finish();
 			break;
-	
+
 		default:
 			break;
 		}

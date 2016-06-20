@@ -121,7 +121,9 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 			startActivity(new Intent(Starta5Activity.this,
 					SingleResultActivity2.class));
 			break;
-
+		case R.id.back:
+			finish();
+			break;
 		default:
 			break;
 		}

@@ -21,19 +21,14 @@
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
-        <TextView    android:textColor="#393939"
-                    android:textSize="12sp"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="要吐槽" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_alignParentBottom="true"
-            android:background="#dcdee4" />
+            android:text="要吐槽"
+            android:textColor="#393939"
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -62,7 +57,7 @@
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:text="长草"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
 
             <RadioButton
@@ -76,7 +71,7 @@
                 android:gravity="center"
                 android:paddingTop="2dp"
                 android:text="拔草"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
 
             <RadioButton
@@ -90,7 +85,7 @@
                 android:gravity="center"
                 android:paddingTop="2dp"
                 android:text="教训"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
         </RadioGroup>
 

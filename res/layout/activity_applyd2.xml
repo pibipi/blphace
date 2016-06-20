@@ -32,6 +32,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:onClick="onClick"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
     </RelativeLayout>
@@ -39,8 +40,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/a1_background" >
+        android:layout_weight="1" >
 
         <ImageView
             android:id="@+id/imageView1"

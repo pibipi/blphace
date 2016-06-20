@@ -11,23 +11,24 @@
         android:background="#ffffff" >
 
         <ImageView
-            android:onClick="onClick"
             android:id="@+id/back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:onClick="onClick"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
-        <TextView    android:textColor="#393939"
-                    android:textSize="12sp"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="肤质测试" />
+            android:text="肤质测试"
+            android:textColor="#393939"
+            android:textSize="12sp" />
 
         <View
             android:layout_width="match_parent"
@@ -36,10 +37,17 @@
             android:background="#dcdee4" />
     </RelativeLayout>
 
-    <RelativeLayout android:background="#ffffff"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="#ffffff" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </android.support.v4.view.ViewPager>
 
         <Button
             android:id="@+id/next"
@@ -47,8 +55,9 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="79dp"
-            android:background="@drawable/next" />
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/next"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

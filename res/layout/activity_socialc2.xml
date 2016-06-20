@@ -74,7 +74,7 @@
                     android:layout_toRightOf="@+id/imageView2"
                     android:text="#话题#"
                     android:textColor="#727272"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -89,150 +89,289 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/rel5"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/r1"
-            android:layout_marginTop="13dp"
-            android:orientation="vertical" >
+            android:layout_marginTop="5dp"
+            android:scrollbars="none" >
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" >
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
                 <RelativeLayout
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="15dp" >
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" >
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="23dp"
-                        android:text="66"
-                        android:textColor="#727272"
-                        android:textSize="12sp" />
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="15dp" >
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="23dp"
+                            android:text="66"
+                            android:textColor="#727272"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="23dp"
+                            android:src="@drawable/c1_img3" />
+                    </RelativeLayout>
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="23dp"
-                        android:src="@drawable/c1_img3" />
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginTop="11dp"
+                        android:src="@drawable/c2_img1" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/imageView1"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toRightOf="@+id/imageView1"
+                        android:text="大逗比"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView3"
+                        android:layout_below="@+id/imageView1"
+                        android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
                 </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginTop="11dp"
-                    android:src="@drawable/c2_img1" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/imageView1"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toRightOf="@+id/imageView1"
-                    android:text="大SB"
-                    android:textColor="#393939"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView3"
-                    android:layout_below="@+id/imageView1"
-                    android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
-                    android:textColor="#393939"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="90dp" >
 
                 <RelativeLayout
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="15dp" >
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" >
 
-                    <TextView
-                        android:id="@+id/textView41"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="23dp"
-                        android:text="666"
-                        android:textColor="#727272"
-                        android:textSize="12sp" />
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="15dp" >
+
+                        <TextView
+                            android:id="@+id/textView41"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="23dp"
+                            android:text="666"
+                            android:textColor="#727272"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView41"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="23dp"
+                            android:src="@drawable/c1_img3" />
+                    </RelativeLayout>
 
                     <ImageView
-                        android:id="@+id/imageView41"
+                        android:id="@+id/imageView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="23dp"
-                        android:src="@drawable/c1_img3" />
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginTop="11dp"
+                        android:src="@drawable/c2_img2" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/imageView11"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toRightOf="@+id/imageView11"
+                        android:text="二逗比"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView31"
+                        android:layout_below="@+id/imageView11"
+                        android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
                 </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginTop="11dp"
-                    android:src="@drawable/c2_img2" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" >
 
-                <TextView
-                    android:id="@+id/textView31"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/imageView11"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toRightOf="@+id/imageView11"
-                    android:text="二SB"
-                    android:textColor="#393939"
-                    android:textSize="12sp" />
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="15dp" >
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView31"
-                    android:layout_below="@+id/imageView11"
-                    android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
-                    android:textColor="#393939"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/textView42"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="23dp"
+                            android:text="666"
+                            android:textColor="#727272"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView42"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="23dp"
+                            android:src="@drawable/c1_img3" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginTop="11dp"
+                        android:src="@drawable/c2_img2" />
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/imageView12"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toRightOf="@+id/imageView12"
+                        android:text="三逗比"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView32"
+                        android:layout_below="@+id/imageView12"
+                        android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" >
+
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="15dp" >
+
+                        <TextView
+                            android:id="@+id/textView43"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="23dp"
+                            android:text="666"
+                            android:textColor="#727272"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView43"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="23dp"
+                            android:src="@drawable/c1_img3" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginTop="11dp"
+                        android:src="@drawable/c2_img2" />
+
+                    <TextView
+                        android:id="@+id/textView33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/imageView13"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toRightOf="@+id/imageView13"
+                        android:text="四逗比"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/textView33"
+                        android:layout_below="@+id/imageView13"
+                        android:text="  那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑,那些年我们一起入过的坑"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
 
         <RelativeLayout
+            android:id="@+id/rel5"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
             android:background="#ffffff" >
 
             <EditText
@@ -247,8 +386,6 @@
                 android:paddingLeft="10dp"
                 android:textColor="#393939"
                 android:textSize="12sp" >
-
-                <requestFocus />
             </EditText>
 
             <Button

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -127,15 +128,17 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 		case R.id.add_product:
 			showDialog();
 			break;
-
+		case R.id.back:
+			finish();
+			break;
 		default:
 			break;
 		}
 	}
 
 	private void showDialog() {
-		AlertDialog add_Dialog = new AlertDialog.Builder(
-				Manageb2Activity.this).create();
+		AlertDialog add_Dialog = new AlertDialog.Builder(Manageb2Activity.this)
+				.create();
 		add_Dialog.show();
 
 		Window window = add_Dialog.getWindow();
@@ -144,6 +147,16 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 
 		add_Dialog.getWindow().setContentView(R.layout.dialog_add_product);
 		add_Dialog.setCancelable(true);
+		ImageView add1 = (ImageView) add_Dialog.getWindow().findViewById(
+				R.id.add1);
+		add1.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(Manageb2Activity.this,
+						MipcaActivityCapture.class));
+			}
+		});
 	}
 
 }

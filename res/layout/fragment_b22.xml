@@ -10,7 +10,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/list_b21" />
+        android:background="@drawable/list_b24" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/list_b22" />
+        android:background="@drawable/list_b25" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -26,6 +26,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/list_b23" />
+        android:background="@drawable/list_b26" />
 
 </LinearLayout>

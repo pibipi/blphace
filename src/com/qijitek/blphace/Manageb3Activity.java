@@ -45,8 +45,8 @@ public class Manageb3Activity extends Activity implements OnClickListener {
 		// window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
 		// window.setWindowAnimations(R.style.mystyle); // 添加动画
 
-		add_Dialog.getWindow().setContentView(layout);
-		// add_Dialog.getWindow().setContentView(R.layout.dialog_start_test);
+		// add_Dialog.getWindow().setContentView(layout);
+		add_Dialog.getWindow().setContentView(R.layout.dialog_start_test);
 		add_Dialog.setCancelable(true);
 
 		add_Dialog.getWindow().findViewById(R.id.close)

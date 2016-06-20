@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context="com.qijitek.blphace.MainActivity" >
 
     <LinearLayout
@@ -11,43 +12,59 @@
         android:layout_centerVertical="true"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/bt1"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="A" />
+            android:layout_height="150dp" >
 
             <Button
                 android:id="@+id/bt2"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="B" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="33dp"
+                android:background="@drawable/main_img2"
+                android:textColor="#393939"
+                android:textSize="18sp" />
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/bt1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="33dp"
+                android:background="@drawable/main_img1"
+                android:textColor="#393939"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:orientation="horizontal" >
+            android:layout_height="150dp" >
 
             <Button
                 android:id="@+id/bt3"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="C" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="33dp"
+                android:background="@drawable/main_img3"
+                android:textColor="#393939"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/bt4"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="D" />
-
-        </LinearLayout>
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="33dp"
+                android:background="@drawable/main_img4"
+                android:textColor="#393939"
+                android:textSize="18sp" />
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

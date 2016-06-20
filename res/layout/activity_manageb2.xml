@@ -10,13 +10,25 @@
         android:layout_weight="11"
         android:background="#ffffff" >
 
-        <TextView    android:textColor="#393939"
-                    android:textSize="12sp"
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="化妆水" />
+            android:text="化妆水"
+            android:textColor="#393939"
+            android:textSize="12sp" />
 
         <View
             android:layout_width="match_parent"
@@ -28,12 +40,11 @@
             android:id="@+id/add_product"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:scaleType="centerInside"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:scaleType="centerInside"
             android:src="@drawable/add_img" />
-
     </RelativeLayout>
 
     <LinearLayout
@@ -43,11 +54,11 @@
         android:orientation="vertical" >
 
         <RadioGroup
-            android:background="#ffffff"
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="12"
+            android:background="#ffffff"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -62,7 +73,7 @@
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:text="未测"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
 
             <RadioButton
@@ -76,9 +87,8 @@
                 android:gravity="center"
                 android:paddingTop="2dp"
                 android:text="已测"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
-
         </RadioGroup>
 
         <android.support.v4.view.ViewPager

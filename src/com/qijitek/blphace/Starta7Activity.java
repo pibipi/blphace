@@ -27,7 +27,9 @@ public class Starta7Activity extends Activity implements OnClickListener {
 		case R.id.list_a71:
 			
 			break;
-
+		case R.id.back:
+			finish();
+			break;
 		default:
 			break;
 		}

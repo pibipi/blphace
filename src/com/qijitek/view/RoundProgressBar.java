@@ -159,7 +159,8 @@ public class RoundProgressBar extends View {
 		float textWidth = paint.measureText(percent + ""); // 测量字体宽度，我们需要根据字体的宽度设置在圆环中间
 
 		if (textIsDisplayable && percent != 0 && style == STROKE) {
-			paint.setShadowLayer(5.0f, 5, 5, 0xffd2d2d2);
+//设置进度字的阴影	
+//			paint.setShadowLayer(5.0f, 5, 5, 0xffd2d2d2);
 			canvas.drawText(percent + "", centre - textWidth / 2f, centre
 					+ textSize / 2f - 15, paint); // 画出进度百分比
 		}

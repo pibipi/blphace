@@ -29,7 +29,9 @@ public class Applyd1Activity extends Activity implements OnClickListener {
 			startActivity(new Intent(Applyd1Activity.this,
 					Applyd2Activity.class));
 			break;
-
+		case R.id.back:
+			finish();
+			break;
 		default:
 			break;
 		}

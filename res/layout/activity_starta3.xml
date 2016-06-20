@@ -43,17 +43,27 @@
         android:layout_weight="1"
         android:background="#ffffff" >
 
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp"
+            android:src="@drawable/a5_img" />
+
         <Button
             android:id="@+id/next"
             android:layout_width="210dp"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="79dp"
+            android:layout_marginBottom="56dp"
             android:background="@drawable/a3_btn_background"
             android:text="保存数据"
             android:textColor="#393939"
             android:textSize="12sp" />
+
     </RelativeLayout>
 
 </LinearLayout>

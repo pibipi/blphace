@@ -10,6 +10,17 @@
         android:layout_weight="11"
         android:background="#ffffff" >
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -26,22 +37,21 @@
             android:background="#dcdee4" />
 
         <ImageView
-            android:onClick="onClick"
             android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="21dp"
+            android:onClick="onClick"
             android:src="@drawable/next" />
-
     </RelativeLayout>
 
     <LinearLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="#ffffff"
         android:orientation="vertical" >
 
         <RadioGroup
@@ -63,7 +73,7 @@
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:text="随意测"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
 
             <RadioButton
@@ -77,7 +87,7 @@
                 android:gravity="center"
                 android:paddingTop="2dp"
                 android:text="重点测"
-                android:textColor="#727272"
+                android:textColor="@drawable/radiobutton_color_selector"
                 android:textSize="12dp" />
         </RadioGroup>
 
