@@ -7,10 +7,14 @@
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="18" />
- <uses-permission android:name="android.permission.CAMERA"/>
-         <uses-permission android:name="android.permission.INTERNET" />
-         <uses-permission android:name="android.permission.VIBRATE" />
-         <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -19,7 +23,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-           <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -57,6 +61,12 @@
         </activity>
         <activity android:name=".MipcaActivityCapture" >
         </activity>
+        <activity android:name=".Bind_Device_Activity" >
+        </activity>
+
+        <service
+            android:name="com.qijitek.service.BluetoothLeService"
+            android:enabled="true" />
     </application>
 
 </manifest>

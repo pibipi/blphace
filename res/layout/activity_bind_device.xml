@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attr="http://schemas.android.com/apk/res/com.example.face"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10.5"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="添加设备"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/bind_device_anim_back"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#F6F4F0" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" >
+
+            <ImageView
+                android:id="@+id/search_img"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/search_img" />
+
+            <ImageView
+                android:id="@+id/search_state"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/searching" />
+        </RelativeLayout>
+
+        <TextView
+            android:textColor="#727272"
+            android:id="@+id/tips"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
+            android:text="未绑定设备" />
+
+        <Button
+            android:id="@+id/start_bind"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tips"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp"
+            android:background="@drawable/tuli_bind_btn"
+            android:text="现在绑定"
+            android:textColor="#901d20"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/search_again"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tips"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp"
+            android:background="@drawable/tuli_bind_btn"
+            android:text="重新搜索"
+            android:textColor="#901d20"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <Button
+            android:layout_centerHorizontal="true"
+            android:id="@+id/not_bind"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/start_bind"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/tuli_bind_btn"
+            android:text="暂不绑定"
+            android:textColor="#901d20"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

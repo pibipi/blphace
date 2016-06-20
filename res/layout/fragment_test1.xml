@@ -5,12 +5,28 @@
     android:background="@drawable/test_background"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:translationY="-40dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/test1_img" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bind_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/test1_img" />
+        android:text="绑定设备" />
 
 </RelativeLayout>

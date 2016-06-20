@@ -73,7 +73,7 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_single_result2);
 		// registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 		init();
-		type = getIntent().getIntExtra("type", 0);
+//		type = getIntent().getIntExtra("type", 0);
 		water = getIntent().getIntExtra("water", 50);
 		oil = getIntent().getIntExtra("oil", 50);
 		light = getIntent().getIntExtra("light", 50);
