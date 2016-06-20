@@ -260,6 +260,7 @@ public class BluetoothLeService extends Service {
 	public void connect_tuli() {
 		String address = new SharedpreferencesUtil(getApplicationContext())
 				.getMyDeviceMac();
+		Log.e(TAG, address);
 		if (!address.equals("")) {
 			connect(address);
 		}
@@ -496,19 +497,19 @@ public class BluetoothLeService extends Service {
 			return false;
 		}
 
-//		// Previously connected device. Try to reconnect.
-//		if (mBluetoothDeviceAddress != null
-//				&& address.equals(mBluetoothDeviceAddress)
-//				&& mBluetoothGatt != null) {
-//			Log.d(TAG,
-//					"Trying to use an existing mBluetoothGatt for connection.");
-//			if (mBluetoothGatt.connect()) {
-//				mConnectionState = STATE_CONNECTING;
-//				return true;
-//			} else {
-//				return false;
-//			}
-//		}
+		// // Previously connected device. Try to reconnect.
+		// if (mBluetoothDeviceAddress != null
+		// && address.equals(mBluetoothDeviceAddress)
+		// && mBluetoothGatt != null) {
+		// Log.d(TAG,
+		// "Trying to use an existing mBluetoothGatt for connection.");
+		// if (mBluetoothGatt.connect()) {
+		// mConnectionState = STATE_CONNECTING;
+		// return true;
+		// } else {
+		// return false;
+		// }
+		// }
 		final BluetoothDevice device = mBluetoothAdapter
 				.getRemoteDevice(address);
 

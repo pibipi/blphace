@@ -302,7 +302,7 @@ public class Fragment_Test2 extends Fragment {
 		getActivity().registerReceiver(mGattUpdateReceiver,
 				makeGattUpdateIntentFilter());
 		state_flag = true;
-		new ScanThread().start();
+//		new ScanThread().start();
 		Log.e(TAG, "on resume");
 		super.onResume();
 	}

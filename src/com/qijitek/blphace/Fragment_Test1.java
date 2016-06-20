@@ -243,7 +243,7 @@ public class Fragment_Test1 extends Fragment implements OnClickListener {
 		getActivity().registerReceiver(mGattUpdateReceiver,
 				makeGattUpdateIntentFilter());
 		state_flag = true;
-		new ScanThread().start();
+//		new ScanThread().start();
 		Log.e(TAG, "on resume");
 		super.onResume();
 	}

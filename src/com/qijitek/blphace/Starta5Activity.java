@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.qijitek.blphace.Fragment_Test1.ScanThread;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.SharedpreferencesUtil;
 
@@ -43,7 +46,9 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 	private String mDeviceAddress;
 	//
 	private final static int BLESTART = 1;
+	private boolean state_flag = true;
 	protected static final String TAG = "Starta5Activity";
+	private Handler mHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,25 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 	}
 
 	private void init() {
+		mHandler = new Handler() {
+
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				switch (msg.what) {
+				case 5:
+//TODO 
+					break;
+				case 6:
+
+					break;
+
+				default:
+					break;
+				}
+			}
+
+		};
 		sharedpreferencesUtil = new SharedpreferencesUtil(
 				getApplicationContext());
 		mDeviceAddress = sharedpreferencesUtil.getMyDeviceMac();
@@ -68,7 +92,6 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 	}
 
 	public void changeFragment(Fragment fragment, boolean isInit) {
-		FrameLayout fff = (FrameLayout) findViewById(R.id.fragment_container);
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		transaction.replace(R.id.fragment_container, fragment);
 		if (!isInit) {
@@ -224,6 +247,7 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 		bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
 
 	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -259,5 +283,44 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 		default:
 			break;
 		}
+	}
+
+	class ScanThread extends Thread {
+
+		@Override
+		public void run() {
+			while (state_flag) {
+				boolean state = sharedpreferencesUtil.getConnectState();
+				Log.e(TAG, "ScanThread" + state);
+				Message msg = new Message();
+				if (state) {
+					msg.what = 5;
+				} else {
+					msg.what = 6;
+				}
+				mHandler.sendMessage(msg);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void onPause() {
+		state_flag = false;
+		Log.e(TAG, "on pause");
+		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		state_flag = true;
+		new ScanThread().start();
+		Log.e(TAG, "on resume");
+		super.onResume();
 	}
 }
