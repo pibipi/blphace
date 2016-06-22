@@ -67,4 +67,22 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/tips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a0cdcdcd"
+        android:onClick="onClick" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="136dp"
+            android:text="这是提示1，我只显示这一次，记住了！（点击消失）" />
+
+    </RelativeLayout>
+
 </RelativeLayout>
