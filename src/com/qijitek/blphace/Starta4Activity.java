@@ -8,10 +8,12 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
@@ -20,6 +22,7 @@ public class Starta4Activity extends Activity implements OnClickListener {
 	private Button next;
 	private TextView title;
 	private TextView content;
+	private Handler mHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,8 @@ public class Starta4Activity extends Activity implements OnClickListener {
 	}
 
 	private void init() {
+		mHandler = new Handler() {
+		};
 		title = (TextView) findViewById(R.id.title);
 		content = (TextView) findViewById(R.id.content);
 		next = (Button) findViewById(R.id.next);
@@ -77,18 +82,34 @@ public class Starta4Activity extends Activity implements OnClickListener {
 				finish();
 			}
 			new Thread(new Runnable() {
-				
+
 				@Override
 				public void run() {
-					
-					String url="http://api.qijitek.com/updateSkintype/?userid="+new SharedpreferencesUtil(getApplicationContext()).getUserid()+"&skintype="+new SharedpreferencesUtil(getApplicationContext()).getSkintype();
+
+					String url = "http://api.qijitek.com/updateSkintype/?userid="
+							+ new SharedpreferencesUtil(getApplicationContext())
+									.getUserid()
+							+ "&skintype="
+							+ new SharedpreferencesUtil(getApplicationContext())
+									.getSkintype();
 					try {
 						MyUtils.getJson(url);
+						new SharedpreferencesUtil(getApplicationContext())
+								.saveIsTest(true);
+						new SharedpreferencesUtil(getApplicationContext())
+								.saveIsTesting(false);
 					} catch (ClientProtocolException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(),
+										"请检查网络连接", 0).show();
+							}
+						});
 						e.printStackTrace();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -96,9 +117,6 @@ public class Starta4Activity extends Activity implements OnClickListener {
 					}
 				}
 			}).start();
-			new SharedpreferencesUtil(getApplicationContext()).saveIsTest(true);
-			new SharedpreferencesUtil(getApplicationContext())
-					.saveIsTesting(false);
 			break;
 		case R.id.back:
 			finish();

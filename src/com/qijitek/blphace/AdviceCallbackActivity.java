@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 	private EditText content_txt;
 	private EditText phone_txt;
 	private Button submit;
+	private Handler mHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 	}
 
 	private void init() {
+		mHandler = new Handler() {
+		};
 		advice_callback_back = (ImageView) findViewById(R.id.advice_callback_back);
 		advice_callback_back.setOnClickListener(this);
 		content_txt = (EditText) findViewById(R.id.content_txt);
@@ -46,6 +50,10 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 			finish();
 			break;
 		case R.id.submit:
+			if (content_txt.getText().toString().trim().equals("")) {
+				Toast.makeText(getApplicationContext(), "请输入内容...", 0).show();
+				return;
+			}
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -57,11 +65,18 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 							+ content_txt.getText().toString().trim();
 					try {
 						MyUtils.getJson(url);
+						Toast.makeText(getApplicationContext(), "提交成功", 0).show();
 					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(),
+										"请检查网络连接", 0).show();
+							}
+						});
 						e.printStackTrace();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -69,7 +84,6 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 					}
 				}
 			}).start();
-			Toast.makeText(getApplicationContext(), "提交成功", 0).show();
 			break;
 		default:
 			break;

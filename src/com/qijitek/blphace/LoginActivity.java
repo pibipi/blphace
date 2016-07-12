@@ -103,6 +103,20 @@ public class LoginActivity extends Activity implements OnClickListener {
 													+ "&login_type=1&platform=1");
 									System.out.println(jsonObject.toString()
 											+ "jsonObject");
+									new SharedpreferencesUtil(
+											getApplicationContext())
+											.saveIsLogin(true);
+									mHandler.postDelayed(new Runnable() {
+
+										@Override
+										public void run() {
+											dialog.dismiss();
+											startActivity(new Intent(
+													LoginActivity.this,
+													MainActivity.class));
+											finish();
+										}
+									}, 1000);
 								} catch (JSONException e) {
 									e.printStackTrace();
 								}
@@ -111,23 +125,18 @@ public class LoginActivity extends Activity implements OnClickListener {
 								// + phone.getText().toString().trim()
 								// + "&login_type=1&platform=1");
 							} catch (IOException e) {
+								mHandler.post(new Runnable() {
+
+									@Override
+									public void run() {
+										Toast.makeText(getApplicationContext(),
+												"请检查网络连接", 0).show();
+									}
+								});
 								e.printStackTrace();
 							}
 						}
 					}).start();
-
-					new SharedpreferencesUtil(getApplicationContext())
-							.saveIsLogin(true);
-					mHandler.postDelayed(new Runnable() {
-
-						@Override
-						public void run() {
-							dialog.dismiss();
-							startActivity(new Intent(LoginActivity.this,
-									MainActivity.class));
-							finish();
-						}
-					}, 1000);
 
 					break;
 				default:

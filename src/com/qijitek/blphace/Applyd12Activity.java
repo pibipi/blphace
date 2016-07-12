@@ -29,6 +29,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qijitek.database.ApplyDemo;
 import com.qijitek.utils.MyUtils;
@@ -119,6 +120,14 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+			mHandler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					Toast.makeText(getApplicationContext(), "请检查网络连接", 0)
+							.show();
+				}
+			});
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

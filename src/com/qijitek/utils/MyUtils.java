@@ -23,6 +23,7 @@ import okhttp3.Response;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ClientConnectionManager;
@@ -51,6 +52,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MyUtils {
 	public static byte[] bitmap2bytearray(Bitmap bitmap) {
@@ -109,9 +111,11 @@ public class MyUtils {
 			System.out.println("getJson" + jsonObj.toString());
 			return jsonObj;
 		} else
-			return null;
+			System.out.println("getJson null");
+		return null;
 
 	}
+
 
 	/**
 	 * https连接

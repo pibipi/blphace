@@ -1,7 +1,10 @@
 package com.qijitek.blphace;
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 
 import com.qijitek.blphace.LoginActivity;
@@ -23,7 +26,7 @@ public class WelcomeActivity extends Activity {
 
 			@Override
 			public void run() {
-				if (isLogin||true) {
+				if (isLogin) {
 					startActivity(new Intent(WelcomeActivity.this,
 							MainActivity.class));
 				} else {
@@ -39,5 +42,16 @@ public class WelcomeActivity extends Activity {
 	private void init() {
 		mHandler = new Handler() {
 		};
+		String SDCard = Environment.getExternalStorageDirectory() + "";
+		String pathName1 = SDCard + "/alphace/Alphace.apk";// 文件存储路径
+		String pathName2 = SDCard + "/alphace";// 文件存储路径
+		File file1 = new File(pathName1);
+		File file2 = new File(pathName2);
+		if (file1.exists()) {
+			file1.delete();
+		}
+		if (file2.exists()) {
+			file2.delete();
+		}
 	}
 }

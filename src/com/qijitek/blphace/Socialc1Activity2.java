@@ -24,6 +24,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qijitek.database.SocialArticle;
 import com.qijitek.utils.MyUtils;
@@ -111,6 +112,14 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+			mHandler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					Toast.makeText(getApplicationContext(), "请检查网络连接", 0)
+							.show();
+				}
+			});
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -158,9 +167,9 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener {
 			}
 			SocialArticle sa = article_data.get(position);
 			viewHolder.title.setText(sa.getTitle());
-			Picasso.with(context).load(sa.getImgurl()).resize(1062,585) 
+			Picasso.with(context).load(sa.getImgurl()).resize(1062, 585)
 					.centerCrop().into(viewHolder.image);
-			System.out.println("img wid"+viewHolder.image.getHeight());
+			System.out.println("img wid" + viewHolder.image.getHeight());
 			return convertView;
 		}
 	}

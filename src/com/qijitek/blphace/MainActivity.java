@@ -1,14 +1,31 @@
 package com.qijitek.blphace;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.NotificationCompat;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 
 public class MainActivity extends SlidingFragmentActivity implements
@@ -18,6 +35,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 	private Button bt3;
 	private Button bt4;
 	private RelativeLayout tips;
+	private Handler mHandler;
+	private String last_versionName = "";
+	private AlertDialog reset_Dialog;
+	private NotificationManager mNotificationManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,9 +46,72 @@ public class MainActivity extends SlidingFragmentActivity implements
 		setContentView(R.layout.activity_main);
 		init();
 		initSlidingMenu(savedInstanceState);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				init_update();
+			}
+		}).start();
+	}
+
+	private void init_update() {
+		try {
+			last_versionName = MyUtils.getVersionName(getApplicationContext());
+			System.out.println(last_versionName + "last_versionName");
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			boolean need_update = false;
+			JSONObject jsonObject = MyUtils
+					.getJson("http://api.qijitek.com/getVersion");
+			String new_versionName = jsonObject.optString("msg").toString();
+			if (new_versionName.equals(last_versionName)) {
+				need_update = false;
+			} else {
+				need_update = true;
+				mHandler.sendEmptyMessage(1);
+			}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void init() {
+		reset_Dialog = new AlertDialog.Builder(MainActivity.this).create();
+		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		mHandler = new Handler() {
+
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				switch (msg.what) {
+				case 1:
+					showDialog();
+					break;
+				case 666:
+					int progress = msg.arg1;
+					if (progress > 0 && progress < 100) {
+						initNotify(progress, 100, "Alphace正在下载更新...");
+					} else {
+						// initNotify(0, 0, "下载完成，点击安装");
+						mNotificationManager.cancelAll();
+					}
+					break;
+				default:
+					break;
+				}
+			}
+
+		};
 		tips = (RelativeLayout) findViewById(R.id.tips);
 		bt1 = (Button) findViewById(R.id.bt1);
 		bt2 = (Button) findViewById(R.id.bt2);
@@ -111,4 +195,71 @@ public class MainActivity extends SlidingFragmentActivity implements
 		}
 	}
 
+	private void showDialog() {
+		reset_Dialog.show();
+
+		Window window = reset_Dialog.getWindow();
+		window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// window.setWindowAnimations(R.style.mystyle); // 添加动画
+
+		reset_Dialog.getWindow().setContentView(R.layout.dialog_update);
+		reset_Dialog.getWindow().findViewById(R.id.yes)
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Toast.makeText(getApplicationContext(), "后台下载中...", 0)
+								.show();
+						new Thread(new Runnable() {
+
+							@Override
+							public void run() {
+								MyUtils.downloadApk(getApplicationContext(),
+										mHandler);
+							}
+						}).start();
+						reset_Dialog.dismiss();
+					}
+				});
+		reset_Dialog.getWindow().findViewById(R.id.no)
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						reset_Dialog.dismiss();
+					}
+				});
+		reset_Dialog.setCancelable(false);
+	}
+
+	private void initNotify(int progress, int max, String title) {
+		final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+				this);
+		mBuilder.setContentTitle(title)
+				// 设置通知栏标题
+				// .setContentIntent(getDefalutIntent(Notification.FLAG_NO_CLEAR))
+				// 设置通知栏点击意图
+				.setTicker("Alphace正在下载更新...")
+				// 通知首次出现在通知栏，带上升动画效果的
+				.setWhen(System.currentTimeMillis())
+				// 通知产生的时间，会在通知信息里显示，一般是系统获取到的时间
+				.setPriority(Notification.PRIORITY_MAX)
+				// 设置该通知优先级
+				// .setAutoCancel(false)
+				// 设置这个标志当用户单击面板就可以让通知将自动取消
+				.setOngoing(false)
+				// ture，设置他为一个正在进行的通知。他们通常是用来表示一个后台任务,用户积极参与(如播放音乐)或以某种方式正在等待,因此占用设备(如一个文件下载,同步操作,主动网络连接)
+				.setProgress(max, progress, false)
+				.setSmallIcon(R.drawable.ic_launcher);// 设置通知小ICON
+		if (progress != 0) {
+			mBuilder.setContentText(progress + "%");
+		} else {
+			mBuilder.setContentText("");
+			mBuilder.setAutoCancel(true);
+
+		}
+		Notification notification = mBuilder.build();
+		notification.flags = Notification.FLAG_NO_CLEAR;
+		mNotificationManager.notify(1, notification);
+	}
 }
