@@ -126,4 +126,122 @@ public class SharedpreferencesUtil {
 		return str;
 
 	}
+
+	public void saveSumScore(int sum) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putInt("SumScore", sum);
+		editor.commit();
+	}
+
+	public int getSumScore() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		int sum = preferences.getInt("SumScore", 8);
+		return sum;
+	}
+
+	public void saveIsLogin(boolean isLogin) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isLogin", isLogin);
+		editor.commit();
+	}
+
+	public boolean getIsLogin() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		boolean isLogin = preferences.getBoolean("isLogin", false);
+		return isLogin;
+	}
+
+	public void saveUserid(String userid) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("userid", userid);
+		editor.commit();
+	}
+
+	public String getUserid() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		String userid = preferences.getString("userid", "");
+		return userid;
+	}
+
+	/**
+	 * 保存肌肤类型 1为干性，2为混合型，3为油
+	 * 
+	 * @param type
+	 */
+	public void saveSkintype(String type) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("type", type);
+		editor.commit();
+	}
+
+	public String getSkintype() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		String type = preferences.getString("type", "0");
+		return type;
+	}
+
+	public String getSkintypeStr() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		String type = preferences.getString("type", "0");
+		int i = Integer.valueOf(type);
+		String str = "";
+		switch (i) {
+		case 1:
+			str = "干性";
+			break;
+		case 2:
+			str = "混合性";
+			break;
+		case 3:
+			str = "油性";
+			break;
+
+		default:
+			break;
+		}
+		return str;
+	}
+
+	public void saveIsTest(boolean isTest) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isTest", isTest);
+		editor.commit();
+	}
+
+	public boolean getIsTest() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Boolean isTesting = preferences.getBoolean("isTest", false);
+		return isTesting;
+	}
+
+	public void saveIsTesting(boolean isTesting) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isTesting", isTesting);
+		editor.commit();
+	}
+
+	public boolean getIsTesting() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Boolean isTesting = preferences.getBoolean("isTesting", true);
+		return isTesting;
+	}
 }

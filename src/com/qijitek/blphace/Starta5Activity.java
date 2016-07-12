@@ -100,85 +100,6 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 		transaction.commit();
 	}
 
-	// @SuppressWarnings("deprecation")
-	// private void initViewPager() {
-	// fragments = new ArrayList<Fragment>();
-	// fragments.add(new Fragment_Test1());
-	// fragments.add(new Fragment_Test2());
-	// pager.setAdapter(new MyPagerAdapter(fragmentManager, fragments));
-	// pager.setCurrentItem(0);
-	// pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-	//
-	// @Override
-	// public void onPageSelected(int index) {
-	// System.out.println(index + "index");
-	// switch (index) {
-	// case 0:
-	// bt1.setChecked(true);
-	// break;
-	// case 1:
-	// bt2.setChecked(true);
-	// break;
-	// default:
-	// break;
-	// }
-	// }
-	//
-	// @Override
-	// public void onPageScrolled(int arg0, float arg1, int arg2) {
-	// }
-	//
-	// @Override
-	// public void onPageScrollStateChanged(int arg0) {
-	//
-	// }
-	// });
-	// }
-	//
-	// class MyPagerAdapter extends FragmentPagerAdapter {
-	// private List<Fragment> list = new ArrayList<Fragment>();
-	//
-	// public MyPagerAdapter(FragmentManager fm) {
-	// super(fm);
-	// }
-	//
-	// public MyPagerAdapter(FragmentManager fm, List<Fragment> list) {
-	// super(fm);
-	// this.list = list;
-	// }
-	//
-	// @Override
-	// public Fragment getItem(int index) {
-	// return list.get(index);
-	// // if (index == 0) {
-	// // return new Fragment_Test1();
-	// // } else if (index == 1) {
-	// // return new Fragment_Test2();
-	// // } else {
-	// // return new Fragment_Test1();
-	// // }
-	// }
-	//
-	// @Override
-	// public int getCount() {
-	// return list.size();
-	// }
-	//
-	// }
-	//
-	// @Override
-	// public void onCheckedChanged(RadioGroup group, int checkedId) {
-	// switch (checkedId) {
-	// case R.id.bt1:
-	// pager.setCurrentItem(0);
-	// break;
-	// case R.id.bt2:
-	// pager.setCurrentItem(1);
-	// break;
-	// default:
-	// break;
-	// }
-	// }
 
 	@Override
 	public void onClick(View v) {
@@ -309,7 +230,7 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 
 	}
 
-	@Override
+	@Override 
 	public void onPause() {
 		state_flag = false;
 		Log.e(TAG, "on pause");

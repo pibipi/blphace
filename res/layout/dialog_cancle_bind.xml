@@ -35,7 +35,7 @@
         android:layout_marginLeft="25dp"
         android:background="@drawable/tuli_bind_btn"
         android:text="是"
-        android:textColor="#901d20" />
+        android:textColor="#76b6a3" />
 
     <Button
         android:id="@+id/no"

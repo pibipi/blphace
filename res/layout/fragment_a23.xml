@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="200dp"
-        android:layout_height="300dp"
+        android:layout_height="280dp"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:translationY="-40dp" >
@@ -22,11 +22,12 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="3.不涂任何防晒品，在太阳下2-3小时皮肤有什么反应？"
+                android:text="3、你化彩妆后通常会？"
                 android:textColor="#393939" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="60dp" >
 
@@ -36,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="A.灼伤"
+                android:text="A 、皮肤有浮粉现象，妆面不服帖"
                 android:textColor="#393939" />
         </RelativeLayout>
 
@@ -50,7 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="B.灼伤后转褐色"
+                android:text="B 、皮肤吸粉较好，T区比较容积脱妆"
                 android:textColor="#393939" />
         </RelativeLayout>
 
@@ -64,23 +65,10 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="C.隔天转褐色"
+                android:text="C 、皮肤吸粉速度快，容易脱妆"
                 android:textColor="#393939" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp" >
-
-            <TextView
-                android:id="@+id/text_d"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="D.即时转褐色"
-                android:textColor="#393939" />
-        </RelativeLayout>
     </LinearLayout>
 
     <TextView
@@ -90,7 +78,7 @@
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="3/4"
+        android:text="3/8"
         android:textColor="#393939" />
 
 </RelativeLayout>

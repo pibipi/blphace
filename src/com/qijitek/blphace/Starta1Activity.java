@@ -1,5 +1,7 @@
 package com.qijitek.blphace;
 
+import com.qijitek.utils.SharedpreferencesUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +33,9 @@ public class Starta1Activity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.next:
+			if(new SharedpreferencesUtil(getApplicationContext()).getIsTesting()){
+			}
+			this.finish();
 			startActivity(new Intent(Starta1Activity.this,
 					Starta2Activity.class));
 			break;

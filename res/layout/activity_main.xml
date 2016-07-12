@@ -68,6 +68,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/tips"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -84,5 +85,16 @@
             android:text="这是提示1，我只显示这一次，记住了！（点击消失）" />
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/slide_menu"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/main_img0" />
 
 </RelativeLayout>

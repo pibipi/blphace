@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="肌肤测试"
+            android:text="我的肌肤信息"
             android:textColor="#393939"
             android:textSize="12sp" />
 
@@ -43,27 +43,86 @@
         android:layout_weight="1"
         android:background="#ffffff" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp"
-            android:src="@drawable/a5_img" />
-
         <Button
             android:id="@+id/next"
             android:layout_width="210dp"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="56dp"
+            android:layout_marginBottom="79dp"
             android:background="@drawable/a3_btn_background"
-            android:text="保存数据"
+            android:onClick="onClick"
+            android:text="完成肌肤测试" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="83dp"
+            android:text="你常用的护肤品牌"
             android:textColor="#393939"
             android:textSize="12sp" />
 
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#cbcbcb"
+            android:orientation="vertical"
+            android:padding="0.2px" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="42dp" >
+
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:background="#fff"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:hint="请选择"
+                    android:onClick="onClick"
+                    android:singleLine="true"
+                    android:textColor="#ff000000"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:id="@+id/bt_dropdown"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:onClick="onClick" >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="15dp"
+                        android:background="@drawable/draw_down" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_below="@+id/layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"
+            android:ems="10"
+            android:gravity="center"
+            android:hint=" 输入你常用的品牌"
+            android:textSize="12sp" >
+        </EditText>
     </RelativeLayout>
 
 </LinearLayout>

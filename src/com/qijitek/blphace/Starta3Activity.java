@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.qijitek.spinner.SpinerAdapter;
 import com.qijitek.spinner.SpinerPopWindow;
+import com.qijitek.utils.MyUtils;
+import com.qijitek.utils.SharedpreferencesUtil;
 
 public class Starta3Activity extends Activity implements OnClickListener,
 		SpinerAdapter.IOnItemSelectListener {
@@ -23,20 +25,21 @@ public class Starta3Activity extends Activity implements OnClickListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_starta4);
+		setContentView(R.layout.activity_starta3);
 		mTView = (TextView) findViewById(R.id.tv_value);
 
 		// 初始化数据
 		mListType.add("雅诗兰黛");
 		mListType.add("欧莱雅");
-		mListType.add("纯净水");
-		mListType.add("蒸馏水");
+		mListType.add("兰蔻");
+		mListType.add("就知道三个");
+		mListType.add("还有什么");
 
 		mAdapter = new SpinerAdapter(this, mListType);
 		mAdapter.refreshData(mListType, 0);
 
 		// 显示第一条数据
-		// mTView.setText(names[0]);
+		mTView.setText("雅诗兰黛");
 
 		// 初始化PopWindow
 		mSpinerPopWindow = new SpinerPopWindow(this);
@@ -63,8 +66,31 @@ public class Starta3Activity extends Activity implements OnClickListener,
 			showSpinWindow();
 			break;
 		case R.id.next:
+			// int sum_score = new
+			// SharedpreferencesUtil(getApplicationContext())
+			// .getSumScore();
+			// System.out.println(sum_score + "sum_score");
+			// if (sum_score >= 8 && sum_score < 12) {
+			// new SharedpreferencesUtil(getApplicationContext())
+			// .saveSkintype("1");
+			// } else if (sum_score >= 12 && sum_score < 28) {
+			// new SharedpreferencesUtil(getApplicationContext())
+			// .saveSkintype("2");
+			// } else if (sum_score >= 28 && sum_score <= 40) {
+			// new SharedpreferencesUtil(getApplicationContext())
+			// .saveSkintype("3");
+			// }
+			if (new SharedpreferencesUtil(getApplicationContext())
+					.getIsTesting()) {
+			}
+			finish();
 			startActivity(new Intent(Starta3Activity.this,
 					Starta4Activity.class));
+
+			// new
+			// SharedpreferencesUtil(getApplicationContext()).saveIsTest(true);
+			// new
+			// SharedpreferencesUtil(getApplicationContext()).saveIsTesting(false);
 			break;
 		case R.id.back:
 			finish();

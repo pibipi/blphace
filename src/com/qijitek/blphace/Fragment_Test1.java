@@ -56,6 +56,12 @@ public class Fragment_Test1 extends Fragment implements OnClickListener {
 				.getApplicationContext());
 		bind_device = (Button) view.findViewById(R.id.bind_device);
 		bind_device.setOnClickListener(this);
+		if (sharedpreferencesUtil.getMyDeviceMac().equals("")) {
+			bind_device.setVisibility(View.VISIBLE);
+		} else {
+			bind_device.setVisibility(View.INVISIBLE);
+		}
+
 	}
 
 	@Override
@@ -243,7 +249,7 @@ public class Fragment_Test1 extends Fragment implements OnClickListener {
 		getActivity().registerReceiver(mGattUpdateReceiver,
 				makeGattUpdateIntentFilter());
 		state_flag = true;
-//		new ScanThread().start();
+		// new ScanThread().start();
 		Log.e(TAG, "on resume");
 		super.onResume();
 	}

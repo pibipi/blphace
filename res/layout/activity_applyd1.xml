@@ -26,13 +26,13 @@
             android:background="#dcdee4" />
 
         <ImageView
-            android:onClick="onClick"
             android:id="@+id/back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:onClick="onClick"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
     </RelativeLayout>
@@ -54,19 +54,8 @@
                 android:layout_height="180dp"
                 android:background="@drawable/d1_img1" >
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginRight="15dp"
-                    android:text="55份"
-                    android:textColor="#393939"
-                    android:textSize="14sp" />
-
                 <RelativeLayout
+                    android:id="@+id/relativeLayout1"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
@@ -81,12 +70,56 @@
                         android:src="@drawable/white_round" />
 
                     <TextView
+                        android:id="@+id/days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="剩余8天"
                         android:textColor="#393939"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="82dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/line_background" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50"
+                            android:textColor="#f19393"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="份"
+                            android:textColor="#393939"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="7dp"
+                        android:text="1231人参加"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -95,17 +128,48 @@
                 android:layout_height="180dp"
                 android:background="@drawable/d1_img2" >
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:layout_width="82dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginRight="15dp"
-                    android:text="55份"
-                    android:textColor="#393939"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/line_background" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30"
+                            android:textColor="#f19393"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="份"
+                            android:textColor="#393939"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="7dp"
+                        android:text="6500人参加"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="80dp"
@@ -122,31 +186,63 @@
                         android:src="@drawable/white_round" />
 
                     <TextView
+                        android:id="@+id/days2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="剩余8天"
+                        android:text="剩余3天"
                         android:textColor="#393939"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:background="@drawable/d1_img3" >
+                android:background="@drawable/d1_img1" >
 
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:layout_width="82dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginRight="15dp"
-                    android:text="55份"
-                    android:textColor="#393939"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/line_background" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:textColor="#f19393"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="份"
+                            android:textColor="#393939"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="7dp"
+                        android:text="4590人参加"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="80dp"
@@ -163,12 +259,13 @@
                         android:src="@drawable/white_round" />
 
                     <TextView
+                        android:id="@+id/days3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="剩余8天"
+                        android:text="剩余6天"
                         android:textColor="#393939"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>

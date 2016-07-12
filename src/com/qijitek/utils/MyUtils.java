@@ -14,6 +14,12 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -100,60 +106,60 @@ public class MyUtils {
 		if (httpResponse.getStatusLine().getStatusCode() == 200) {
 			String strResult = EntityUtils.toString(httpResponse.getEntity());
 			jsonObj = new JSONObject(strResult);
-
+			System.out.println("getJson" + jsonObj.toString());
 			return jsonObj;
 		} else
 			return null;
 
 	}
-//
-//	/**
-//	 * https连接
-//	 * 
-//	 * @param path
-//	 * @return
-//	 * @throws ClientProtocolException
-//	 * @throws IOException
-//	 */
-//	@SuppressWarnings("deprecation")
-//	public static JSONObject initSSLWithHttpClinet(String path)
-//			throws ClientProtocolException, IOException {
-//		HTTPSTrustManager.allowAllSSL();
-//		JSONObject jsonObject = null;
-//		int timeOut = 30 * 1000;
-//		HttpParams param = new BasicHttpParams();
-//		HttpConnectionParams.setConnectionTimeout(param, timeOut);
-//		HttpConnectionParams.setSoTimeout(param, timeOut);
-//		HttpConnectionParams.setTcpNoDelay(param, true);
-//
-//		SchemeRegistry registry = new SchemeRegistry();
-//		registry.register(new Scheme("http", PlainSocketFactory
-//				.getSocketFactory(), 80));
-//		registry.register(new Scheme("https", TrustAllSSLSocketFactory
-//				.getDefault(), 443));
-//		ClientConnectionManager manager = new ThreadSafeClientConnManager(
-//				param, registry);
-//		DefaultHttpClient client = new DefaultHttpClient(manager, param);
-//
-//		HttpGet request = new HttpGet(path);
-//		// HttpGet request = new HttpGet("https://www.alipay.com/");
-//		HttpResponse response = client.execute(request);
-//		HttpEntity entity = response.getEntity();
-//		BufferedReader reader = new BufferedReader(new InputStreamReader(
-//				entity.getContent()));
-//		StringBuilder result = new StringBuilder();
-//		String line = "";
-//		while ((line = reader.readLine()) != null) {
-//			result.append(line);
-//			try {
-//				jsonObject = new JSONObject(line);
-//			} catch (JSONException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		Log.e("HTTPS TEST", result.toString());
-//		return jsonObject;
-//	}
+
+	/**
+	 * https连接
+	 * 
+	 * @param path
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+	@SuppressWarnings("deprecation")
+	public static JSONObject initSSLWithHttpClinet(String path)
+			throws ClientProtocolException, IOException {
+		HTTPSTrustManager.allowAllSSL();
+		JSONObject jsonObject = null;
+		int timeOut = 30 * 1000;
+		HttpParams param = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(param, timeOut);
+		HttpConnectionParams.setSoTimeout(param, timeOut);
+		HttpConnectionParams.setTcpNoDelay(param, true);
+
+		SchemeRegistry registry = new SchemeRegistry();
+		registry.register(new Scheme("http", PlainSocketFactory
+				.getSocketFactory(), 80));
+		registry.register(new Scheme("https", TrustAllSSLSocketFactory
+				.getDefault(), 443));
+		ClientConnectionManager manager = new ThreadSafeClientConnManager(
+				param, registry);
+		DefaultHttpClient client = new DefaultHttpClient(manager, param);
+
+		HttpGet request = new HttpGet(path);
+		// HttpGet request = new HttpGet("https://www.alipay.com/");
+		HttpResponse response = client.execute(request);
+		HttpEntity entity = response.getEntity();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				entity.getContent()));
+		StringBuilder result = new StringBuilder();
+		String line = "";
+		while ((line = reader.readLine()) != null) {
+			result.append(line);
+			try {
+				jsonObject = new JSONObject(line);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		Log.e("HTTPS TEST", result.toString());
+		return jsonObject;
+	}
 
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -525,5 +531,49 @@ public class MyUtils {
 		intent.setDataAndType(Uri.fromFile(new File(fileName)),
 				"application/vnd.android.package-archive");
 		context.startActivity(intent);
+	}
+
+	/**
+	 * 验证手机号码
+	 * 
+	 * @param phoneNumber
+	 *            手机号码
+	 * @return boolean
+	 */
+	public static boolean checkPhoneNumber(String phoneNumber) {
+		Pattern pattern = Pattern
+				.compile("^((13[0-9])|(147)|(17[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$");
+		Matcher matcher = pattern.matcher(phoneNumber);
+		return matcher.matches();
+	}
+
+	public static String getOkHttp(String url) throws IOException {
+		OkHttpClient client = new OkHttpClient();
+
+		Request request = new Request.Builder().url(url).build();
+
+		Response response = client.newCall(request).execute();
+
+		return response.body().string();
+	}
+
+	public static String getSkintypeText(String type) {
+		int t = Integer.valueOf(type);
+		String str = "";
+		switch (t) {
+		case 1:
+			str = "干性皮肤的mm应选用养分多，滋润型的乳液化妆品，以使肌肤湿润、健康、有活力。定期做面部按摩，提高肌肤温度，改善血液循环，增进肌肤的生理活动，使肌肤光润亮泽。注意饮食营养的平衡（脂肪可稍多一些）。冬季室内受暖气影响，肌肤会变得更加促造，因此室内宜使用加湿器。";
+			break;
+		case 2:
+			str = "混合性皮肤的mm可以用比较滋润的保养品，注意两颊的保湿，但T区要做好清洁工作，最好跟两颊分开护理，用些比较清爽的产品，控制多余油份的产生。一些去油光和去黑头的特效产品只用在T区部位，多吃水果。千万不要嫌护肤程序麻烦哦！";
+			break;
+		case 3:
+			str = "油性皮肤的mm应使用洁净力强的洗面产品，去掉附着毛孔中的污物。用调节皮脂分泌的化妆品护理肌肤，并用清爽的乳液柔和皮肤。不偏食油腻食物，多吃蔬菜、水果和含维生素B的食物。保持心情轻松愉快，多参加体育活动，睡眠要充足。";
+			break;
+		default:
+			break;
+		}
+		return str;
+
 	}
 }

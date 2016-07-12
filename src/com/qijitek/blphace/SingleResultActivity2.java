@@ -25,6 +25,7 @@ import com.qijitek.constant.NomalConstant;
 import com.qijitek.database.FaceData;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.GetTypeUtils;
+import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.MyProgressBar;
 
 public class SingleResultActivity2 extends Activity implements OnClickListener {
@@ -66,6 +67,8 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 
 	//
 	private LinearLayout background;
+	private TextView skin_type;
+	private ImageView result_img;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +76,7 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_single_result2);
 		// registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 		init();
-//		type = getIntent().getIntExtra("type", 0);
+		// type = getIntent().getIntExtra("type", 0);
 		water = getIntent().getIntExtra("water", 50);
 		oil = getIntent().getIntExtra("oil", 50);
 		light = getIntent().getIntExtra("light", 50);
@@ -124,6 +127,9 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 			}
 
 		};
+		result_img = (ImageView) findViewById(R.id.result_img);
+		skin_type = (TextView) findViewById(R.id.skin_type);
+		skin_type.setText(new SharedpreferencesUtil(getApplicationContext()).getSkintypeStr()+"肌肤");
 		background = (LinearLayout) findViewById(R.id.background);
 		// Bitmap bmp1 = MyUtils.bytearray2bitmap(getIntent().getByteArrayExtra(
 		// "bmp"));
@@ -295,15 +301,15 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 			break;
 		case R.id.share2wechat:
 			// TODO
-			startActivity(new Intent(SingleResultActivity2.this,Starta7Activity.class));
-//			Toast.makeText(getApplicationContext(), "功能暂未开放", 0).show();
+			startActivity(new Intent(SingleResultActivity2.this,
+					Starta7Activity.class));
+			// Toast.makeText(getApplicationContext(), "功能暂未开放", 0).show();
 			// share2wechatUrl();
 			break;
 		default:
 			break;
 		}
 	}
-
 
 	private static IntentFilter makeGattUpdateIntentFilter() {
 		final IntentFilter intentFilter = new IntentFilter();

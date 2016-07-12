@@ -330,6 +330,9 @@ public class BluetoothLeService extends Service {
 	 */
 	public void writeCharacteristic(byte[] b, String uuid) {
 		mBusy = true;
+		if(mBluetoothGatt==null){
+			return;
+		}
 		BluetoothGattService ms = mBluetoothGatt.getService(UUID_BLE_SERVICE);
 		if (ms != null) {
 			BluetoothGattCharacteristic characteristic = ms

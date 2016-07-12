@@ -15,7 +15,7 @@ public class Fragment_c11 extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_c11, null);
+		View view = inflater.inflate(R.layout.fragment_c11_2, null);
 		init(view);
 		return view;
 	}

@@ -23,10 +23,11 @@
 
     <Button
         android:id="@+id/bind_device"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/a3_btn_background"
         android:text="绑定设备" />
 
 </RelativeLayout>
