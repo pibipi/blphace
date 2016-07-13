@@ -19,27 +19,67 @@ import com.qijitek.utils.SharedpreferencesUtil;
 public class Starta3Activity extends Activity implements OnClickListener,
 		SpinerAdapter.IOnItemSelectListener {
 	private List<String> mListType = new ArrayList<String>(); // 类型列表
+	private List<String> mListType2 = new ArrayList<String>(); // 类型列表
 	private TextView mTView;
 	private SpinerAdapter mAdapter;
+	// 设置PopWindow
+	private SpinerPopWindow mSpinerPopWindow;
+
+	private TextView mTView2;
+	private SpinerAdapter mAdapter2;
+	// 设置PopWindow2
+	private SpinerPopWindow mSpinerPopWindow2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_starta3);
+		init_q1();
+		init_q2();
+
+	}
+
+	private void init_q2() {
+		mTView2 = (TextView) findViewById(R.id.tv_value2);
+
+		// 初始化数据
+		mListType2.add("用到空瓶");
+		mListType2.add("半途而废");
+		mListType2.add("三分钟热度");
+
+		mAdapter2 = new SpinerAdapter(this, mListType2);
+		mAdapter2.refreshData(mListType2, 0);
+
+		// 显示第一条数据
+		mTView2.setText("用到空瓶");
+
+		// 初始化PopWindow
+		mSpinerPopWindow2 = new SpinerPopWindow(this);
+		mSpinerPopWindow2.setAdatper(mAdapter2);
+		mSpinerPopWindow2.setItemListener(this);
+	}
+
+	private void init_q1() {
 		mTView = (TextView) findViewById(R.id.tv_value);
 
 		// 初始化数据
-		mListType.add("雅诗兰黛");
-		mListType.add("欧莱雅");
+		mListType.add("阿玛尼");
+		mListType.add("娇韵诗");
+		mListType.add("菲诗小铺");
+		mListType.add("雪花秀");
+		mListType.add("CPB");
+		mListType.add("奥尔滨");
+		mListType.add("悦诗风吟");
 		mListType.add("兰蔻");
-		mListType.add("就知道三个");
-		mListType.add("还有什么");
+		mListType.add("资生堂");
+		mListType.add("YSL");
+		mListType.add("雅诗兰黛");
 
 		mAdapter = new SpinerAdapter(this, mListType);
 		mAdapter.refreshData(mListType, 0);
 
 		// 显示第一条数据
-		mTView.setText("雅诗兰黛");
+		mTView.setText("CPB");
 
 		// 初始化PopWindow
 		mSpinerPopWindow = new SpinerPopWindow(this);
@@ -47,13 +87,16 @@ public class Starta3Activity extends Activity implements OnClickListener,
 		mSpinerPopWindow.setItemListener(this);
 	}
 
-	// 设置PopWindow
-	private SpinerPopWindow mSpinerPopWindow;
-
 	private void showSpinWindow() {
 		Log.e("", "showSpinWindow");
 		mSpinerPopWindow.setWidth(mTView.getWidth());
 		mSpinerPopWindow.showAsDropDown(mTView);
+	}
+
+	private void showSpinWindow2() {
+		Log.e("", "showSpinWindow2");
+		mSpinerPopWindow2.setWidth(mTView2.getWidth());
+		mSpinerPopWindow2.showAsDropDown(mTView2);
 	}
 
 	@Override
@@ -64,6 +107,9 @@ public class Starta3Activity extends Activity implements OnClickListener,
 			break;
 		case R.id.tv_value:
 			showSpinWindow();
+			break;
+		case R.id.tv_value2:
+			showSpinWindow2();
 			break;
 		case R.id.next:
 			// int sum_score = new

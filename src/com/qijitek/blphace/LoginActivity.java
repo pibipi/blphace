@@ -181,14 +181,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.send:
-			code.setFocusable(true);
+			code.requestFocus();
 			String phone_str = phone.getText().toString().trim();
-			if (!phone_str.equals("") && !MyUtils.checkPhoneNumber(phone_str)) {
+			if (phone_str.equals("") && !MyUtils.checkPhoneNumber(phone_str)) {
 				Toast.makeText(getApplicationContext(), "请输入正确手机号", 0).show();
 			} else {
 				send.setClickable(false);
 				CountDownButtonHelper helper = new CountDownButtonHelper(send,
-						"已发送", 120, 1);
+						"已发送", 60, 1);
 				send.setTextColor(0xff727272);
 				helper.setOnFinishListener(new CountDownButtonHelper.OnFinishListener() {
 					@Override
@@ -203,6 +203,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// SMSSDK.getSupportedCountries();
 				SMSSDK.getVerificationCode("86", phone_str);
 			}
+			break;
+		case R.id.weibo_login:
+			startActivity(new Intent(
+					LoginActivity.this,
+					MainActivity.class));
+			finish();
 			break;
 		default:
 			break;

@@ -185,7 +185,7 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/unlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/update"

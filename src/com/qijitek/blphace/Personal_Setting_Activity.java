@@ -28,6 +28,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class Personal_Setting_Activity extends Activity implements
 	private String latestVersion = "";
 	private AlertDialog update_Dialog;
 	private NotificationManager mNotificationManager;
+	private Button unlogin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,8 @@ public class Personal_Setting_Activity extends Activity implements
 	}
 
 	private void init() {
+		unlogin = (Button) findViewById(R.id.unlogin);
+		unlogin.setOnClickListener(this);
 		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		update_Dialog = new AlertDialog.Builder(Personal_Setting_Activity.this)
 				.create();
@@ -249,6 +253,15 @@ public class Personal_Setting_Activity extends Activity implements
 				Toast.makeText(getApplicationContext(), "已是最新版本", 0).show();
 			}
 			break;
+		case R.id.unlogin:
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveIsLogin(false);
+			Intent intent = new Intent(Personal_Setting_Activity.this,
+					LoginActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			startActivity(intent);
+			break;
 		default:
 			break;
 		}
@@ -299,62 +312,62 @@ public class Personal_Setting_Activity extends Activity implements
 	}
 
 	private void showUpdateDialog() {
-//		update_Dialog.show();
-//
-//		Window window = update_Dialog.getWindow();
-//		window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
-//		// window.setWindowAnimations(R.style.mystyle); // 添加动画
-//
-//		update_Dialog.getWindow().setContentView(R.layout.dialog_update);
-//		update_Dialog.getWindow().findViewById(R.id.yes)
-//				.setOnClickListener(new View.OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						Toast.makeText(getApplicationContext(), "后台下载中...", 0)
-//								.show();
-//						new Thread(new Runnable() {
-//
-//							@Override
-//							public void run() {
-//								MyUtils.downloadApk(getApplicationContext(),
-//										mHandler);
-//							}
-//						}).start();
-//						update_Dialog.dismiss();
-//					}
-//				});
-//		update_Dialog.getWindow().findViewById(R.id.no)
-//				.setOnClickListener(new View.OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						update_Dialog.dismiss();
-//					}
-//				});
-//		update_Dialog.setCancelable(false);
+		// update_Dialog.show();
+		//
+		// Window window = update_Dialog.getWindow();
+		// window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// // window.setWindowAnimations(R.style.mystyle); // 添加动画
+		//
+		// update_Dialog.getWindow().setContentView(R.layout.dialog_update);
+		// update_Dialog.getWindow().findViewById(R.id.yes)
+		// .setOnClickListener(new View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// Toast.makeText(getApplicationContext(), "后台下载中...", 0)
+		// .show();
+		// new Thread(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// MyUtils.downloadApk(getApplicationContext(),
+		// mHandler);
+		// }
+		// }).start();
+		// update_Dialog.dismiss();
+		// }
+		// });
+		// update_Dialog.getWindow().findViewById(R.id.no)
+		// .setOnClickListener(new View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// update_Dialog.dismiss();
+		// }
+		// });
+		// update_Dialog.setCancelable(false);
 	}
-	
+
 	private void collapseStatusBar() {
-        int currentApiVersion = android.os.Build.VERSION.SDK_INT;
-        try {
-            Object service = getSystemService("statusbar");
-            Class<?> statusbarManager = Class
-                    .forName("android.app.StatusBarManager");
-            Method collapse = null;
-            if (service != null) {
-                if (currentApiVersion <= 16) {
-                    collapse = statusbarManager.getMethod("collapse");
-                } else {
-                    collapse = statusbarManager.getMethod("collapsePanels");
-                }
-                collapse.setAccessible(true);
-                collapse.invoke(service);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+		try {
+			Object service = getSystemService("statusbar");
+			Class<?> statusbarManager = Class
+					.forName("android.app.StatusBarManager");
+			Method collapse = null;
+			if (service != null) {
+				if (currentApiVersion <= 16) {
+					collapse = statusbarManager.getMethod("collapse");
+				} else {
+					collapse = statusbarManager.getMethod("collapsePanels");
+				}
+				collapse.setAccessible(true);
+				collapse.invoke(service);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 // class MyAsyncTask extends AsyncTask<String, Integer, String> {

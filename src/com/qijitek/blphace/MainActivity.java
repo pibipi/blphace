@@ -100,7 +100,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 				case 666:
 					int progress = msg.arg1;
 					if (progress > 0 && progress < 100) {
-						initNotify(progress, 100, "Alphace正在下载更新...");
+						initNotify(progress, 100, "昕颜正在下载更新...");
 					} else {
 						// initNotify(0, 0, "下载完成，点击安装");
 						mNotificationManager.cancelAll();

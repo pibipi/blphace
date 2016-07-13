@@ -43,7 +43,7 @@ public class Applyd2Activity extends Activity implements OnClickListener {
 		imgurl = getIntent().getStringExtra("imgurl");
 		demo_img = (ImageView) findViewById(R.id.demo_img);
 		content_txt = (TextView) findViewById(R.id.content_txt);
-		Picasso.with(getApplicationContext()).load(imgurl).resize(width, dp_hei).into(demo_img);
+		Picasso.with(getApplicationContext()).load(imgurl).into(demo_img);
 		content_txt.setText("\b\b\b\b"+content);
 	}
 

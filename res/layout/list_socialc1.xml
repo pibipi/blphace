@@ -9,16 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/d1_img2" />
+        android:background="@drawable/a_background" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/image"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="那些年我们一起坑"
         android:textColor="#393939"
         android:textSize="14sp" />

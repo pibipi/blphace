@@ -177,8 +177,10 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 			}
 			ApplyDemo ad = demo_data.get(position);
 			System.out.println("wid" + width + "dp_hei" + dp_hei);
-			Picasso.with(context).load(ad.getImageurl()).resize(width, dp_hei)
-					.centerCrop().into(viewHolder.image);
+			Picasso.with(context).load(ad.getImageurl())
+//					.resize(width, dp_hei)
+//					.centerCrop()
+					.into(viewHolder.image);
 			viewHolder.days.setText("还剩N天");
 			viewHolder.people.setText(ad.getPeople());
 			viewHolder.total.setText(ad.getTotal());

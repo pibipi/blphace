@@ -17,6 +17,7 @@ import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,7 +31,8 @@ import com.qijitek.database.SocialArticle;
 import com.qijitek.utils.MyUtils;
 import com.squareup.picasso.Picasso;
 
-public class Socialc1Activity2 extends Activity implements OnItemClickListener {
+public class Socialc1Activity2 extends Activity implements OnItemClickListener,
+		OnClickListener {
 	private ListView socialc1_list;
 	private ArrayList<SocialArticle> article_data;
 	private MyAdapter myAdapter;
@@ -187,5 +189,17 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener {
 				Socialc2Activity2.class);
 		intent.putExtra("url", sa.getUrl());
 		startActivity(intent);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.back:
+			finish();
+			break;
+
+		default:
+			break;
+		}
 	}
 }
