@@ -13,8 +13,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -95,6 +98,11 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 				showProgressBar(water, oil, light, average, result);
 			}
 		}, 500);
+		if (new SharedpreferencesUtil(getApplicationContext()).getIsFirst3()) {
+			showTips1();
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveIsFirst3(false);
+		}
 	}
 
 	private void init() {
@@ -302,7 +310,7 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		case R.id.share2wechat:
 			// TODO
 			startActivity(new Intent(SingleResultActivity2.this,
-					Starta7Activity.class));
+					Socialc1Activity2.class));
 			// Toast.makeText(getApplicationContext(), "功能暂未开放", 0).show();
 			// share2wechatUrl();
 			break;
@@ -455,5 +463,32 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		// }
 		// });
 		// reset_Dialog.setCancelable(false);
+	}
+	private void showTips1() {
+		final AlertDialog tips1_Dialog = new AlertDialog.Builder(
+				SingleResultActivity2.this, R.style.dialog).create();
+		tips1_Dialog.show();
+
+		Window window = tips1_Dialog.getWindow();
+		// window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// window.setWindowAnimations(R.style.dialog); // 添加动画
+		WindowManager windowManager = getWindowManager();
+		Display display = windowManager.getDefaultDisplay();
+		WindowManager.LayoutParams lp = tips1_Dialog.getWindow()
+				.getAttributes();
+		lp.width = (int) (display.getWidth() - 2); // 设置宽度
+		lp.height = (int) (display.getHeight() - 50); // 设置宽度
+		tips1_Dialog.getWindow().setAttributes(lp);
+
+		tips1_Dialog.getWindow().setContentView(R.layout.dialog_tips_a6);
+		tips1_Dialog.setCancelable(true);
+		tips1_Dialog.getWindow().findViewById(R.id.t1)
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						tips1_Dialog.dismiss();
+					}
+				});
 	}
 }

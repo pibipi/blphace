@@ -6,4 +6,5 @@
       <color name="possible_result_points">#c0ffff00</color>
       <color name="ffffff">#ffffffff</color>
       <color name="c0c0c0">#ffc0c0c0</color>
+       <color name="transparent">#00000000</color>
 </resources>

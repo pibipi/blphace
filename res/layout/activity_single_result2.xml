@@ -395,17 +395,22 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/share2wechat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/relativeLayout7"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="-15dp"
-                android:background="@drawable/result_article"
-                android:textColor="#393939"
-                android:textSize="12sp" />
+                android:layout_marginTop="-25dp" >
+
+                <Button
+                    android:id="@+id/share2wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/result_article"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 

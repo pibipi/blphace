@@ -77,7 +77,7 @@
             android:layout_height="40dp"
             android:layout_below="@+id/tips"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="53dp"
             android:background="@drawable/tuli_bind_btn"
             android:text="现在绑定"
             android:textColor="#76b6a3"

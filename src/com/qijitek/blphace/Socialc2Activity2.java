@@ -2,10 +2,12 @@ package com.qijitek.blphace;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class Socialc2Activity2 extends Activity {
+public class Socialc2Activity2 extends Activity implements OnClickListener {
 	private WebView webView;
 	private String url = "";
 
@@ -30,5 +32,17 @@ public class Socialc2Activity2 extends Activity {
 				return true;
 			}
 		});
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.back:
+			finish();
+			break;
+
+		default:
+			break;
+		}
 	}
 }

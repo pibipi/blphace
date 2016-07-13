@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/com.qijitek.blphace"
+    android:id="@+id/t1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11"
+        android:visibility="invisible" >
+
+        <TextView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="多点测试"
+            android:textColor="#393939"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/back" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#a1a1a1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/r2"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="15dp"
+                android:visibility="invisible" >
+
+                <ImageView
+                    android:id="@+id/result_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bt3_img" />
+
+                <TextView
+                    android:id="@+id/skin_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/result_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:text="TextView"
+                    android:textColor="#393939"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/r2"
+                android:visibility="invisible" >
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true" >
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="25dp"
+                        android:src="@drawable/face_water_icon" />
+
+                    <TextView
+                        android:id="@+id/water_progress"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="2dp"
+                        android:layout_toRightOf="@+id/face_water_progressBar"
+                        android:gravity="center"
+                        android:text="60"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/water_type"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="1dp"
+                        android:layout_toRightOf="@+id/water_progress"
+                        android:gravity="center"
+                        android:text="缺水"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/imageView12"
+                        android:text="水分程度"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <com.qijitek.view.MyProgressBar
+                        android:id="@+id/face_water_progressBar"
+                        style="@style/StyleProgressBarWater"
+                        android:layout_width="155dp"
+                        android:layout_height="9dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView1"
+                        android:background="@drawable/shape_progressbar_water"
+                        android:progress="5"
+                        android:secondaryProgress="100" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/relativeLayout1" >
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="25dp"
+                        android:src="@drawable/face_oil_icon" />
+
+                    <TextView
+                        android:id="@+id/textView33"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/imageView11"
+                        android:text="水油平衡"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <com.qijitek.view.MyProgressBar
+                        android:id="@+id/face_oil_progressBar"
+                        style="@style/StyleProgressBarWater"
+                        android:layout_width="155dp"
+                        android:layout_height="9dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView33"
+                        android:background="@drawable/shape_progressbar_water"
+                        android:progress="5"
+                        android:secondaryProgress="100" />
+
+                    <TextView
+                        android:id="@+id/oil_progress"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="2dp"
+                        android:layout_toRightOf="@+id/face_oil_progressBar"
+                        android:gravity="center"
+                        android:text="60"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/oil_type"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="1dp"
+                        android:layout_toRightOf="@+id/oil_progress"
+                        android:gravity="center"
+                        android:text="泛油"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/relativeLayout3" >
+
+                    <ImageView
+                        android:id="@+id/imageView111"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="25dp"
+                        android:src="@drawable/skin_color_icon" />
+
+                    <TextView
+                        android:id="@+id/textView333"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/imageView111"
+                        android:text="肤色程度"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <com.qijitek.view.MyProgressBar
+                        android:id="@+id/skin_light_progressBar"
+                        style="@style/StyleProgressBarWater"
+                        android:layout_width="155dp"
+                        android:layout_height="9dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView333"
+                        android:background="@drawable/shape_progressbar_water"
+                        android:progress="5"
+                        android:secondaryProgress="100" />
+
+                    <TextView
+                        android:id="@+id/light_progress"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="2dp"
+                        android:layout_toRightOf="@+id/skin_light_progressBar"
+                        android:gravity="center"
+                        android:text="60"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/light_type"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="1dp"
+                        android:layout_toRightOf="@+id/light_progress"
+                        android:gravity="center"
+                        android:text="偏黄"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/relativeLayout2" >
+
+                    <ImageView
+                        android:id="@+id/imageView1111"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="25dp"
+                        android:src="@drawable/skin_average_icon" />
+
+                    <com.qijitek.view.MyProgressBar
+                        android:id="@+id/skin_average_progressBar"
+                        style="@style/StyleProgressBarWater"
+                        android:layout_width="155dp"
+                        android:layout_height="9dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView3333"
+                        android:background="@drawable/shape_progressbar_water"
+                        android:progress="5"
+                        android:secondaryProgress="100" />
+
+                    <TextView
+                        android:id="@+id/average_progress"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="2dp"
+                        android:layout_toRightOf="@+id/skin_average_progressBar"
+                        android:gravity="center"
+                        android:text="60"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/average_type"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="1dp"
+                        android:layout_toRightOf="@+id/average_progress"
+                        android:gravity="center"
+                        android:text="不均匀"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView3333"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/imageView1111"
+                        android:text="均匀度"
+                        android:textColor="#4e4e4e"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="155dp"
+                android:layout_below="@+id/relativeLayout4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:visibility="invisible" >
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout6"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true" >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="23dp"
+                        android:background="@drawable/result_img1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/imageView2"
+                        android:text="肌肤分析："
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/relativeLayout6"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/result_lineback" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="8dp"
+                        android:text="  肌肤分析肌肤分肌肤分析肌肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析肌肤分析"
+                        android:textColor="#393939"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r1_tips"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/relativeLayout7"
+                android:layout_marginTop="-25dp" >
+
+                <Button
+                    android:id="@+id/share2wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/tips_a61"
+                    android:textColor="#393939"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_marginRight="-10dp"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/r1_tips"
+                android:layout_toLeftOf="@+id/r1_tips"
+                android:src="@drawable/tips_a60" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

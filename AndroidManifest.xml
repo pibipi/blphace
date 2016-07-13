@@ -70,7 +70,11 @@
         </activity>
         <activity android:name=".Applyd2Activity" >
         </activity>
-        <activity android:name=".SingleResultActivity2" >
+        <activity android:name=".SingleResultActivity2" >            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".CompareResultActivity" >
         </activity>
@@ -95,11 +99,7 @@
         <activity android:name=".MyAddressActivity" >
         </activity>
         <activity android:name=".WelcomeActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" >
         </activity>

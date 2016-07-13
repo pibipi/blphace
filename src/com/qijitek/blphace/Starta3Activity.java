@@ -16,8 +16,7 @@ import com.qijitek.spinner.SpinerPopWindow;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 
-public class Starta3Activity extends Activity implements OnClickListener,
-		SpinerAdapter.IOnItemSelectListener {
+public class Starta3Activity extends Activity implements OnClickListener{
 	private List<String> mListType = new ArrayList<String>(); // 类型列表
 	private List<String> mListType2 = new ArrayList<String>(); // 类型列表
 	private TextView mTView;
@@ -56,7 +55,17 @@ public class Starta3Activity extends Activity implements OnClickListener,
 		// 初始化PopWindow
 		mSpinerPopWindow2 = new SpinerPopWindow(this);
 		mSpinerPopWindow2.setAdatper(mAdapter2);
-		mSpinerPopWindow2.setItemListener(this);
+		mSpinerPopWindow2
+				.setItemListener(new SpinerAdapter.IOnItemSelectListener() {
+
+					@Override
+					public void onItemClick(int pos) {
+						if (pos >= 0 && pos <= mListType2.size()) {
+							String value = mListType2.get(pos);
+							mTView2.setText(value.toString());
+						}
+					}
+				});
 	}
 
 	private void init_q1() {
@@ -84,7 +93,17 @@ public class Starta3Activity extends Activity implements OnClickListener,
 		// 初始化PopWindow
 		mSpinerPopWindow = new SpinerPopWindow(this);
 		mSpinerPopWindow.setAdatper(mAdapter);
-		mSpinerPopWindow.setItemListener(this);
+		mSpinerPopWindow
+		.setItemListener(new SpinerAdapter.IOnItemSelectListener() {
+
+			@Override
+			public void onItemClick(int pos) {
+				if (pos >= 0 && pos <= mListType.size()) {
+					String value = mListType.get(pos);
+					mTView.setText(value.toString());
+				}
+			}
+		});
 	}
 
 	private void showSpinWindow() {
@@ -150,12 +169,11 @@ public class Starta3Activity extends Activity implements OnClickListener,
 	 * @see
 	 * org.gaochun.adapter.SpinerAdapter.IOnItemSelectListener#onItemClick(int)
 	 */
-	@Override
-	public void onItemClick(int pos) {
-		// TODO Auto-generated method stub
-		if (pos >= 0 && pos <= mListType.size()) {
-			String value = mListType.get(pos);
-			mTView.setText(value.toString());
-		}
-	}
+	// @Override
+	// public void onItemClick(int pos) {
+	// if (pos >= 0 && pos <= mListType.size()) {
+	// String value = mListType.get(pos);
+	// mTView.setText(value.toString());
+	// }
+	// }
 }

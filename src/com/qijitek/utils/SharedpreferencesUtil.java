@@ -244,4 +244,49 @@ public class SharedpreferencesUtil {
 		Boolean isTesting = preferences.getBoolean("isTesting", true);
 		return isTesting;
 	}
+
+	public void saveIsFirst1(boolean isFirst) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isFirst1", isFirst);
+		editor.commit();
+	}
+
+	public boolean getIsFirst1() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Boolean isFirst = preferences.getBoolean("isFirst1", true);
+		return isFirst;
+	}
+
+	public void saveIsFirst2(boolean isFirst) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isFirst2", isFirst);
+		editor.commit();
+	}
+
+	public boolean getIsFirst2() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Boolean isFirst = preferences.getBoolean("isFirst2", true);
+		return isFirst;
+	}
+
+	public void saveIsFirst3(boolean isFirst) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isFirst3", isFirst);
+		editor.commit();
+	}
+
+	public boolean getIsFirst3() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Boolean isFirst = preferences.getBoolean("isFirst3", true);
+		return isFirst;
+	}
 }

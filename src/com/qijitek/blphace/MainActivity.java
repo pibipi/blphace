@@ -15,10 +15,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.NotificationCompat;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -53,6 +55,12 @@ public class MainActivity extends SlidingFragmentActivity implements
 				init_update();
 			}
 		}).start();
+		if (new SharedpreferencesUtil(getApplicationContext()).getIsFirst1()) {
+			showTips2();
+			showTips1();
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveIsFirst1(false);
+		}
 	}
 
 	private void init_update() {
@@ -193,6 +201,62 @@ public class MainActivity extends SlidingFragmentActivity implements
 		default:
 			break;
 		}
+	}
+
+	private void showTips2() {
+		final AlertDialog tips1_Dialog = new AlertDialog.Builder(
+				MainActivity.this, R.style.dialog).create();
+		tips1_Dialog.show();
+
+		Window window = tips1_Dialog.getWindow();
+		// window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// window.setWindowAnimations(R.style.dialog); // 添加动画
+		WindowManager windowManager = getWindowManager();
+		Display display = windowManager.getDefaultDisplay();
+		WindowManager.LayoutParams lp = tips1_Dialog.getWindow()
+				.getAttributes();
+		lp.width = (int) (display.getWidth() - 2); // 设置宽度
+		lp.height = (int) (display.getHeight() - 50); // 设置宽度
+		tips1_Dialog.getWindow().setAttributes(lp);
+
+		tips1_Dialog.getWindow().setContentView(R.layout.dialog_tips_main2);
+		tips1_Dialog.setCancelable(true);
+		tips1_Dialog.getWindow().findViewById(R.id.t1)
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						tips1_Dialog.dismiss();
+					}
+				});
+	}
+
+	private void showTips1() {
+		final AlertDialog tips1_Dialog = new AlertDialog.Builder(
+				MainActivity.this, R.style.dialog).create();
+		tips1_Dialog.show();
+
+		Window window = tips1_Dialog.getWindow();
+		// window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// window.setWindowAnimations(R.style.dialog); // 添加动画
+		WindowManager windowManager = getWindowManager();
+		Display display = windowManager.getDefaultDisplay();
+		WindowManager.LayoutParams lp = tips1_Dialog.getWindow()
+				.getAttributes();
+		lp.width = (int) (display.getWidth() - 2); // 设置宽度
+		lp.height = (int) (display.getHeight() - 50); // 设置宽度
+		tips1_Dialog.getWindow().setAttributes(lp);
+
+		tips1_Dialog.getWindow().setContentView(R.layout.dialog_tips_main1);
+		tips1_Dialog.setCancelable(true);
+		tips1_Dialog.getWindow().findViewById(R.id.t1)
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						tips1_Dialog.dismiss();
+					}
+				});
 	}
 
 	private void showDialog() {
