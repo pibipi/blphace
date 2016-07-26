@@ -289,4 +289,19 @@ public class SharedpreferencesUtil {
 		Boolean isFirst = preferences.getBoolean("isFirst3", true);
 		return isFirst;
 	}
+
+	public void saveItemtype(String itemtype) {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("itemtype", itemtype);
+		editor.commit();
+	}
+
+	public String getItemtype() {
+		SharedPreferences preferences = context.getSharedPreferences(NAME,
+				Context.MODE_PRIVATE);
+		String itemtype = preferences.getString("itemtype", "");
+		return itemtype;
+	}
 }

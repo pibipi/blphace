@@ -6,8 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="11"
+        android:layout_height="48dp"
         android:background="#ffffff" >
 
         <ImageView
@@ -70,14 +69,13 @@
                 android:layout_marginRight="9dp"
                 android:layout_toLeftOf="@+id/tips"
                 android:src="@drawable/blue_point" />
-
         </RelativeLayout>
 
         <RelativeLayout
-            android:translationY="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" >
+            android:layout_centerInParent="true"
+            android:translationY="10dp" >
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -85,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/test2_img" />
+                android:src="@drawable/test1_img" />
 
             <ImageView
                 android:id="@+id/multiply_img"
@@ -93,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/multiply_test1" />
+                android:src="@drawable/test1_img" />
         </RelativeLayout>
     </RelativeLayout>
 

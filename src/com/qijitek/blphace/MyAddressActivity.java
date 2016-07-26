@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import com.pickerview.OptionsPopupWindow;
 import com.pickerview.OptionsPopupWindow.OnOptionsSelectListener;
+import com.qijitek.database.UserAddress;
 import com.qijitek.utils.HttpUtils;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
@@ -34,19 +37,162 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 	private EditText address;
 	private Button submit;
 	private Handler mHandler;
+	private boolean isUpdate = false;
+	private boolean applyFlag = false;
+	private UserAddress userAddress;
+	private TextView edit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_myaddress);
 		init();
+		initDate();
+	}
+
+	private void initDate() {
+		applyFlag = getIntent().getBooleanExtra("applyFlag", false);
+		if (applyFlag) {
+			isUpdate = getIntent().getBooleanExtra("isupdate", false);
+			if (isUpdate) {
+				submit.setText("立即申请");
+				submit.setOnClickListener(new ApplyOnClickListener());
+//				userAddress = (UserAddress) getIntent().getExtras().get(
+//						"useraddress");
+//				System.out.println(userAddress.toString()+"``````");
+//				completeText(userAddress);
+				setUnEditable();
+			}
+		} else {
+
+			submit.setOnClickListener(new SaveOnClickListener());
+			edit.setVisibility(View.INVISIBLE);
+			setEditable();
+		}
+	}
+
+	private void completeText(UserAddress ua) {
+		name.setText(ua.getName());
+		age.setText(ua.getAge());
+		phone.setText(ua.getPhone());
+		address.setText(ua.getAddress());
+		province.setText(ua.getProvince());
+		String sex_txt = ua.getSex();
+		String skintype_txt = ua.getSkintype();
+		sex.setText(sex_txt);
+		skin_type.setText(skintype_txt);
+		// if (sex_txt.equals("1")) {
+		// sex.setText("男");
+		// } else {
+		// sex.setText("女");
+		// }
+		// if (skintype_txt.equals("1")) {
+		// skin_type.setText("干性肌肤");
+		// } else if (skintype_txt.equals("2")) {
+		// skin_type.setText("混合性肌肤");
+		// } else {
+		// skin_type.setText("油性肌肤");
+		// }
+	}
+
+	private void setUnEditable() {
+		skin_type.setClickable(false);
+		sex.setClickable(false);
+		province.setClickable(false);
+		// name.setFocusable(false);
+		name.setEnabled(false);
+		// age.setFocusable(false);
+		age.setEnabled(false);
+		// phone.setFocusable(false);
+		phone.setEnabled(false);
+		// address.setFocusable(false);
+		address.setEnabled(false);
+	}
+
+	private void setEditable() {
+		skin_type.setClickable(true);
+		sex.setClickable(true);
+		province.setClickable(true);
+		name.requestFocus();
+		// name.setFocusable(true);
+		name.setEnabled(true);
+		age.setEnabled(true);
+		phone.setEnabled(true);
+		address.setEnabled(true);
 	}
 
 	private void init() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String url = "http://api.qijitek.com/getAddress/?userid="
+						+ new SharedpreferencesUtil(getApplicationContext())
+								.getUserid();
+				try {
+					JSONObject jsonObject = MyUtils.getJson(url);
+					String msg = jsonObject.optString("msg");
+					if (msg.equals("已提交")) {
+						isUpdate = true;
+						JSONArray obj_array = jsonObject.getJSONArray("obj");
+						JSONObject obj_json = (JSONObject) obj_array.opt(0);
+						userAddress = new UserAddress(
+								obj_json.optString("userid"),
+								obj_json.optString("name"),
+								obj_json.optString("age"),
+								obj_json.optString("sex"),
+								obj_json.optString("skintype"),
+								obj_json.optString("phone"),
+								obj_json.optString("province"),
+								obj_json.optString("address"));
+						System.out.println(userAddress.toString()+"```");
+						mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								completeText(userAddress);
+							}
+						});
+					}
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					mHandler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							Toast.makeText(getApplicationContext(), "请检查网络连接",
+									0).show();
+						}
+					});
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 		mHandler = new Handler() {
+
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				switch (msg.what) {
+				case 1:
+					Toast.makeText(getApplicationContext(), "申请成功", 0).show();
+					setResult(0);
+					finish();
+					break;
+
+				default:
+					break;
+				}
+			}
+
 		};
+		edit = (TextView) findViewById(R.id.edit);
+		edit.setOnClickListener(this);
 		submit = (Button) findViewById(R.id.submit);
-		submit.setOnClickListener(this);
+		submit.setOnClickListener(new SaveOnClickListener());
 		name = (EditText) findViewById(R.id.name);
 		age = (EditText) findViewById(R.id.age);
 		phone = (EditText) findViewById(R.id.phone);
@@ -162,13 +308,14 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 		});
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.submit:
+	private class SaveOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
 			if (!edit_notnull()) {
 				return;
 			}
+			setUnEditable();
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -180,6 +327,7 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 					String province_txt = province.getText().toString().trim();
 					String address_txt = address.getText().toString().trim();
 					String name_txt = name.getText().toString().trim();
+					String skintype_txt = skin_type.getText().toString().trim();
 
 					String url = "http://api.qijitek.com/updateAddress/?userid="
 							+ userid
@@ -193,10 +341,32 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 							+ province_txt
 							+ "&address="
 							+ address_txt
-							+ "&name=" + name_txt;
+							+ "&name=" + name_txt + "&skintype=" + skintype_txt;
+					System.out.println(url);
 					try {
 						JSONObject jsonObject = MyUtils.getJson(url);
-						MyAddressActivity.this.finish();
+						if (!applyFlag) {
+							mHandler.post(new Runnable() {
+
+								@Override
+								public void run() {
+									Toast.makeText(getApplicationContext(),
+											"保存成功", 0).show();
+								}
+							});
+							MyAddressActivity.this.finish();
+						} else {
+							mHandler.post(new Runnable() {
+
+								@Override
+								public void run() {
+									submit.setOnClickListener(new ApplyOnClickListener());
+									submit.setText("立即申请");
+									Toast.makeText(getApplicationContext(),
+											"保存成功", 0).show();
+								}
+							});
+						}
 						if (jsonObject == null) {
 							System.out.println("SB le ba");
 						}
@@ -218,12 +388,58 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 					}
 				}
 			}).start();
-			break;
+		}
+
+	}
+
+	private class ApplyOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					String url = "http://api.qijitek.com/applyDemo/?userid="
+							+ new SharedpreferencesUtil(getApplicationContext())
+									.getUserid() + "&code="
+							+ getIntent().getStringExtra("code") + "&time="
+							+ System.currentTimeMillis();
+					try {
+						JSONObject jsonObject = MyUtils.getJson(url);
+						System.out.println(url);
+						mHandler.sendEmptyMessage(1);
+					} catch (ClientProtocolException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(),
+										"请检查网络连接", 0).show();
+							}
+						});
+						e.printStackTrace();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		}
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
 		case R.id.back:
 			finish();
 			break;
 		case R.id.edit:
-
+			setEditable();
+			submit.setOnClickListener(new SaveOnClickListener());
+			submit.setText("保存");
 			break;
 		default:
 			break;
@@ -232,14 +448,6 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 
 	private boolean edit_notnull() {
 		boolean flag = false;
-		// if (!name.getText().toString().trim().equals("")
-		// && !sex.getText().toString().trim().equals("")
-		// && !age.getText().toString().trim().equals("")
-		// && !skin_type.getText().toString().trim().equals("")
-		// && !phone.getText().toString().trim().equals("")
-		// && !province.getText().toString().trim().equals("")
-		// && !address.getText().toString().trim().equals("")) {
-		// }
 		if (name.getText().toString().trim().equals("")) {
 			toastShort("请输入姓名");
 		} else if (sex.getText().toString().trim().equals("")) {
@@ -263,4 +471,10 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 	private void toastShort(String str) {
 		Toast.makeText(getApplicationContext(), str, 0).show();
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
 }

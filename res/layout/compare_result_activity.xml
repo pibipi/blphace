@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res/com.qijitek.blphace"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/test_background"
-    android:orientation="vertical" >
+    android:background="@drawable/test_background" >
 
     <RelativeLayout
+        android:id="@+id/rell1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="11"
+        android:layout_height="48dp"
         android:background="#ffffff" >
 
         <ImageView
@@ -41,8 +40,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rell1"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -57,6 +56,7 @@
                 android:layout_marginLeft="30dp" >
 
                 <TextView
+                    android:id="@+id/name1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -66,11 +66,12 @@
                     android:textSize="12sp" />
 
                 <ImageView
+                    android:id="@+id/img1"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/demo1" />
+                    android:background="@drawable/no_img" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -80,6 +81,7 @@
                 android:layout_marginRight="30dp" >
 
                 <TextView
+                    android:id="@+id/name2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -89,11 +91,12 @@
                     android:textSize="12sp" />
 
                 <ImageView
+                    android:id="@+id/img2"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/demo2" />
+                    android:background="@drawable/no_img" />
             </RelativeLayout>
 
             <TextView
@@ -117,6 +120,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="44dp"
+                android:visibility="invisible"
                 android_custom:roundColor="#f2eded"
                 android_custom:roundProgressColor="#8dcdb9"
                 android_custom:roundWidth="7dip"
@@ -130,6 +134,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="44dp"
+                android:visibility="invisible"
                 android_custom:roundColor="#f2eded"
                 android_custom:roundProgressColor="#8dcdb9"
                 android_custom:roundWidth="7dip"
@@ -164,6 +169,18 @@
             android:layout_width="match_parent"
             android:layout_height="100dp" >
 
+            <TextView
+                android:id="@+id/p1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="44dp"
+                android:gravity="center"
+                android:text="测试中..."
+                android:textColor="#393939"
+                android:textSize="12sp" />
+
             <com.qijitek.view.RoundProgressBar
                 android:id="@+id/oil_progress1"
                 android:layout_width="80dp"
@@ -171,6 +188,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="44dp"
+                android:visibility="invisible"
                 android_custom:roundColor="#f2eded"
                 android_custom:roundProgressColor="#8dcdb9"
                 android_custom:roundWidth="7dip"
@@ -184,11 +202,24 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="44dp"
+                android:visibility="invisible"
                 android_custom:roundColor="#f2eded"
                 android_custom:roundProgressColor="#8dcdb9"
                 android_custom:roundWidth="7dip"
                 android_custom:textColor="#a1a1a1"
                 android_custom:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/p2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="44dp"
+                android:gravity="center"
+                android:text="等待测试"
+                android:textColor="#393939"
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -219,12 +250,13 @@
             android:layout_height="100dp" >
 
             <com.qijitek.view.RoundProgressBar
-                android:id="@+id/color_progress1"
+                android:id="@+id/light_progress1"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="44dp"
+                android:visibility="invisible"
                 android_custom:roundColor="#f2eded"
                 android_custom:roundProgressColor="#8dcdb9"
                 android_custom:roundWidth="7dip"
@@ -232,12 +264,13 @@
                 android_custom:textSize="15dp" />
 
             <com.qijitek.view.RoundProgressBar
-                android:id="@+id/color_progress2"
+                android:id="@+id/light_progress2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="44dp"
+                android:visibility="invisible"
                 android_custom:roundColor="#f2eded"
                 android_custom:roundProgressColor="#8dcdb9"
                 android_custom:roundWidth="7dip"
@@ -269,4 +302,17 @@
         </RelativeLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/single_result_btn"
+        android:onClick="onClick"
+        android:text="保存并退出"
+        android:textColor="#393939"
+        android:textSize="12sp" />
+
+</RelativeLayout>

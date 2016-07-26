@@ -7,4 +7,5 @@
       <color name="ffffff">#ffffffff</color>
       <color name="c0c0c0">#ffc0c0c0</color>
        <color name="transparent">#00000000</color>
+       <color name="transparent_a5">#a5000000</color>
 </resources>

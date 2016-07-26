@@ -1,6 +1,7 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,7 +34,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qijitek.database.ApplyDemo;
+import com.qijitek.database.UserAddress;
 import com.qijitek.utils.MyUtils;
+import com.qijitek.utils.SharedpreferencesUtil;
 import com.squareup.picasso.Picasso;
 
 @SuppressLint("SimpleDateFormat")
@@ -46,6 +50,8 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 	int dp_hei;
 	int width;
 	int height;
+	private boolean isUpdate = false;
+	private UserAddress userAddress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +90,15 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 		applyd1_list.setOnItemClickListener(this);
 		context = getApplicationContext();
 		myAdapter = new MyAdapter(context);
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				getDemoData();
-			}
-		}).start();
 	}
 
 	private void getDemoData() {
 		try {
 			JSONObject jsonObject = MyUtils
-					.getJson("http://api.qijitek.com/getDemos/");
+					.getJson("http://api.qijitek.com/getDemos/?userid="
+							+ new SharedpreferencesUtil(getApplicationContext())
+									.getUserid());
+			demo_data.clear();
 			System.out.println(jsonObject.toString());
 			JSONArray obj = jsonObject.getJSONArray("obj");
 			System.out.println(obj.length());
@@ -109,8 +112,9 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 				String content = json.getString("content");
 				String time = json.getString("time");
 				String total = json.getString("total");
+				String isapply = json.getString("isapply");
 				ApplyDemo ad = new ApplyDemo(code, name, people, imageurl,
-						content, time, total);
+						content, time, total, isapply);
 				demo_data.add(ad);
 				Message msg = new Message();
 				msg.what = 1;
@@ -160,7 +164,7 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder viewHolder;
 			if (convertView == null) {
-				convertView = layoutInflater.inflate(R.layout.list_applyd1,
+				convertView = layoutInflater.inflate(R.layout.list_applyd12,
 						null);
 				viewHolder = new ViewHolder();
 				viewHolder.image = (ImageView) convertView
@@ -178,11 +182,10 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 			ApplyDemo ad = demo_data.get(position);
 			System.out.println("wid" + width + "dp_hei" + dp_hei);
 			Picasso.with(context).load(ad.getImageurl())
-//					.resize(width, dp_hei)
-//					.centerCrop()
+			// .resize(width, dp_hei)
+			// .centerCrop()
 					.into(viewHolder.image);
-			viewHolder.days.setText("还剩N天");
-			viewHolder.people.setText(ad.getPeople());
+			viewHolder.people.setText("已参加：" + ad.getPeople() + "人");
 			viewHolder.total.setText(ad.getTotal());
 			//
 			SimpleDateFormat format = new SimpleDateFormat(
@@ -193,9 +196,9 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 				String dt_str = "";
 				System.out.println(System.currentTimeMillis() + "dt" + dt);
 				if (dt > 0) {
-					dt_str = "还剩" + (int) (dt / 86400000f + 1) + "天";
+					dt_str = (int) (dt / 86400000f + 1) + "";
 				} else {
-					dt_str = "还剩0天";
+					dt_str = "0";
 				}
 				viewHolder.days.setText(dt_str);
 			} catch (ParseException e) {
@@ -235,7 +238,70 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 		intent.putExtra("name", ad.getName());
 		intent.putExtra("content", ad.getContent());
 		intent.putExtra("imgurl", ad.getImageurl());
+		intent.putExtra("code", ad.getCode());
+		intent.putExtra("isapply", ad.getIsapply());
+		intent.putExtra("isupdate", isUpdate);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("useraddress", userAddress);
+		intent.putExtras(bundle);
 		startActivity(intent);
+	}
+
+	private void isUpdateAddress() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String url = "http://api.qijitek.com/getAddress/?userid="
+						+ new SharedpreferencesUtil(getApplicationContext())
+								.getUserid();
+				try {
+					JSONObject jsonObject = MyUtils.getJson(url);
+					String msg = jsonObject.optString("msg");
+					if (msg.equals("已提交")) {
+						isUpdate = true;
+						JSONArray obj_array = jsonObject.getJSONArray("obj");
+						JSONObject obj_json = (JSONObject) obj_array.opt(0);
+						userAddress = new UserAddress(
+								obj_json.optString("userid"),
+								obj_json.optString("name"),
+								obj_json.optString("age"),
+								obj_json.optString("sex"),
+								obj_json.optString("skintype"),
+								obj_json.optString("phone"),
+								obj_json.optString("province"),
+								obj_json.optString("address"));
+					}
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					mHandler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							Toast.makeText(getApplicationContext(), "请检查网络连接",
+									0).show();
+						}
+					});
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
+	}
+
+	@Override
+	protected void onResume() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				getDemoData();
+				isUpdateAddress();
+			}
+		}).start();
+		super.onResume();
 	}
 
 }

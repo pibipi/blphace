@@ -8,8 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="11"
+        android:layout_height="48dp"
         android:visibility="invisible" >
 
         <TextView
@@ -50,11 +49,11 @@
             android:layout_height="match_parent" >
 
             <RelativeLayout
+                android:visibility="invisible"
                 android:id="@+id/r2"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginTop="15dp"
-                android:visibility="invisible" >
+                android:layout_marginTop="15dp" >
 
                 <ImageView
                     android:id="@+id/result_img"

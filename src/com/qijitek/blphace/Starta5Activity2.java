@@ -1,8 +1,12 @@
 package com.qijitek.blphace;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,7 +36,9 @@ import android.widget.Toast;
 
 import com.qijitek.constant.NomalConstant;
 import com.qijitek.database.FaceData;
+import com.qijitek.database.SingleItem;
 import com.qijitek.service.BluetoothLeService;
+import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 
 public class Starta5Activity2 extends Activity implements OnClickListener {
@@ -60,6 +66,11 @@ public class Starta5Activity2 extends Activity implements OnClickListener {
 	private ImageView multiply_img;
 	private FaceData averageData;
 
+	private int water = 60, oil = 60, light = 60;
+	private int result = 60;
+	private boolean needsave = false;
+	private SingleItem si;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,6 +81,10 @@ public class Starta5Activity2 extends Activity implements OnClickListener {
 			showTips1();
 			new SharedpreferencesUtil(getApplicationContext())
 					.saveIsFirst2(false);
+		}
+		needsave = getIntent().getBooleanExtra("needsave", false);
+		if (needsave) {
+			si = (SingleItem) getIntent().getExtras().getSerializable("si");
 		}
 	}
 
@@ -177,43 +192,105 @@ public class Starta5Activity2 extends Activity implements OnClickListener {
 						UUID_BLE_CHARACTERISTIC_F1.toString())) {
 					byte[] b = intent
 							.getByteArrayExtra(BluetoothLeService.BYTE_DATA);
-					System.out.println("Multiply" + "对了F1```" + b.length + "``"
+					System.out.println("Single" + "对了F1```" + b.length + "``"
 							+ b[0]);
-					final FaceData fd = byte2data(b);
-					if (list.size() <= 5) {
-						list.add(fd);
-						System.out.println("list size" + list.size());
-						switch (list.size()) {
-						case 1:
-							multiply_img
-									.setImageResource(R.drawable.multiply_test2);
-							break;
-						case 2:
-							multiply_img
-									.setImageResource(R.drawable.multiply_test3);
-							break;
-						case 3:
-							multiply_img
-									.setImageResource(R.drawable.multiply_test4);
-							break;
-						case 4:
-							multiply_img
-									.setImageResource(R.drawable.multiply_test5);
-							break;
-						case 5:
-							multiply_img
-									.setImageResource(R.drawable.multiply_test1);
-							handdata(list, fd);
-							break;
-						default:
-							break;
-						}
-					}
+					FaceData fd = byte2data(b);
+					water = fd.getWater();
+					oil = fd.getOil();
+					light = fd.getLight();
+					result = (int) (light * 0.5f + water * 0.3f + 0.2f * oil);
+
 					Log.e(TAG,
 							fd.getWater() + "``" + fd.getOil() + "``"
 									+ fd.getLight() + "``" + fd.getAverage());
+					Intent i = new Intent(Starta5Activity2.this,
+							SingleResultActivity2.class);
+					i.putExtra("water", water);
+					i.putExtra("oil", oil);
+					i.putExtra("light", light);
+					i.putExtra("result", result);
+					if (needsave) {
+						new Thread(new Runnable() {
 
+							@Override
+							public void run() {
+								String url = "http://api.qijitek.com/uploadSingleTestResult/?userid="
+										+ sharedpreferencesUtil.getUserid()
+										+ "&qid="
+										+ si.getQid()
+										+ "&itemtype="
+										+ sharedpreferencesUtil.getItemtype()
+										+ "&water="
+										+ water
+										+ "&oil="
+										+ oil
+										+ "&light=" + light;
+								try {
+									MyUtils.getJson(url);
+								} catch (ClientProtocolException e) {
+									e.printStackTrace();
+								} catch (IOException e) {
+									mHandler.post(new Runnable() {
+
+										@Override
+										public void run() {
+											Toast.makeText(
+													getApplicationContext(),
+													"请检查网络连接", 0).show();
+											Starta5Activity2.this.finish();
+										}
+									});
+									e.printStackTrace();
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						}).start();
+					}
+					startActivity(i);
 				}
+				// if
+				// (intent.getStringExtra(BluetoothLeService.DATA_UUID).equals(
+				// UUID_BLE_CHARACTERISTIC_F1.toString())) {
+				// byte[] b = intent
+				// .getByteArrayExtra(BluetoothLeService.BYTE_DATA);
+				// System.out.println("Multiply" + "对了F1```" + b.length + "``"
+				// + b[0]);
+				// final FaceData fd = byte2data(b);
+				// if (list.size() <= 5) {
+				// list.add(fd);
+				// System.out.println("list size" + list.size());
+				// switch (list.size()) {
+				// case 1:
+				// multiply_img
+				// .setImageResource(R.drawable.multiply_test2);
+				// break;
+				// case 2:
+				// multiply_img
+				// .setImageResource(R.drawable.multiply_test3);
+				// break;
+				// case 3:
+				// multiply_img
+				// .setImageResource(R.drawable.multiply_test4);
+				// break;
+				// case 4:
+				// multiply_img
+				// .setImageResource(R.drawable.multiply_test5);
+				// break;
+				// case 5:
+				// multiply_img
+				// .setImageResource(R.drawable.multiply_test1);
+				// handdata(list, fd);
+				// break;
+				// default:
+				// break;
+				// }
+				// }
+				// Log.e(TAG,
+				// fd.getWater() + "``" + fd.getOil() + "``"
+				// + fd.getLight() + "``" + fd.getAverage());
+				//
+				// }
 
 			}
 		}

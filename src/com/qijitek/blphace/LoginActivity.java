@@ -5,12 +5,12 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import okhttp3.OkHttpClient;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,10 +20,16 @@ import android.widget.Toast;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
+import com.qijitek.constant.WeiboConstant;
 import com.qijitek.utils.CountDownButtonHelper;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.ProgersssDialog;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.auth.sso.SsoHandler;
+import com.sina.weibo.sdk.exception.WeiboException;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 
@@ -35,6 +41,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private EditText phone;
 	private EditText code;
 	private Handler mHandler;
+	//
+	private AuthInfo mAuthInfo;
+	private SsoHandler mSsoHandler;
+	private Oauth2AccessToken mAccessToken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +53,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 		init();
 		Log.e(TAG, "onCreate");
 		initLogin();
+		mAuthInfo = new AuthInfo(getApplicationContext(),
+				WeiboConstant.APP_KEY, WeiboConstant.REDIRECT_URL,
+				WeiboConstant.SCOPE);
+		mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
+
 	}
 
 	private void initLogin() {
@@ -83,10 +98,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 							Toast.LENGTH_SHORT).show();
 					break;
 				case 2:
-					Toast.makeText(getApplicationContext(), "登陆成功",
-							Toast.LENGTH_SHORT).show();
 					final ProgersssDialog dialog = new ProgersssDialog(
-							LoginActivity.this, "验证成功，正在登陆...");
+							LoginActivity.this, "");
 					new SharedpreferencesUtil(getApplicationContext())
 							.saveUserid(phone.getText().toString().trim());
 					new Thread(new Runnable() {
@@ -110,6 +123,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 										@Override
 										public void run() {
+											Toast.makeText(
+													getApplicationContext(),
+													"登陆成功", Toast.LENGTH_SHORT)
+													.show();
 											dialog.dismiss();
 											startActivity(new Intent(
 													LoginActivity.this,
@@ -138,6 +155,64 @@ public class LoginActivity extends Activity implements OnClickListener {
 						}
 					}).start();
 
+					break;
+				case 3:
+					final String uid = (String) msg.obj;
+					final ProgersssDialog dialog2 = new ProgersssDialog(
+							LoginActivity.this, "");
+					new SharedpreferencesUtil(getApplicationContext())
+							.saveUserid(uid);
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							try {
+								JSONObject jsonObject;
+								try {
+									jsonObject = MyUtils
+											.getJson("http://api.qijitek.com/regist/?userid="
+													+ uid
+													+ "&login_type=3&platform=1");
+									System.out.println(jsonObject.toString()
+											+ "jsonObject");
+									new SharedpreferencesUtil(
+											getApplicationContext())
+											.saveIsLogin(true);
+									mHandler.postDelayed(new Runnable() {
+
+										@Override
+										public void run() {
+											Toast.makeText(
+													getApplicationContext(),
+													"登陆成功", Toast.LENGTH_SHORT)
+													.show();
+											dialog2.dismiss();
+											startActivity(new Intent(
+													LoginActivity.this,
+													MainActivity.class));
+											finish();
+										}
+									}, 1000);
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+								// String s=
+								// MyUtils.getOkHttp("http://api.qijitek.com/regist/?userid="
+								// + phone.getText().toString().trim()
+								// + "&login_type=1&platform=1");
+							} catch (IOException e) {
+								mHandler.post(new Runnable() {
+
+									@Override
+									public void run() {
+										Toast.makeText(getApplicationContext(),
+												"请检查网络连接", 0).show();
+									}
+								});
+								e.printStackTrace();
+							}
+						}
+					}).start();
 					break;
 				default:
 					break;
@@ -205,14 +280,84 @@ public class LoginActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.weibo_login:
-			startActivity(new Intent(
-					LoginActivity.this,
-					MainActivity.class));
-			finish();
+			// startActivity(new Intent(LoginActivity.this,
+			// MainActivity.class));
+			// finish();
+			mSsoHandler.authorize(new AuthListener());
 			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 微博认证授权回调类。 1. SSO 授权时，需要在 {@link #onActivityResult} 中调用
+	 * {@link SsoHandler#authorizeCallBack} 后， 该回调才会被执行。 2. 非 SSO
+	 * 授权时，当授权结束后，该回调就会被执行。 当授权成功后，请保存该 access_token、expires_in、uid 等信息到
+	 * SharedPreferences 中。
+	 */
+	class AuthListener implements WeiboAuthListener {
+
+		@Override
+		public void onComplete(Bundle values) {
+			// 从 Bundle 中解析 Token
+			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
+			// 从这里获取用户输入的 电话号码信息
+			String phoneNum = mAccessToken.getPhoneNum();
+			if (mAccessToken.isSessionValid()) {
+
+				// 保存 Token 到 SharedPreferences
+				// AccessTokenKeeper.writeAccessToken(LoginActivity.this,
+				// mAccessToken);
+//				Toast.makeText(LoginActivity.this, "success",
+//						Toast.LENGTH_SHORT).show();
+				String uid = mAccessToken.getUid();
+				System.out.println(uid + "```");
+				Message msg = new Message();
+				msg.what = 3;
+				msg.obj = uid;
+				mHandler.sendMessage(msg);
+			} else {
+				// 以下几种情况，您会收到 Code：
+				// 1. 当您未在平台上注册的应用程序的包名与签名时；
+				// 2. 当您注册的应用程序包名与签名不正确时；
+				// 3. 当您在平台上注册的包名和签名与您当前测试的应用的包名和签名不匹配时。
+				String code = values.getString("code");
+				String message = "failed";
+				if (!TextUtils.isEmpty(code)) {
+					message = message + "\nObtained the code: " + code;
+				}
+				Toast.makeText(LoginActivity.this, "微博授权失败", Toast.LENGTH_LONG)
+						.show();
+			}
+		}
+
+		@Override
+		public void onCancel() {
+
+		}
+
+		@Override
+		public void onWeiboException(WeiboException arg0) {
+
+		}
+	}
+
+	/**
+	 * 当 SSO 授权 Activity 退出时，该函数被调用。
+	 * 
+	 * @see {@link Activity#onActivityResult}
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		// SSO 授权回调
+		// 重要：发起 SSO 登陆的 Activity 必须重写 onActivityResults
+		if (mSsoHandler != null) {
+			mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
+
 	}
 
 	@Override

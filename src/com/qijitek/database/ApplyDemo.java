@@ -10,9 +10,12 @@ public class ApplyDemo {
 	private String time;
 	//小样总数
 	private String total;
+	//是否申请过
+	private String isapply;
+
 
 	public ApplyDemo(String code, String name, String people, String imageurl,
-			String content, String time, String total) {
+			String content, String time, String total, String isapply) {
 		super();
 		this.code = code;
 		this.name = name;
@@ -21,13 +24,23 @@ public class ApplyDemo {
 		this.content = content;
 		this.time = time;
 		this.total = total;
+		this.isapply = isapply;
 	}
 
 	@Override
 	public String toString() {
 		return "ApplyDemo [code=" + code + ", name=" + name + ", people="
 				+ people + ", imageurl=" + imageurl + ", content=" + content
-				+ ", time=" + time + ", total=" + total + "]";
+				+ ", time=" + time + ", total=" + total + ", isapply="
+				+ isapply + "]";
+	}
+
+	public String getIsapply() {
+		return isapply;
+	}
+
+	public void setIsapply(String isapply) {
+		this.isapply = isapply;
 	}
 
 	public String getCode() {

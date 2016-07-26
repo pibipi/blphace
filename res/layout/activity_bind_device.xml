@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10.5"
+        android:layout_height="48dp"
         android:background="#ffffff" >
 
         <TextView
@@ -61,7 +60,6 @@
         </RelativeLayout>
 
         <TextView
-            android:textColor="#727272"
             android:id="@+id/tips"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -69,7 +67,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp"
             android:gravity="center"
-            android:text="未绑定设备" />
+            android:text="未绑定设备"
+            android:textColor="#727272" />
 
         <Button
             android:id="@+id/start_bind"
@@ -97,18 +96,17 @@
             android:visibility="gone" />
 
         <Button
-            android:visibility="gone"
-            android:layout_centerHorizontal="true"
             android:id="@+id/not_bind"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_below="@+id/start_bind"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="22dp"
             android:background="@drawable/tuli_bind_btn"
             android:text="暂不绑定"
             android:textColor="#76b6a3"
-            android:textSize="14sp" />
-
+            android:textSize="14sp"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

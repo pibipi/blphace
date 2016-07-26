@@ -161,16 +161,12 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener,
 				viewHolder = new ViewHolder();
 				viewHolder.image = (ImageView) convertView
 						.findViewById(R.id.image);
-				viewHolder.title = (TextView) convertView
-						.findViewById(R.id.title);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			SocialArticle sa = article_data.get(position);
-			viewHolder.title.setText(sa.getTitle());
-			Picasso.with(context).load(sa.getImgurl()).resize(1062, 585)
-					.centerCrop().into(viewHolder.image);
+			Picasso.with(context).load(sa.getImgurl()).into(viewHolder.image);
 			System.out.println("img wid" + viewHolder.image.getHeight());
 			return convertView;
 		}
@@ -178,7 +174,6 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener,
 
 	private static class ViewHolder {
 		private ImageView image;
-		private TextView title;
 	}
 
 	@Override

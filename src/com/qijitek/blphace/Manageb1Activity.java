@@ -1,5 +1,7 @@
 package com.qijitek.blphace;
 
+import com.qijitek.utils.SharedpreferencesUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,23 +43,40 @@ public class Manageb1Activity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.bt1:
-
+			startActivity(new Intent(Manageb1Activity.this,
+					Manageb2Activity.class));
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveItemtype("1");
 			break;
 		case R.id.bt2:
 			startActivity(new Intent(Manageb1Activity.this,
 					Manageb2Activity.class));
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveItemtype("2");
 			break;
 		case R.id.bt3:
-
+			startActivity(new Intent(Manageb1Activity.this,
+					Manageb2Activity.class));
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveItemtype("3");
 			break;
 		case R.id.bt4:
-
+			startActivity(new Intent(Manageb1Activity.this,
+					Manageb2Activity.class));
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveItemtype("4");
 			break;
 		case R.id.bt5:
-
+			startActivity(new Intent(Manageb1Activity.this,
+					Manageb2Activity.class));
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveItemtype("5");
 			break;
 		case R.id.bt6:
-
+			startActivity(new Intent(Manageb1Activity.this,
+					Manageb2Activity.class));
+			new SharedpreferencesUtil(getApplicationContext())
+					.saveItemtype("6");
 			break;
 		case R.id.back:
 			finish();

@@ -149,12 +149,22 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 		add_Dialog.setCancelable(true);
 		ImageView add1 = (ImageView) add_Dialog.getWindow().findViewById(
 				R.id.add1);
+		ImageView add2 = (ImageView) add_Dialog.getWindow().findViewById(
+				R.id.add2);
 		add1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(Manageb2Activity.this,
 						MipcaActivityCapture.class));
+			}
+		});
+		add2.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(Manageb2Activity.this,
+						SearchActivity.class));
 			}
 		});
 	}

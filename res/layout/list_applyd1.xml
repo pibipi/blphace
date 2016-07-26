@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/a_background" />
+        android:background="@drawable/ac_background" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -16,7 +16,7 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="25dp" >
+        android:layout_marginLeft="8dp" >
 
         <ImageView
             android:id="@+id/imageView1"
@@ -25,14 +25,37 @@
             android:layout_centerInParent="true"
             android:src="@drawable/white_round" />
 
-        <TextView
-            android:id="@+id/days"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="剩余8天"
-            android:textColor="#393939"
-            android:textSize="12sp" />
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="剩余"
+                android:textColor="#393939"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="8"
+                android:textColor="#f19393"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="天"
+                android:textColor="#393939"
+                android:textSize="12sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

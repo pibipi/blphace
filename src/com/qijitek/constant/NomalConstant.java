@@ -9,6 +9,8 @@ public class NomalConstant {
 	public static long TIMEDATASHIFT = 1446000000000l;
 	public static String AppSecret = "c0cc5de60a6a1937a2a9bcbbd30b101c";
 	public static String AppID = "wxbf43c205c8901f6b";
+	public static String QijiSecret = "cp6ux1t39ksajpxg";
+	public static String QijiID = "b12hhm3qyg15gp4dhw92xjcpj23f1g94";
 	public static String DEVICE_NAME = "ac";
 
 }

@@ -17,6 +17,7 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -41,6 +42,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	private String last_versionName = "";
 	private AlertDialog reset_Dialog;
 	private NotificationManager mNotificationManager;
+	private long mExitTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -82,13 +84,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 				mHandler.sendEmptyMessage(1);
 			}
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -326,4 +325,20 @@ public class MainActivity extends SlidingFragmentActivity implements
 		notification.flags = Notification.FLAG_NO_CLEAR;
 		mNotificationManager.notify(1, notification);
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				mExitTime = System.currentTimeMillis();
+
+			} else {
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
 }

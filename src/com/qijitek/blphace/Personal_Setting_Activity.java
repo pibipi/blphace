@@ -62,6 +62,7 @@ public class Personal_Setting_Activity extends Activity implements
 	private AlertDialog update_Dialog;
 	private NotificationManager mNotificationManager;
 	private Button unlogin;
+	private AlertDialog log_Dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,8 @@ public class Personal_Setting_Activity extends Activity implements
 	}
 
 	private void init() {
+		log_Dialog = new AlertDialog.Builder(Personal_Setting_Activity.this)
+				.create();
 		unlogin = (Button) findViewById(R.id.unlogin);
 		unlogin.setOnClickListener(this);
 		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -254,13 +257,7 @@ public class Personal_Setting_Activity extends Activity implements
 			}
 			break;
 		case R.id.unlogin:
-			new SharedpreferencesUtil(getApplicationContext())
-					.saveIsLogin(false);
-			Intent intent = new Intent(Personal_Setting_Activity.this,
-					LoginActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-					| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-			startActivity(intent);
+			showUnLoginDialog();
 			break;
 		default:
 			break;
@@ -367,6 +364,41 @@ public class Personal_Setting_Activity extends Activity implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void showUnLoginDialog() {
+		log_Dialog.show();
+
+		Window window = log_Dialog.getWindow();
+		window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
+		// window.setWindowAnimations(R.style.mystyle); // 添加动画
+
+		log_Dialog.getWindow().setContentView(R.layout.dialog_login_out);
+		log_Dialog.getWindow().findViewById(R.id.yes)
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						new SharedpreferencesUtil(getApplicationContext())
+								.saveIsLogin(false);
+						Intent intent = new Intent(
+								Personal_Setting_Activity.this,
+								LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+								| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+						startActivity(intent);
+						log_Dialog.dismiss();
+					}
+				});
+		log_Dialog.getWindow().findViewById(R.id.no)
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						log_Dialog.dismiss();
+					}
+				});
+		log_Dialog.setCancelable(false);
 	}
 }
 

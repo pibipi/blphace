@@ -35,7 +35,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
         <!-- <item name="android:windowBackground">@drawable/loading_bg</item> -->
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/transparent_a5</item>
     </style>
 
     <style name="dialog" parent="@android:style/Theme.Dialog">

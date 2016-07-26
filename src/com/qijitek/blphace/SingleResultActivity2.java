@@ -19,15 +19,18 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qijitek.constant.NomalConstant;
 import com.qijitek.database.FaceData;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.GetTypeUtils;
+import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.MyProgressBar;
 
@@ -72,6 +75,8 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 	private LinearLayout background;
 	private TextView skin_type;
 	private ImageView result_img;
+	private RelativeLayout relativeLayout5;
+	private TextView details_txt;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,11 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		// registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 		init();
 		// type = getIntent().getIntExtra("type", 0);
+		// boolean isSingle=getIntent().getBooleanExtra("single", true);
+		// if(isSingle){
+		// relativeLayout5.setVisibility(View.GONE);
+		// }
+
 		water = getIntent().getIntExtra("water", 50);
 		oil = getIntent().getIntExtra("oil", 50);
 		light = getIntent().getIntExtra("light", 50);
@@ -135,9 +145,12 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 			}
 
 		};
+		details_txt = (TextView) findViewById(R.id.details_txt);
+		relativeLayout5 = (RelativeLayout) findViewById(R.id.relativeLayout5);
 		result_img = (ImageView) findViewById(R.id.result_img);
 		skin_type = (TextView) findViewById(R.id.skin_type);
-		skin_type.setText(new SharedpreferencesUtil(getApplicationContext()).getSkintypeStr()+"肌肤");
+		skin_type.setText(new SharedpreferencesUtil(getApplicationContext())
+				.getSkintypeStr() + "肌肤");
 		background = (LinearLayout) findViewById(R.id.background);
 		// Bitmap bmp1 = MyUtils.bytearray2bitmap(getIntent().getByteArrayExtra(
 		// "bmp"));
@@ -193,6 +206,13 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		oil = b;
 		light = c;
 		average = d;
+		AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1.0f);
+		alphaAnimation.setDuration(2000);
+		alphaAnimation.setFillAfter(true);
+		details_txt.startAnimation(alphaAnimation);
+		details_txt.setText(GetTypeUtils.getLightDetail(c) + "\n"
+				+ GetTypeUtils.getLightDetail(c) + "\n"
+				+ GetTypeUtils.getLightDetail(c));
 		new WaterThread().start();
 		new OilThread().start();
 		new SkinThread().start();
@@ -464,6 +484,7 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		// });
 		// reset_Dialog.setCancelable(false);
 	}
+
 	private void showTips1() {
 		final AlertDialog tips1_Dialog = new AlertDialog.Builder(
 				SingleResultActivity2.this, R.style.dialog).create();

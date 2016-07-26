@@ -6,8 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="11"
+        android:layout_height="48dp"
         android:background="#ffffff" >
 
         <ImageView
@@ -45,7 +44,6 @@
 
         <TextView
             android:id="@+id/content"
-            android:translationY="-30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -54,7 +52,8 @@
             android:lineSpacingMultiplier="1.5"
             android:text="  干性皮肤的mm应选用养分多，滋润型的乳液化妆品，以使肌肤湿润、健康、有活力。定期做面部按摩，提高肌肤温度，改善血液循环，增进肌肤的生理活动，使肌肤光润亮泽。注意饮食营养的平衡（脂肪可稍多一些）。冬季室内受暖气影响，肌肤会变得更加促造，因此室内宜使用加湿器。"
             android:textColor="#393939"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:translationY="-30dp" />
 
         <Button
             android:id="@+id/next"

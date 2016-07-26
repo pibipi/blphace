@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,8 +31,12 @@ import com.mining.app.zxing.camera.CameraManager;
 import com.mining.app.zxing.decoding.CaptureActivityHandler;
 import com.mining.app.zxing.decoding.InactivityTimer;
 import com.mining.app.zxing.view.ViewfinderView;
+import com.qijitek.constant.NomalConstant;
+import com.qijitek.database.SingleItem;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.qijitek.view.ProgersssDialog;
+import com.squareup.picasso.Picasso;
 
 /**
  * Initial the camera
@@ -51,6 +56,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
 	private Handler mHandler;
+	private ProgersssDialog dialog;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -71,8 +77,8 @@ public class MipcaActivityCapture extends Activity implements Callback {
 				super.handleMessage(msg);
 				switch (msg.what) {
 				case 1:
-					Toast.makeText(MipcaActivityCapture.this, msg.obj.toString(), 1)
-							.show();
+					Toast.makeText(MipcaActivityCapture.this,
+							msg.obj.toString(), 1).show();
 					break;
 
 				default:
@@ -146,36 +152,74 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		}
 		// Toast.makeText(getApplicationContext(), resultString, 0).show();
 		//
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				try {
-//					JSONObject res = MyUtils
-//							.getJson("http://api.avatardata.cn/Barcode/Lookup?key=fbb61a6102944b489ead77b5845400d3&barcode="
-//									+ resultString);
-//					JSONObject result_json = res.getJSONObject("result");
-//					String goodsName = result_json.optString("goodsName");
-//					Log.e("都是钱", goodsName);
-//					Message msg = new Message();
-//					msg.what = 1;
-//					msg.obj = goodsName;
-//					mHandler.sendMessage(msg);
-//
-//				} catch (ClientProtocolException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}).start();
 		Log.e("result", resultString + "");
-		// MipcaActivityCapture.this.finish();
+		dialog = new ProgersssDialog(MipcaActivityCapture.this, "");
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					final JSONObject jsonObject = MyUtils
+							.getJson("http://openapi.jimi.la/openapi?query="
+									+ resultString
+									+ "&appid="
+									+ NomalConstant.QijiID
+									+ "&token="
+									+ MyUtils.md5(resultString
+											+ NomalConstant.QijiSecret));
+					System.out.println("http://openapi.jimi.la/openapi?query="
+							+ resultString
+							+ "&appid="
+							+ NomalConstant.QijiID
+							+ "&token="
+							+ MyUtils.md5(resultString
+									+ NomalConstant.QijiSecret));
+					if (jsonObject.optBoolean("success")) {
+						mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								Intent intent = new Intent(
+										MipcaActivityCapture.this,
+										ItemDetailActivity.class);
+								intent.putExtra("json", jsonObject.toString() + "");
+								intent.putExtra("code", resultString + "");
+								startActivity(intent);
+								MipcaActivityCapture.this.finish();
+							}
+						});
+					} else {
+						mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(),
+										"查询失败，请稍后再试", 0).show();
+								MipcaActivityCapture.this.finish();
+							}
+						});
+					}
+					dialog.dismiss();
+
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+					mHandler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							Toast.makeText(getApplicationContext(), "请检查网络连接",
+									0).show();
+							MipcaActivityCapture.this.finish();
+						}
+					});
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {
