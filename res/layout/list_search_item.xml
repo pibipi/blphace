@@ -62,11 +62,12 @@
                 android:src="@drawable/add_search" />
 
             <TextView
+                android:layout_marginRight="20dp"
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/name"
                 android:layout_below="@+id/spec"
+                android:layout_toLeftOf="@+id/add"
                 android:background="@drawable/price_img"
                 android:gravity="center"
                 android:text="¥120"

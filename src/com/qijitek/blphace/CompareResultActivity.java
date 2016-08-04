@@ -1,10 +1,13 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -86,6 +89,7 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 	private AlertDialog reset_Dialog;
 	private boolean isSave = false;
 	boolean checklist = false;
+	private ImageView state_icon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +124,12 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 		submit.setVisibility(View.INVISIBLE);
 		p1.setVisibility(View.GONE);
 		p2.setVisibility(View.GONE);
-//		water_progress1.setVisibility(View.VISIBLE);
-//		water_progress2.setVisibility(View.VISIBLE);
-//		oil_progress1.setVisibility(View.VISIBLE);
-//		oil_progress2.setVisibility(View.VISIBLE);
-//		light_progress1.setVisibility(View.VISIBLE);
-//		light_progress2.setVisibility(View.VISIBLE);
+		// water_progress1.setVisibility(View.VISIBLE);
+		// water_progress2.setVisibility(View.VISIBLE);
+		// oil_progress1.setVisibility(View.VISIBLE);
+		// oil_progress2.setVisibility(View.VISIBLE);
+		// light_progress1.setVisibility(View.VISIBLE);
+		// light_progress2.setVisibility(View.VISIBLE);
 		showP1();
 		showP2();
 		mHandler.postDelayed(new Runnable() {
@@ -207,10 +211,11 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 					}, 300);
 					break;
 				case 5:
-
+					state_icon.setBackgroundResource(R.drawable.ic_launcher);
 					break;
 				case 6:
-
+					state_icon
+							.setBackgroundResource(R.drawable.ic_launcher_black);
 					break;
 
 				default:
@@ -219,6 +224,7 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 			}
 
 		};
+		state_icon = (ImageView) findViewById(R.id.state_icon);
 		submit = (Button) findViewById(R.id.submit);
 		reset_Dialog = new AlertDialog.Builder(CompareResultActivity.this)
 				.create();
@@ -322,6 +328,8 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 			final String action = intent.getAction();
 			if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
 				Log.e(TAG, "connected");
+				Toast.makeText(getApplicationContext(), "设备已连接", 1).show();
+				p1.setText("测试中...");
 			} else if (BluetoothLeService.ACTION_GATT_DISCONNECTED
 					.equals(action)) {
 				System.out.println("disconnect");
@@ -603,42 +611,41 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 				@Override
 				public void run() {
 					try {
-						String url = "http://api.qijitek.com/uploadCompareTestResult/?userid="
-								+ sharedpreferencesUtil.getUserid()
-								+ "&time="
-								+ System.currentTimeMillis()
-								+ "&itemtype="
-								+ sharedpreferencesUtil.getItemtype()
-								+ "&qid1="
-								+ si.getQid()
-								+ "&code1="
-								+ si.getCode()
-								+ "&name1="
-								+ si.getName()
-								+ "&imgurl1="
-								+ si.getImgurl()
-								+ "&water1="
-								+ si.getWater()
-								+ "&oil1="
-								+ si.getOil()
-								+ "&light1="
-								+ si.getLight()
-								+ "&qid2="
-								+ si2.getQid()
-								+ "&code2="
-								+ si2.getCode()
-								+ "&name2="
-								+ si2.getName()
-								+ "&imgurl2="
-								+ si2.getImgurl()
-								+ "&water2="
-								+ si2.getWater()
-								+ "&oil2="
-								+ si2.getOil()
-								+ "&light2="
-								+ si2.getLight();
-						System.out.println(url);
-						JSONObject jsonObject = MyUtils.getJson(url);
+						String baseUrl = "http://api.qijitek.com/uploadCompareTestResult/";
+
+						List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+						params.add(new BasicNameValuePair("userid",
+								new SharedpreferencesUtil(
+										getApplicationContext()).getUserid()));
+						params.add(new BasicNameValuePair("time", System
+								.currentTimeMillis() + ""));
+						params.add(new BasicNameValuePair("itemtype",
+								sharedpreferencesUtil.getItemtype()));
+						params.add(new BasicNameValuePair("qid1", si.getQid()));
+						params.add(new BasicNameValuePair("code1", si.getCode()));
+						params.add(new BasicNameValuePair("name1", si.getName()));
+						params.add(new BasicNameValuePair("imgurl1", si
+								.getImgurl()));
+						params.add(new BasicNameValuePair("water1", si
+								.getWater()));
+						params.add(new BasicNameValuePair("oil1", si.getOil()));
+						params.add(new BasicNameValuePair("light1", si
+								.getLight()));
+						params.add(new BasicNameValuePair("qid2", si2.getQid()));
+						params.add(new BasicNameValuePair("code2", si2
+								.getCode()));
+						params.add(new BasicNameValuePair("name2", si2
+								.getName()));
+						params.add(new BasicNameValuePair("imgurl2", si2
+								.getImgurl()));
+						params.add(new BasicNameValuePair("water2", si2
+								.getWater()));
+						params.add(new BasicNameValuePair("oil2", si2.getOil()));
+						params.add(new BasicNameValuePair("light2", si2
+								.getLight()));
+
+						JSONObject jsonObject = MyUtils.getJson2(baseUrl,
+								params);
 						isSave = true;
 						CompareResultActivity.this.finish();
 						mHandler.post(new Runnable() {

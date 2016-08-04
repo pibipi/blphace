@@ -1,6 +1,11 @@
 package com.qijitek.blphace;
 
+import java.io.IOException;
 import java.util.UUID;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qijitek.constant.NomalConstant;
 import com.qijitek.database.FaceData;
@@ -149,8 +155,24 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		relativeLayout5 = (RelativeLayout) findViewById(R.id.relativeLayout5);
 		result_img = (ImageView) findViewById(R.id.result_img);
 		skin_type = (TextView) findViewById(R.id.skin_type);
-		skin_type.setText(new SharedpreferencesUtil(getApplicationContext())
-				.getSkintypeStr() + "肌肤");
+		// TODO
+		String str = new SharedpreferencesUtil(getApplicationContext())
+				.getSkintypeStr();
+		
+		if (!str.equals("")) {
+			skin_type.setText(str + "肌肤");
+			if(str.equals("干性")){
+				result_img.setBackgroundResource(R.drawable.skin_type1);
+			}else if(str.equals("混合性")){
+				result_img.setBackgroundResource(R.drawable.skin_type2);
+			}else if(str.equals("油性")){
+				result_img.setBackgroundResource(R.drawable.skin_type3);
+			}
+		} else {
+			skin_type.setText("暂无肌肤信息");
+			Toast.makeText(getApplicationContext(),
+					"请先去<测肤质>更新您的肌肤信息，以便于更好的测试", 1).show();
+		}
 		background = (LinearLayout) findViewById(R.id.background);
 		// Bitmap bmp1 = MyUtils.bytearray2bitmap(getIntent().getByteArrayExtra(
 		// "bmp"));
@@ -201,18 +223,60 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 
 	}
 
-	private void showProgressBar(int a, int b, int c, int d, int e) {
+	private void showProgressBar(final int a, final int b, final int c, int d,
+			int e) {
 		water = a;
 		oil = b;
 		light = c;
 		average = d;
-		AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1.0f);
-		alphaAnimation.setDuration(2000);
-		alphaAnimation.setFillAfter(true);
-		details_txt.startAnimation(alphaAnimation);
-		details_txt.setText(GetTypeUtils.getLightDetail(c) + "\n"
-				+ GetTypeUtils.getLightDetail(c) + "\n"
-				+ GetTypeUtils.getLightDetail(c));
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String url = "http://api.qijitek.com/getResultAnalysis/?water="
+						+ a + "&oil=" + b + "&light=" + c;
+				try {
+					JSONObject jsonObject = MyUtils.getJson(url);
+					final String str = jsonObject.optString("obj");
+
+					mHandler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							AlphaAnimation alphaAnimation = new AlphaAnimation(
+									0f, 1.0f);
+							alphaAnimation.setDuration(2000);
+							alphaAnimation.setFillAfter(true);
+							details_txt.startAnimation(alphaAnimation);
+							details_txt.setText(str);
+						}
+					});
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					mHandler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							Toast.makeText(getApplicationContext(), "请检查网络连接",
+									0).show();
+							AlphaAnimation alphaAnimation = new AlphaAnimation(
+									0f, 1.0f);
+							alphaAnimation.setDuration(2000);
+							alphaAnimation.setFillAfter(true);
+							details_txt.startAnimation(alphaAnimation);
+							details_txt.setText("暂无数据");
+						}
+					});
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		// details_txt.setText(GetTypeUtils.getLightDetail(c) + "\n"
+		// + GetTypeUtils.getLightDetail(c) + "\n"
+		// + GetTypeUtils.getLightDetail(c));
 		new WaterThread().start();
 		new OilThread().start();
 		new SkinThread().start();

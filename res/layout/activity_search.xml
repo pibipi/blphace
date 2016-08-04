@@ -195,7 +195,7 @@
                         android:background="#ececec"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="悦诗风吟aaaaa" />
+                        android:text="悦诗风吟" />
                 </RelativeLayout>
             </RelativeLayout>
 

@@ -1,8 +1,11 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,10 +95,21 @@ public class ItemDetailActivity extends Activity implements OnClickListener {
 						Picasso.with(getApplicationContext()).load(images_str)
 								.into(img);
 					}
-
-					alias.setText(alias_str);
-					brand.setText(brand_str);
-					methods.setText(methods_str);
+					if (!alias_str.equals("")) {
+						alias.setText(alias_str);
+					} else {
+						alias.setText("无");
+					}
+					if (!brand_str.equals("")) {
+						brand.setText(brand_str);
+					} else {
+						brand.setText("无");
+					}
+					if (!methods_str.equals("")) {
+						methods.setText(methods_str);
+					} else {
+						methods.setText("无");
+					}
 					String f0;
 					String f1;
 					String f2;
@@ -103,18 +117,59 @@ public class ItemDetailActivity extends Activity implements OnClickListener {
 					String f4;
 					String feature_txt = "";
 					try {
-						f0 = feature.getString(0);
-						f1 = feature.getString(1);
-						f2 = feature.getString(2);
-						f3 = feature.getString(3);
-						f4 = feature.getString(4);
-						feature_txt = f0 + "@" + f1 + "@" + f2 + "@" + f3 + "@"
-								+ f4;
-						button1.setText(f0);
-						button2.setText(f1);
-						button3.setText(f2);
-						button4.setText(f3);
-						button5.setText(f4);
+						if (feature.length() >= 5) {
+							f0 = feature.getString(0);
+							f1 = feature.getString(1);
+							f2 = feature.getString(2);
+							f3 = feature.getString(3);
+							f4 = feature.getString(4);
+							feature_txt = f0 + "@" + f1 + "@" + f2 + "@" + f3
+									+ "@" + f4;
+						} else if (feature.length() < 5 && feature.length() > 0) {
+							feature_txt = feature.getString(0);
+							for (int i = 1; i < feature.length(); i++) {
+								feature_txt = "@" + feature.getString(i);
+							}
+						} else {
+							feature_txt = MyUtils.getNullFeature();
+						}
+						String[] ms = feature_txt.split("@");
+						if (ms.length == 5) {
+							button1.setText(ms[0]);
+							button2.setText(ms[1]);
+							button3.setText(ms[2]);
+							button4.setText(ms[3]);
+							button5.setText(ms[4]);
+						} else if (ms.length == 4) {
+							button1.setText(ms[0]);
+							button2.setText(ms[1]);
+							button3.setText(ms[2]);
+							button4.setText(ms[3]);
+							button5.setVisibility(View.INVISIBLE);
+						} else if (ms.length == 3) {
+							button1.setText(ms[0]);
+							button2.setText(ms[1]);
+							button3.setText(ms[2]);
+							button4.setVisibility(View.INVISIBLE);
+							button5.setVisibility(View.INVISIBLE);
+						} else if (ms.length == 2) {
+							button1.setText(ms[0]);
+							button2.setText(ms[1]);
+							button3.setVisibility(View.INVISIBLE);
+							button4.setVisibility(View.INVISIBLE);
+							button5.setVisibility(View.INVISIBLE);
+						} else if (ms.length == 1) {
+							button1.setText(ms[0]);
+							button2.setVisibility(View.INVISIBLE);
+							button3.setVisibility(View.INVISIBLE);
+							button4.setVisibility(View.INVISIBLE);
+							button5.setVisibility(View.INVISIBLE);
+						}
+						// button1.setText(f0);
+						// button2.setText(f1);
+						// button3.setText(f2);
+						// button4.setText(f3);
+						// button5.setText(f4);
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -135,20 +190,28 @@ public class ItemDetailActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.add:
-			final String url = "http://api.qijitek.com/uploadTestlist/?userid="
-					+ new SharedpreferencesUtil(getApplicationContext())
-							.getUserid() + "&itemtype=" + si.getItemtype()
-					+ "&code=" + si.getCode() + "&name=" + si.getName()
-					+ "&imgurl=" + si.getImgurl() + "&feature="
-					+ si.getFeature() + "&alias=" + si.getAlias() + "&brand="
-					+ si.getBrand() + "&methods=" + si.getMethods() + "&time="
-					+ System.currentTimeMillis();
+			final String baseurl = "http://api.qijitek.com/uploadTestlist/";
+			final List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+			params.add(new BasicNameValuePair("userid",
+					new SharedpreferencesUtil(getApplicationContext())
+							.getUserid()));
+			params.add(new BasicNameValuePair("itemtype", si.getItemtype()));
+			params.add(new BasicNameValuePair("code", si.getCode().trim()));
+			params.add(new BasicNameValuePair("name", si.getName().trim()));
+			params.add(new BasicNameValuePair("imgurl", si.getImgurl().trim()));
+			params.add(new BasicNameValuePair("feature", si.getFeature().trim()));
+			params.add(new BasicNameValuePair("alias", si.getAlias().trim()));
+			params.add(new BasicNameValuePair("brand", si.getBrand().trim()));
+			params.add(new BasicNameValuePair("methods", si.getMethods().trim()));
+			params.add(new BasicNameValuePair("time", System
+					.currentTimeMillis() + ""));
+
 			new Thread(new Runnable() {
 
 				@Override
 				public void run() {
 					try {
-						MyUtils.getJson(url);
+						MyUtils.getJson2(baseurl, params);
 						mHandler.post(new Runnable() {
 
 							@Override

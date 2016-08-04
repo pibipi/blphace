@@ -2,8 +2,11 @@ package com.qijitek.blphace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 import com.qijitek.constant.NomalConstant;
 import com.qijitek.database.SingleItem;
 import com.qijitek.utils.MyUtils;
+import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.ProgersssDialog;
 
 public class SearchActivity extends Activity implements OnClickListener {
@@ -125,24 +129,26 @@ public class SearchActivity extends Activity implements OnClickListener {
 	}
 
 	protected void getSearchList(final String query_txt) {
+		if (query_txt.equals("")) {
+			Toast.makeText(getApplicationContext(), "请输入关键字", 0).show();
+			return;
+		}
 		dialog = new ProgersssDialog(SearchActivity.this, "");
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				try {
-					System.out.println("http://openapi.jimi.la/openapi?query="
-							+ query_txt + "&appid=" + NomalConstant.QijiID
-							+ "&token="
-							+ MyUtils.md5(query_txt + NomalConstant.QijiSecret));
-					JSONObject jsonObject = MyUtils
-							.getJson("http://openapi.jimi.la/openapi?query="
-									+ query_txt
-									+ "&appid="
-									+ NomalConstant.QijiID
-									+ "&token="
-									+ MyUtils.md5(query_txt
-											+ NomalConstant.QijiSecret));
+					String baseurl = "http://openapi.jimi.la/openapi/";
+
+					List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+					params.add(new BasicNameValuePair("query", query_txt));
+					params.add(new BasicNameValuePair("appid",
+							NomalConstant.QijiID));
+					params.add(new BasicNameValuePair("token", MyUtils
+							.md5(query_txt + NomalConstant.QijiSecret)));
+
+					JSONObject jsonObject = MyUtils.getJson2(baseurl, params);
 					if (jsonObject.optBoolean("success")) {
 						Intent intent = new Intent(SearchActivity.this,
 								SearchResultActivity.class);
@@ -178,42 +184,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 				}
 			}
 		}).start();
-	}
-
-	private class MyAdapter extends BaseAdapter {
-		private LayoutInflater inflater;
-		private Context context;
-
-		public MyAdapter(Context context) {
-			super();
-			this.context = context;
-			this.inflater = LayoutInflater.from(context);
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
 	}
 
 	@Override

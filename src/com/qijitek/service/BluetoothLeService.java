@@ -496,8 +496,8 @@ public class BluetoothLeService extends Service {
 		if (mBluetoothAdapter == null || address == null) {
 			Log.w(TAG,
 					"BluetoothAdapter not initialized or unspecified address.");
-			// initialize();
-			return false;
+			 initialize();
+//			return false;
 		}
 
 		// // Previously connected device. Try to reconnect.

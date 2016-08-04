@@ -6,12 +6,12 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
-        android:src="@drawable/a7_img2" />
+        android:src="@drawable/ic_launcher" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -34,8 +34,6 @@
                 android:background="#d1d1d1" />
 
             <EditText
-                android:maxLength="11"
-                android:inputType="number"
                 android:id="@+id/phone"
                 android:layout_width="250dp"
                 android:layout_height="30dp"
@@ -43,8 +41,10 @@
                 android:layout_centerHorizontal="true"
                 android:background="@null"
                 android:hint="请输入手机号"
+                android:inputType="number"
+                android:maxLength="11"
                 android:textColor="#393939"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -59,17 +59,17 @@
                 android:background="#d1d1d1" />
 
             <EditText
-                android:inputType="number"
                 android:id="@+id/code"
                 android:layout_width="250dp"
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:background="@null"
-                android:maxLength="4"
                 android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="4"
                 android:textColor="#393939"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
             <Button
                 android:id="@+id/send"
@@ -81,7 +81,7 @@
                 android:background="@null"
                 android:text="发送验证码"
                 android:textColor="#393939"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -139,24 +139,24 @@
         android:layout_marginTop="14dp" >
 
         <ImageView
-            android:id="@+id/wechat_login"
+            android:id="@+id/weibo_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="80dp"
             android:onClick="onClick"
-            android:src="@drawable/weixin_icon" />
+            android:src="@drawable/weibo_icon" />
 
         <ImageView
-            android:onClick="onClick"
-            android:id="@+id/weibo_login"
+            android:id="@+id/wechat_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="50dp"
-            android:src="@drawable/weibo_icon" />
+            android:layout_marginRight="80dp"
+            android:onClick="onClick"
+            android:src="@drawable/weixin_icon" />
     </RelativeLayout>
 
 </RelativeLayout>

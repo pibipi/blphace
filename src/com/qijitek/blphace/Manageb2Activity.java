@@ -3,6 +3,8 @@ package com.qijitek.blphace;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qijitek.utils.SharedpreferencesUtil;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 		implements OnCheckedChangeListener, OnClickListener {
@@ -28,15 +31,42 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 	private RadioButton bt1;
 	private RadioButton bt2;
 	private ImageView add_product;
+	private TextView title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manageb2);
 		init();
+		String itemtype = new SharedpreferencesUtil(getApplicationContext())
+				.getItemtype();
+		switch (Integer.valueOf(itemtype)) {
+		case 1:
+			title.setText("洁面");
+			break;
+		case 2:
+		 	title.setText("化妆水");
+			break;
+		case 3:
+			title.setText("乳液");
+			break;
+		case 4:
+			title.setText("面膜");
+			break;
+		case 5: 
+			title.setText("眼部护理");
+			break;
+		case 6:
+			title.setText("面部精华");
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	private void init() {
+		title = (TextView) findViewById(R.id.title);
 		add_product = (ImageView) findViewById(R.id.add_product);
 		add_product.setOnClickListener(this);
 		fragmentManager = getSupportFragmentManager();

@@ -64,7 +64,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@null"
                 android:gravity="top"
-                android:hint="您对Alphace设备或app的意见和建议"
+                android:hint="您对硬件设备或app的意见和建议"
                 android:textSize="14sp" />
         </RelativeLayout>
 

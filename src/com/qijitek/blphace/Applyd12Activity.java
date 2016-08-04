@@ -6,8 +6,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,10 +97,12 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 
 	private void getDemoData() {
 		try {
-			JSONObject jsonObject = MyUtils
-					.getJson("http://api.qijitek.com/getDemos/?userid="
-							+ new SharedpreferencesUtil(getApplicationContext())
-									.getUserid());
+			String baseUrl = "http://api.qijitek.com/getDemos/";
+			List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+			params.add(new BasicNameValuePair("userid",
+					new SharedpreferencesUtil(getApplicationContext())
+							.getUserid()));
+			JSONObject jsonObject = MyUtils.getJson2(baseUrl, params);
 			demo_data.clear();
 			System.out.println(jsonObject.toString());
 			JSONArray obj = jsonObject.getJSONArray("obj");
@@ -252,25 +257,26 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 
 			@Override
 			public void run() {
-				String url = "http://api.qijitek.com/getAddress/?userid="
-						+ new SharedpreferencesUtil(getApplicationContext())
-								.getUserid();
+				String baseUrl = "http://api.qijitek.com/getAddress/";
+				List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+				params.add(new BasicNameValuePair("userid",
+						new SharedpreferencesUtil(getApplicationContext())
+								.getUserid()));
 				try {
-					JSONObject jsonObject = MyUtils.getJson(url);
+					JSONObject jsonObject = MyUtils.getJson2(baseUrl, params);
 					String msg = jsonObject.optString("msg");
 					if (msg.equals("已提交")) {
 						isUpdate = true;
 						JSONArray obj_array = jsonObject.getJSONArray("obj");
 						JSONObject obj_json = (JSONObject) obj_array.opt(0);
-						userAddress = new UserAddress(
-								obj_json.optString("userid"),
-								obj_json.optString("name"),
-								obj_json.optString("age"),
-								obj_json.optString("sex"),
-								obj_json.optString("skintype"),
-								obj_json.optString("phone"),
-								obj_json.optString("province"),
-								obj_json.optString("address"));
+						userAddress = new UserAddress(obj_json
+								.optString("userid"), obj_json
+								.optString("name"), obj_json.optString("age"),
+								obj_json.optString("sex"), obj_json
+										.optString("skintype"), obj_json
+										.optString("phone"), obj_json
+										.optString("province"), obj_json
+										.optString("address"));
 					}
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();

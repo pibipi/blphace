@@ -1,4 +1,5 @@
 package com.qijitek.blphace;
+
 import java.io.File;
 
 import android.app.Activity;
@@ -20,19 +21,25 @@ public class WelcomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 		init();
-		final boolean isLogin = new SharedpreferencesUtil(
+		final boolean IsFirst = new SharedpreferencesUtil(
+				getApplicationContext()).getIsFirst1();
+		final boolean IsLogin = new SharedpreferencesUtil(
 				getApplicationContext()).getIsLogin();
 		mHandler.postDelayed(new Runnable() {
 
 			@Override
 			public void run() {
-				if (isLogin) {
+				if (IsFirst) {
 					startActivity(new Intent(WelcomeActivity.this,
-							MainActivity.class));
+							GuideActivity.class));
 				} else {
-					startActivity(new Intent(WelcomeActivity.this,
-							LoginActivity.class));
-
+					if (IsLogin) {
+						startActivity(new Intent(WelcomeActivity.this,
+								MainActivity.class));
+					} else {
+						startActivity(new Intent(WelcomeActivity.this,
+								LoginActivity.class));
+					}
 				}
 				finish();
 			}

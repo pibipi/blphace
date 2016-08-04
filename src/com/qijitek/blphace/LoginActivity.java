@@ -1,7 +1,10 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,6 +82,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 						// 返回支持发送验证码的国家列表
 					}
 				} else {
+					mHandler.sendEmptyMessage(4);
 					((Throwable) data).printStackTrace();
 				}
 			}
@@ -109,11 +113,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 							try {
 								JSONObject jsonObject;
 								try {
-									jsonObject = MyUtils
-											.getJson("http://api.qijitek.com/regist/?userid="
-													+ phone.getText()
-															.toString().trim()
-													+ "&login_type=1&platform=1");
+									String baseurl = "http://api.qijitek.com/regist/";
+									List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+									params.add(new BasicNameValuePair("userid",
+											phone.getText().toString().trim()));
+									params.add(new BasicNameValuePair(
+											"login_type", "1"));
+									params.add(new BasicNameValuePair(
+											"platform", "1"));
+									jsonObject = MyUtils.getJson2(baseurl,
+											params);
 									System.out.println(jsonObject.toString()
 											+ "jsonObject");
 									new SharedpreferencesUtil(
@@ -169,10 +178,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 							try {
 								JSONObject jsonObject;
 								try {
-									jsonObject = MyUtils
-											.getJson("http://api.qijitek.com/regist/?userid="
-													+ uid
-													+ "&login_type=3&platform=1");
+									String baseurl = "http://api.qijitek.com/regist/";
+									List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+									params.add(new BasicNameValuePair("userid",
+											uid));
+									params.add(new BasicNameValuePair(
+											"login_type", "3"));
+									params.add(new BasicNameValuePair(
+											"platform", "1"));
+									jsonObject = MyUtils.getJson2(baseurl,
+											params);
 									System.out.println(jsonObject.toString()
 											+ "jsonObject");
 									new SharedpreferencesUtil(
@@ -214,6 +229,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 						}
 					}).start();
 					break;
+				case 4:
+					Toast.makeText(getApplicationContext(), "验证码错误",
+							Toast.LENGTH_SHORT).show();
+					break;
 				default:
 					break;
 				}
@@ -236,6 +255,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		case R.id.login:
 			SMSSDK.submitVerificationCode("86", phone.getText().toString()
 					.trim(), code.getText().toString().trim());
+			
 			// startActivity(new Intent(LoginActivity.this,
 			// MainActivity.class));
 			// finish();
@@ -263,7 +283,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			} else {
 				send.setClickable(false);
 				CountDownButtonHelper helper = new CountDownButtonHelper(send,
-						"已发送", 60, 1);
+						"已发送", 30, 1);
 				send.setTextColor(0xff727272);
 				helper.setOnFinishListener(new CountDownButtonHelper.OnFinishListener() {
 					@Override
@@ -309,8 +329,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// 保存 Token 到 SharedPreferences
 				// AccessTokenKeeper.writeAccessToken(LoginActivity.this,
 				// mAccessToken);
-//				Toast.makeText(LoginActivity.this, "success",
-//						Toast.LENGTH_SHORT).show();
+				// Toast.makeText(LoginActivity.this, "success",
+				// Toast.LENGTH_SHORT).show();
 				String uid = mAccessToken.getUid();
 				System.out.println(uid + "```");
 				Message msg = new Message();
@@ -363,6 +383,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		SMSSDK.registerEventHandler(eh);
 		Log.e(TAG, "onResume");
 	}
 

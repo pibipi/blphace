@@ -36,6 +36,15 @@
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
             android:background="#dcdee4" />
+
+        <ImageView
+            android:id="@+id/state_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="19dp"
+            android:background="@drawable/ic_launcher_black" />
     </RelativeLayout>
 
     <LinearLayout
@@ -57,10 +66,12 @@
 
                 <TextView
                     android:id="@+id/name1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:singleLine="true"
                     android:text="雅诗兰黛"
                     android:textColor="#393939"
                     android:textSize="12sp" />
@@ -82,10 +93,12 @@
 
                 <TextView
                     android:id="@+id/name2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:singleLine="true"
                     android:text="雅诗兰黛2"
                     android:textColor="#393939"
                     android:textSize="12sp" />
@@ -177,7 +190,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="44dp"
                 android:gravity="center"
-                android:text="测试中..."
+                android:text="正在连接..."
                 android:textColor="#393939"
                 android:textSize="12sp" />
 

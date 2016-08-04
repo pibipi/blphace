@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/a1_background"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -11,11 +12,11 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/a7_img2"
+            android:src="@drawable/ic_launcher"
             android:translationY="-15dp" />
 
         <TextView
@@ -25,7 +26,7 @@
             android:layout_below="@+id/imageView1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:text="Papi酱"
+            android:text="昕颜"
             android:textColor="#393939"
             android:textSize="14sp" />
 
@@ -87,22 +88,6 @@
                 android:background="@null"
                 android:clickable="false"
                 android:text="我的收货地址"
-                android:textColor="#515151"
-                android:textSize="14sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/r3"
-            android:layout_width="match_parent"
-            android:layout_height="60dp" >
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:clickable="false"
-                android:text="我的话题"
                 android:textColor="#515151"
                 android:textSize="14sp" />
         </RelativeLayout>

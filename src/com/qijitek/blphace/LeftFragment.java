@@ -16,7 +16,6 @@ import com.qijitek.utils.SharedpreferencesUtil;
 public class LeftFragment extends Fragment implements OnClickListener {
 	RelativeLayout r1;
 	RelativeLayout r2;
-	RelativeLayout r3;
 	RelativeLayout r4;
 	RelativeLayout r5;
 	private boolean isTest;
@@ -34,12 +33,10 @@ public class LeftFragment extends Fragment implements OnClickListener {
 		isTest_txt = (TextView) view.findViewById(R.id.isTest_txt);
 		r1 = (RelativeLayout) view.findViewById(R.id.r1);
 		r2 = (RelativeLayout) view.findViewById(R.id.r2);
-		r3 = (RelativeLayout) view.findViewById(R.id.r3);
 		r4 = (RelativeLayout) view.findViewById(R.id.r4);
 		r5 = (RelativeLayout) view.findViewById(R.id.r5);
 		r1.setOnClickListener(this);
 		r2.setOnClickListener(this);
-		r3.setOnClickListener(this);
 		r4.setOnClickListener(this);
 		r5.setOnClickListener(this);
 		isTest = new SharedpreferencesUtil(getContext()).getIsTest();
@@ -79,9 +76,6 @@ public class LeftFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.r2:
 			startActivity(new Intent(getActivity(), MyAddressActivity.class));
-			break;
-		case R.id.r3:
-
 			break;
 		case R.id.r4:
 			startActivity(new Intent(getActivity(), AboutUsActivity.class));

@@ -4,9 +4,10 @@
     android:layout_height="match_parent" >
 
     <RelativeLayout
+        android:background="#f6f6f6"
         android:id="@+id/r1"
         android:layout_width="match_parent"
-        android:layout_height="48dp" >
+        android:layout_height="45dp" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,7 +27,8 @@
                 android:layout_marginLeft="14dp"
                 android:src="@drawable/search_icon" />
 
-            <EditText
+            <TextView
+                android:gravity="center_vertical"
                 android:id="@+id/query"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -34,12 +36,12 @@
                 android:layout_toRightOf="@+id/imageView1"
                 android:background="@null"
                 android:hint="输入您需要的化妆品名称"
-                android:inputType="text"
                 android:singleLine="true"
                 android:textSize="12sp" />
         </RelativeLayout>
 
-        <Button
+        <TextView
+            android:gravity="center"
             android:id="@+id/search"
             android:layout_width="65dp"
             android:layout_height="48dp"
@@ -55,8 +57,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/r1"
-        android:layout_marginTop="10dp"
-        android:background="#f6f6f6" >
+        android:background="#f6f6f6"
+        android:divider="#ffffff"
+        android:dividerHeight="5dp"
+        android:listSelector="#00000000"
+        android:scrollbars="@null" >
     </ListView>
 
 </RelativeLayout>

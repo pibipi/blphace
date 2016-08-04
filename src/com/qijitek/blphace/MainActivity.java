@@ -48,10 +48,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		init();
 		initSlidingMenu(savedInstanceState);
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				init_update();

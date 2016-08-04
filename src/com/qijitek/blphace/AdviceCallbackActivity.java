@@ -1,8 +1,11 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 
 import android.app.Activity;
@@ -57,15 +60,19 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					String url = "http://api.qijitek.com/userAdvice/?userid="
-							+ new SharedpreferencesUtil(getApplicationContext())
-									.getUserid() + "&phone="
-							+ phone_txt.getText().toString().trim()
-							+ "&content="
-							+ content_txt.getText().toString().trim();
+					String baseUrl = "http://api.qijitek.com/userAdvice/";
+					List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+					params.add(new BasicNameValuePair("userid",
+							new SharedpreferencesUtil(getApplicationContext())
+									.getUserid()));
+					params.add(new BasicNameValuePair("phone", phone_txt
+							.getText().toString().trim()));
+					params.add(new BasicNameValuePair("content", content_txt
+							.getText().toString().trim()));
 					try {
-						MyUtils.getJson(url);
-						Toast.makeText(getApplicationContext(), "提交成功", 0).show();
+						MyUtils.getJson2(baseUrl, params);
+						Toast.makeText(getApplicationContext(), "提交成功", 0)
+								.show();
 					} catch (ClientProtocolException e) {
 						e.printStackTrace();
 					} catch (IOException e) {

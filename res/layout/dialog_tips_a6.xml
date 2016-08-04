@@ -76,7 +76,7 @@
                     android:textSize="13sp" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <RelativeLayout    android:layout_marginTop="30dp"
                 android:id="@+id/relativeLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"

@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_below="@+id/view1"
+                android:background="@drawable/a1_background"
                 android:divider="#ffffff"
                 android:dividerHeight="0dp"
                 android:listSelector="#00000000"
@@ -205,13 +206,13 @@
             android:layout_marginTop="20dp" >
 
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/ok"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/not_close" />
+                android:src="@drawable/not_close"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/cancle"

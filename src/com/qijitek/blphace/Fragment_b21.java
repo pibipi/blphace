@@ -2,8 +2,11 @@ package com.qijitek.blphace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,10 +80,12 @@ public class Fragment_b21 extends Fragment implements OnClickListener {
 	private void getSingleItems() {
 		String itemtype = new SharedpreferencesUtil(getContext()).getItemtype();
 		String userid = new SharedpreferencesUtil(getContext()).getUserid();
-		String url = "http://api.qijitek.com/getTestList/?userid=" + userid
-				+ "&itemtype=" + itemtype;
+		String baseUrl = "http://api.qijitek.com/getTestList/";
+		List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+		params.add(new BasicNameValuePair("userid", userid));
+		params.add(new BasicNameValuePair("itemtype", itemtype));
 		try {
-			JSONObject jsonObject = MyUtils.getJson(url);
+			JSONObject jsonObject = MyUtils.getJson2(baseUrl, params);
 			JSONArray obj = jsonObject.getJSONArray("obj");
 			int length = obj.length();
 			for (int i = 0; i < length; i++) {
@@ -277,15 +282,17 @@ public class Fragment_b21 extends Fragment implements OnClickListener {
 
 							@Override
 							public void run() {
-								String url = "http://api.qijitek.com/deleteSingleItem/?userid="
-										+ sharedpreferencesUtil.getUserid()
-										+ "&itemtype="
-										+ sharedpreferencesUtil.getItemtype()
-										+ "&qid="
-										+ singleItems.get(position).getQid();
+								String baseurl = "http://api.qijitek.com/deleteSingleItem/";
+								List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+								params.add(new BasicNameValuePair("userid",
+										sharedpreferencesUtil.getUserid()));
+								params.add(new BasicNameValuePair("itemtype",
+										sharedpreferencesUtil.getItemtype()));
+								params.add(new BasicNameValuePair("qid",
+										singleItems.get(position).getQid()));
 								try {
 									JSONObject jsonObject = MyUtils
-											.getJson(url);
+											.getJson2(baseurl,params);
 									mHandler.post(new Runnable() {
 
 										@Override

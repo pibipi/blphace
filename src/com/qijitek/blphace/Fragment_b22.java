@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -174,10 +177,14 @@ public class Fragment_b22 extends Fragment {
 	private void getCompareDatas() {
 		String itemtype = new SharedpreferencesUtil(getContext()).getItemtype();
 		String userid = new SharedpreferencesUtil(getContext()).getUserid();
-		String url = "http://api.qijitek.com/getCompareTestList/?userid="
-				+ userid + "&itemtype=" + itemtype;
+		String baseurl = "http://api.qijitek.com/getCompareTestList/";
+		List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+		params.add(new BasicNameValuePair("userid", sharedpreferencesUtil
+				.getUserid()));
+		params.add(new BasicNameValuePair("itemtype", sharedpreferencesUtil
+				.getItemtype()));
 		try {
-			JSONObject jsonObject = MyUtils.getJson(url);
+			JSONObject jsonObject = MyUtils.getJson2(baseurl, params);
 			JSONArray obj = jsonObject.getJSONArray("obj");
 			int length = obj.length();
 			for (int i = 0; i < length; i++) {
@@ -249,15 +256,17 @@ public class Fragment_b22 extends Fragment {
 
 							@Override
 							public void run() {
-								String url = "http://api.qijitek.com/deleteCompareItem/?userid="
-										+ sharedpreferencesUtil.getUserid()
-										+ "&itemtype="
-										+ sharedpreferencesUtil.getItemtype()
-										+ "&time="
-										+ compareDatas.get(position).getTime();
+								String baseurl = "http://api.qijitek.com/deleteCompareItem/";
+								List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+								params.add(new BasicNameValuePair("userid",
+										sharedpreferencesUtil.getUserid()));
+								params.add(new BasicNameValuePair("itemtype",
+										sharedpreferencesUtil.getItemtype()));
+								params.add(new BasicNameValuePair("time",
+										compareDatas.get(position).getTime()));
 								try {
-									JSONObject jsonObject = MyUtils
-											.getJson(url);
+									JSONObject jsonObject = MyUtils.getJson2(
+											baseurl, params);
 									mHandler.post(new Runnable() {
 
 										@Override

@@ -76,9 +76,21 @@ public class Manageb3Activity extends Activity implements OnClickListener {
 		button3 = (Button) findViewById(R.id.button3);
 		button4 = (Button) findViewById(R.id.button4);
 		button5 = (Button) findViewById(R.id.button5);
-		alias.setText(si.getAlias());
-		brand.setText(si.getBrand());
-		methods.setText(si.getMethods());
+		if (!si.getAlias().equals("")) {
+			alias.setText(si.getAlias());
+		} else {
+			alias.setText("无");
+		}
+		if (!si.getBrand().equals("")) {
+			brand.setText(si.getBrand());
+		} else {
+			brand.setText("无");
+		}
+		if (!si.getMethods().equals("")) {
+			methods.setText(si.getMethods());
+		} else {
+			methods.setText("无");
+		}
 		name.setText(si.getName());
 		if (!si.getImgurl().equals("")) {
 			Picasso.with(getApplicationContext()).load(si.getImgurl())
@@ -86,11 +98,40 @@ public class Manageb3Activity extends Activity implements OnClickListener {
 		}
 		System.out.println(si.getFeature());
 		String[] ms = si.getFeature().split("@");
-		button1.setText(ms[0]);
-		button2.setText(ms[1]);
-		button3.setText(ms[2]);
-		button4.setText(ms[3]);
-		button5.setText(ms[4]);
+		if (ms.length == 0) {
+			ms[0] = MyUtils.getNullFeature();
+		}
+		if (ms.length == 5) {
+			button1.setText(ms[0]);
+			button2.setText(ms[1]);
+			button3.setText(ms[2]);
+			button4.setText(ms[3]);
+			button5.setText(ms[4]);
+		} else if (ms.length == 4) {
+			button1.setText(ms[0]);
+			button2.setText(ms[1]);
+			button3.setText(ms[2]);
+			button4.setText(ms[3]);
+			button5.setVisibility(View.INVISIBLE);
+		} else if (ms.length == 3) {
+			button1.setText(ms[0]);
+			button2.setText(ms[1]);
+			button3.setText(ms[2]);
+			button4.setVisibility(View.INVISIBLE);
+			button5.setVisibility(View.INVISIBLE);
+		} else if (ms.length == 2) {
+			button1.setText(ms[0]);
+			button2.setText(ms[1]);
+			button3.setVisibility(View.INVISIBLE);
+			button4.setVisibility(View.INVISIBLE);
+			button5.setVisibility(View.INVISIBLE);
+		} else if (ms.length == 1) {
+			button1.setText(ms[0]);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setVisibility(View.INVISIBLE);
+			button4.setVisibility(View.INVISIBLE);
+			button5.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	@Override

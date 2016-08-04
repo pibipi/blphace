@@ -2,8 +2,11 @@ package com.qijitek.blphace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,10 +60,10 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 			if (isUpdate) {
 				submit.setText("立即申请");
 				submit.setOnClickListener(new ApplyOnClickListener());
-//				userAddress = (UserAddress) getIntent().getExtras().get(
-//						"useraddress");
-//				System.out.println(userAddress.toString()+"``````");
-//				completeText(userAddress);
+				// userAddress = (UserAddress) getIntent().getExtras().get(
+				// "useraddress");
+				// System.out.println(userAddress.toString()+"``````");
+				// completeText(userAddress);
 				setUnEditable();
 			}
 		} else {
@@ -145,7 +148,7 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 								obj_json.optString("phone"),
 								obj_json.optString("province"),
 								obj_json.optString("address"));
-						System.out.println(userAddress.toString()+"```");
+						System.out.println(userAddress.toString() + "```");
 						mHandler.post(new Runnable() {
 
 							@Override
@@ -329,7 +332,7 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 					String name_txt = name.getText().toString().trim();
 					String skintype_txt = skin_type.getText().toString().trim();
 
-					String url = "http://api.qijitek.com/updateAddress/?userid="
+					String baseurl = "http://api.qijitek.com/updateAddress/?userid="
 							+ userid
 							+ "&age="
 							+ age_txt
@@ -342,9 +345,18 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 							+ "&address="
 							+ address_txt
 							+ "&name=" + name_txt + "&skintype=" + skintype_txt;
-					System.out.println(url);
+					List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+					params.add(new BasicNameValuePair("userid", userid));
+					params.add(new BasicNameValuePair("age", age_txt));
+					params.add(new BasicNameValuePair("sex", sex_txt));
+					params.add(new BasicNameValuePair("phone", phone_txt));
+					params.add(new BasicNameValuePair("province", province_txt));
+					params.add(new BasicNameValuePair("address", address_txt));
+					params.add(new BasicNameValuePair("name", name_txt));
+					params.add(new BasicNameValuePair("skintype", skintype_txt));
+
 					try {
-						JSONObject jsonObject = MyUtils.getJson(url);
+						JSONObject jsonObject = MyUtils.getJson2(baseurl,params);
 						if (!applyFlag) {
 							mHandler.post(new Runnable() {
 

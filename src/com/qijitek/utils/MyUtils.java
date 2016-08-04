@@ -12,11 +12,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,15 +31,18 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.util.EncodingUtils;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,6 +109,27 @@ public class MyUtils {
 
 	public static JSONObject getJson(String url)
 			throws ClientProtocolException, IOException, JSONException {
+		System.out.println(url);
+		HttpGet httpGet = new HttpGet(url);
+		JSONObject jsonObj;
+		HttpResponse httpResponse = new DefaultHttpClient().execute(httpGet);
+		if (httpResponse.getStatusLine().getStatusCode() == 200) {
+			String strResult = EntityUtils.toString(httpResponse.getEntity());
+			jsonObj = new JSONObject(strResult);
+			System.out.println("getJson" + jsonObj.toString());
+			return jsonObj;
+		} else
+			System.out.println("getJson null");
+		return null;
+
+	}
+
+	public static JSONObject getJson2(String baseUrl,
+			List<BasicNameValuePair> params) throws ClientProtocolException,
+			IOException, JSONException {
+		String param = URLEncodedUtils.format(params, "UTF-8");// 对参数编码
+		String url = baseUrl + "?" + param;
+		System.out.println(url);
 		HttpGet httpGet = new HttpGet(url);
 		JSONObject jsonObj;
 		HttpResponse httpResponse = new DefaultHttpClient().execute(httpGet);
@@ -617,5 +644,11 @@ public class MyUtils {
 		}
 		System.out.println("myutils" + value);
 		return value;
+	}
+
+	public static String getNullFeature() {
+		String[] lists = { "滋润", "防腐剂少", "修复", "防衰老" };
+		int r = new Random().nextInt(4);
+		return lists[r];
 	}
 }
