@@ -1,7 +1,6 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,6 +33,7 @@ import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.ProgersssDialog;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 public class SearchResultActivity extends Activity implements OnClickListener {
 	private RelativeLayout r1;
@@ -135,7 +136,7 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 			}
 			String price = s.getPrice();
 			if (!price.equals("")) {
-				holder.price.setText("¥"+s.getPrice());
+				holder.price.setText("¥" + s.getPrice());
 			} else {
 				holder.price.setText("无");
 
@@ -197,41 +198,46 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 									f4 = feature.getString(4);
 									feature_txt = f0 + "@" + f1 + "@" + f2
 											+ "@" + f3 + "@" + f4;
-								} else if (feature.length() < 5 && feature.length() > 0) {
+								} else if (feature.length() < 5
+										&& feature.length() > 0) {
 									feature_txt = feature.getString(0);
+									Log.e("bug", feature.getString(0));
 									for (int i = 1; i < feature.length(); i++) {
-										feature_txt = "@" + feature.getString(i);
+										feature_txt += "@"
+												+ feature.getString(i);
+										Log.e("bug", feature_txt);
 									}
 								} else {
 									feature_txt = MyUtils.getNullFeature();
 								}
-								
-//								String url20 = "http://api.qijitek.com/uploadTestlist/?userid="
-//										+ new SharedpreferencesUtil(
-//												getApplicationContext())
-//												.getUserid()
-//										+ "&itemtype="
-//										+ s.getItemtype()
-//										+ "&code="
-//										+ ""
-//										+ "&name="
-//										+ s.getName().trim()
-//										+ "&imgurl="
-//										+ s.getImgurl().trim()
-//										+ "&feature="
-//										+ feature_txt.trim()
-//										+ "&alias="
-//										+ alias_str.trim()
-//										+ "&brand="
-//										+ brand_str.trim()
-//										+ "&methods="
-//										+ methods_str.trim()
-//										+ "&time=" + System.currentTimeMillis();
-//								// final String url2 = url20
-//								// .replaceAll(" ", "%20");
-//								final String url2 = URLEncoder.encode(url20,
-//										"utf-8");
-//								MyUtils.getJson(url2.trim());
+
+								// String url20 =
+								// "http://api.qijitek.com/uploadTestlist/?userid="
+								// + new SharedpreferencesUtil(
+								// getApplicationContext())
+								// .getUserid()
+								// + "&itemtype="
+								// + s.getItemtype()
+								// + "&code="
+								// + ""
+								// + "&name="
+								// + s.getName().trim()
+								// + "&imgurl="
+								// + s.getImgurl().trim()
+								// + "&feature="
+								// + feature_txt.trim()
+								// + "&alias="
+								// + alias_str.trim()
+								// + "&brand="
+								// + brand_str.trim()
+								// + "&methods="
+								// + methods_str.trim()
+								// + "&time=" + System.currentTimeMillis();
+								// // final String url2 = url20
+								// // .replaceAll(" ", "%20");
+								// final String url2 = URLEncoder.encode(url20,
+								// "utf-8");
+								// MyUtils.getJson(url2.trim());
 								//
 								String baseUrl = "http://api.qijitek.com/uploadTestlist/";
 								List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
@@ -310,5 +316,15 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

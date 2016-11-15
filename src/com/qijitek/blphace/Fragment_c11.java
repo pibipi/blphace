@@ -29,7 +29,7 @@ public class Fragment_c11 extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.list_c111:
-			startActivity(new Intent(getActivity(), Socialc2Activity.class));
+			startActivity(new Intent(getActivity(), Socialc2Activity2.class));
 			break;
 
 		default:

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
+import com.umeng.analytics.MobclickAgent;
+
 public class Starta7Activity extends Activity implements OnClickListener {
 	private RelativeLayout list_a71;
 
@@ -25,7 +27,7 @@ public class Starta7Activity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.list_a71:
-			
+
 			break;
 		case R.id.back:
 			finish();
@@ -33,5 +35,15 @@ public class Starta7Activity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

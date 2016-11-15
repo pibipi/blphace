@@ -43,9 +43,9 @@ import com.qijitek.constant.NomalConstant;
 import com.qijitek.database.RssiData;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
-public class Bind_Device_Activity extends Activity implements
-		OnClickListener {
+public class Bind_Device_Activity extends Activity implements OnClickListener {
 
 	public final static UUID UUID_BLE_CHARACTERISTIC_F1 = UUID
 			.fromString(NomalConstant.BLE_CHARACTERISTIC_F1);
@@ -75,6 +75,7 @@ public class Bind_Device_Activity extends Activity implements
 	private boolean mConnected = false;
 	private SharedpreferencesUtil sharedpreferencesUtil;
 	private String mDeviceAddress;
+	private Context mContext;
 	//
 	private ArrayList<RssiData> list_bind_temp;
 	private ArrayList<BluetoothDevice> black_bind_temp;
@@ -103,6 +104,7 @@ public class Bind_Device_Activity extends Activity implements
 		startService(new Intent(Bind_Device_Activity.this,
 				BluetoothLeService.class));
 		connectService();
+		MobclickAgent.onEvent(mContext, "toBind");
 	}
 
 	private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
@@ -324,6 +326,7 @@ public class Bind_Device_Activity extends Activity implements
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case BIND_SUCCESS:
+					MobclickAgent.onEvent(getApplicationContext(), "bind_succeed");
 					System.out.println("绑定成功");
 					Toast.makeText(getApplicationContext(), "绑定成功", 0).show();
 					sharedpreferencesUtil.saveMyDeviceMac(maxDevice
@@ -364,6 +367,7 @@ public class Bind_Device_Activity extends Activity implements
 			}
 
 		};
+		mContext=getApplicationContext();
 		reset_Dialog = new AlertDialog.Builder(Bind_Device_Activity.this)
 				.create();
 		list_bind_temp = new ArrayList<RssiData>();
@@ -618,6 +622,7 @@ public class Bind_Device_Activity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onResume(this);
 		registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 		if (mBluetoothLeService != null) {
 			// final boolean result =
@@ -634,6 +639,7 @@ public class Bind_Device_Activity extends Activity implements
 		// unbindService(mServiceConnection);
 		unregisterReceiver(mGattUpdateReceiver);
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

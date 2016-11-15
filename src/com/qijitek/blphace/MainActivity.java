@@ -30,6 +30,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends SlidingFragmentActivity implements
 		OnClickListener {
@@ -48,7 +49,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		MobclickAgent.onEvent(getApplicationContext(), "Main");
 		init();
 		initSlidingMenu(savedInstanceState);
 		new Thread(new Runnable() {
@@ -341,4 +342,13 @@ public class MainActivity extends SlidingFragmentActivity implements
 		return super.onKeyDown(keyCode, event);
 	}
 
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

@@ -26,9 +26,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +40,7 @@ import com.qijitek.database.SingleItem;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class Starta5Activity2 extends Activity implements OnClickListener {
 	private final static String TAG = Fragment_Test2.class.getSimpleName();
@@ -516,6 +517,7 @@ public class Starta5Activity2 extends Activity implements OnClickListener {
 		unregisterReceiver(mGattUpdateReceiver);
 		Log.e(TAG, "on pause");
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -527,6 +529,7 @@ public class Starta5Activity2 extends Activity implements OnClickListener {
 		new ScanThread().start();
 		Log.e(TAG, "on resume");
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 	@Override

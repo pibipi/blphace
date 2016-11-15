@@ -55,12 +55,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp" >
 
             <RelativeLayout
                 android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="30dp" >
 
@@ -68,10 +68,9 @@
                     android:id="@+id/name1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/img1"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:singleLine="true"
                     android:text="雅诗兰黛"
                     android:textColor="#393939"
                     android:textSize="12sp" />
@@ -81,13 +80,12 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/no_img" />
+                    android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp" >
 
@@ -95,11 +93,10 @@
                     android:id="@+id/name2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/img2"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:singleLine="true"
-                    android:text="雅诗兰黛2"
+                    android:text="悦诗风吟"
                     android:textColor="#393939"
                     android:textSize="12sp" />
 
@@ -108,8 +105,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/no_img" />
+                    android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
             <TextView

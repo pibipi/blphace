@@ -1,13 +1,14 @@
 package com.qijitek.blphace;
 
-import com.qijitek.utils.SharedpreferencesUtil;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class Manageb1Activity extends Activity implements OnClickListener {
 	private Button bt1;
@@ -84,5 +85,15 @@ public class Manageb1Activity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

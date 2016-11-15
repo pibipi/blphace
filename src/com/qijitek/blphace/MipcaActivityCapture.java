@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Vector;
 
 import org.apache.http.client.ClientProtocolException;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,11 +31,9 @@ import com.mining.app.zxing.decoding.CaptureActivityHandler;
 import com.mining.app.zxing.decoding.InactivityTimer;
 import com.mining.app.zxing.view.ViewfinderView;
 import com.qijitek.constant.NomalConstant;
-import com.qijitek.database.SingleItem;
 import com.qijitek.utils.MyUtils;
-import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.ProgersssDialog;
-import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Initial the camera
@@ -92,6 +89,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onResume(this);
 		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
@@ -116,6 +114,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		MobclickAgent.onPause(this);
 		if (handler != null) {
 			handler.quitSynchronously();
 			handler = null;
@@ -182,7 +181,8 @@ public class MipcaActivityCapture extends Activity implements Callback {
 								Intent intent = new Intent(
 										MipcaActivityCapture.this,
 										ItemDetailActivity.class);
-								intent.putExtra("json", jsonObject.toString() + "");
+								intent.putExtra("json", jsonObject.toString()
+										+ "");
 								intent.putExtra("code", resultString + "");
 								startActivity(intent);
 								MipcaActivityCapture.this.finish();

@@ -3,8 +3,6 @@ package com.qijitek.blphace;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.qijitek.utils.SharedpreferencesUtil;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +14,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class GuideActivity extends Activity implements OnClickListener,
 		OnPageChangeListener {
@@ -137,5 +138,15 @@ public class GuideActivity extends Activity implements OnClickListener,
 			img1.setBackgroundResource(R.drawable.guide_point_gray);
 			start.setVisibility(View.VISIBLE);
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

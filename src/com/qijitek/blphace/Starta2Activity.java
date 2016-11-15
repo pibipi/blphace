@@ -18,6 +18,7 @@ import android.widget.Button;
 
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.NotScollViewPager;
+import com.umeng.analytics.MobclickAgent;
 
 public class Starta2Activity extends android.support.v4.app.FragmentActivity
 		implements OnClickListener {
@@ -131,12 +132,13 @@ public class Starta2Activity extends android.support.v4.app.FragmentActivity
 			System.out.println("count" + count);
 			sum_score += score;
 			if (count == 8) {
-				if(new SharedpreferencesUtil(getApplicationContext()).getIsTesting()){
+				if (new SharedpreferencesUtil(getApplicationContext())
+						.getIsTesting()) {
 				}
 				Starta2Activity.this.finish();
 				startActivity(new Intent(Starta2Activity.this,
 						Starta3Activity.class));
-				System.out.println(sum_score+"sum_score");
+				System.out.println(sum_score + "sum_score");
 				new SharedpreferencesUtil(getApplicationContext())
 						.saveSumScore(sum_score);
 			} else {
@@ -149,12 +151,14 @@ public class Starta2Activity extends android.support.v4.app.FragmentActivity
 	protected void onResume() {
 		registerReceiver(pagerReceiver, pagerIntentFilter());
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		unregisterReceiver(pagerReceiver);
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 }

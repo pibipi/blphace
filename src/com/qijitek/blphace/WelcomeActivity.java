@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 
-import com.qijitek.blphace.LoginActivity;
-import com.qijitek.blphace.MainActivity;
-import com.qijitek.blphace.R;
+import cn.jpush.android.api.JPushInterface;
+
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class WelcomeActivity extends Activity {
 	private Handler mHandler;
@@ -20,6 +20,7 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
+		MobclickAgent.setDebugMode(true);
 		init();
 		final boolean IsFirst = new SharedpreferencesUtil(
 				getApplicationContext()).getIsFirst1();
@@ -60,5 +61,17 @@ public class WelcomeActivity extends Activity {
 		if (file2.exists()) {
 			file2.delete();
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		JPushInterface.onResume(this);
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		JPushInterface.onPause(this);
+		MobclickAgent.onPause(this);
 	}
 }

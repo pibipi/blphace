@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import com.qijitek.spinner.SpinerAdapter;
 import com.qijitek.spinner.SpinerPopWindow;
-import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
-public class Starta3Activity extends Activity implements OnClickListener{
+public class Starta3Activity extends Activity implements OnClickListener {
 	private List<String> mListType = new ArrayList<String>(); // 类型列表
 	private List<String> mListType2 = new ArrayList<String>(); // 类型列表
 	private TextView mTView;
@@ -94,16 +94,16 @@ public class Starta3Activity extends Activity implements OnClickListener{
 		mSpinerPopWindow = new SpinerPopWindow(this);
 		mSpinerPopWindow.setAdatper(mAdapter);
 		mSpinerPopWindow
-		.setItemListener(new SpinerAdapter.IOnItemSelectListener() {
+				.setItemListener(new SpinerAdapter.IOnItemSelectListener() {
 
-			@Override
-			public void onItemClick(int pos) {
-				if (pos >= 0 && pos <= mListType.size()) {
-					String value = mListType.get(pos);
-					mTView.setText(value.toString());
-				}
-			}
-		});
+					@Override
+					public void onItemClick(int pos) {
+						if (pos >= 0 && pos <= mListType.size()) {
+							String value = mListType.get(pos);
+							mTView.setText(value.toString());
+						}
+					}
+				});
 	}
 
 	private void showSpinWindow() {
@@ -176,4 +176,13 @@ public class Starta3Activity extends Activity implements OnClickListener{
 	// mTView.setText(value.toString());
 	// }
 	// }
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

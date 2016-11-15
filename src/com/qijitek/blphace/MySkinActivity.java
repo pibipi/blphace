@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class MySkinActivity extends Activity implements OnClickListener {
 	private LinearLayout menu_layout;
@@ -82,16 +83,17 @@ public class MySkinActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onResume() {
-		content.setText("\b\b\b\b"+MyUtils.getSkintypeText(new SharedpreferencesUtil(
-				getApplicationContext()).getSkintype()));
+		content.setText("\b\b\b\b"
+				+ MyUtils.getSkintypeText(new SharedpreferencesUtil(
+						getApplicationContext()).getSkintype()));
 		title.setText("您的肌肤类型是：" + sharedpreferencesUtil.getSkintypeStr()
 				+ "肌肤性肌肤");
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
-	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
-
 }

@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -42,12 +41,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.util.EncodingUtils;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -60,6 +60,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.ta.utdid2.android.utils.StringUtils;
 
 public class MyUtils {
 	public static byte[] bitmap2bytearray(Bitmap bitmap) {
@@ -650,5 +652,48 @@ public class MyUtils {
 		String[] lists = { "滋润", "防腐剂少", "修复", "防衰老" };
 		int r = new Random().nextInt(4);
 		return lists[r];
+	}
+
+	/**
+	 * 判断这个所有Activity中是否启动了目标Activity
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param packageName
+	 * @return
+	 */
+	public static boolean isActivityLunch(Context context, String packageName) {
+		boolean isActive = false;
+		if (!StringUtils.isEmpty(packageName)) {
+			ActivityManager am = (ActivityManager) context
+					.getSystemService(Activity.ACTIVITY_SERVICE);
+			List<ActivityManager.RunningTaskInfo> taskInfoList = am
+					.getRunningTasks(10);
+			for (ActivityManager.RunningTaskInfo taskInfo : taskInfoList) {
+				if (taskInfo.baseActivity.getClassName().contains(packageName)) { // 说明它已经启动了
+					isActive = true;
+					break;
+				}
+			}
+		}
+		return isActive;
+	}
+
+	// 在进程中去寻找当前APP的信息，判断是否在前台运行
+	public static boolean isAppOnForeground(Context context) {
+		ActivityManager activityManager = (ActivityManager) context
+				.getSystemService(Context.ACTIVITY_SERVICE);
+		String packageName = context.getPackageName();
+		List<RunningAppProcessInfo> appProcesses = activityManager
+				.getRunningAppProcesses();
+		if (appProcesses == null)
+			return false;
+		for (RunningAppProcessInfo appProcess : appProcesses) {
+			if (appProcess.processName.equals(packageName)
+					&& appProcess.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

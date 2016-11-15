@@ -38,7 +38,6 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="40dp"
                 android:layout_toRightOf="@+id/img"
-                android:singleLine="true"
                 android:text="悦诗风吟 轻视毛孔净扯爽肤液"
                 android:textColor="#393939"
                 android:textSize="12sp" />

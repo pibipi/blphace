@@ -20,15 +20,14 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import com.qijitek.blphace.Fragment_Test1.ScanThread;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class Starta5Activity extends android.support.v4.app.FragmentActivity
 		implements OnCheckedChangeListener, OnClickListener {
@@ -67,7 +66,7 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 				super.handleMessage(msg);
 				switch (msg.what) {
 				case 5:
-//TODO 
+					// TODO
 					break;
 				case 6:
 
@@ -99,7 +98,6 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 		}
 		transaction.commit();
 	}
-
 
 	@Override
 	public void onClick(View v) {
@@ -230,11 +228,12 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 
 	}
 
-	@Override 
+	@Override
 	public void onPause() {
 		state_flag = false;
 		Log.e(TAG, "on pause");
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -243,5 +242,6 @@ public class Starta5Activity extends android.support.v4.app.FragmentActivity
 		new ScanThread().start();
 		Log.e(TAG, "on resume");
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 }

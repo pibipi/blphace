@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class AdviceCallbackActivity extends Activity implements OnClickListener {
 	private ImageView advice_callback_back;
@@ -95,5 +96,15 @@ public class AdviceCallbackActivity extends Activity implements OnClickListener 
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

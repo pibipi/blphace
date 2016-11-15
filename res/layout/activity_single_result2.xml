@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="多点测试"
+            android:text="单点测试"
             android:textColor="#393939"
             android:textSize="12sp" />
 

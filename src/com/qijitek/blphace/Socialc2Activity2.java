@@ -7,6 +7,8 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.umeng.analytics.MobclickAgent;
+
 public class Socialc2Activity2 extends Activity implements OnClickListener {
 	private WebView webView;
 	private String url = "";
@@ -43,5 +45,15 @@ public class Socialc2Activity2 extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

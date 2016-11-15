@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,14 +105,15 @@ public class Fragment_b21 extends Fragment implements OnClickListener {
 				SingleItem si = new SingleItem(name, imgurl, code, water, oil,
 						light, itemtype, qid, alias, brand, methods, feature);
 				singleItems.add(si);
-				mHandler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						myadapter.notifyDataSetChanged();
-					}
-				});
 			}
+			mHandler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					myadapter.notifyDataSetChanged();
+				}
+			});
+			Log.e("9ge", singleItems.size() + "");
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -291,8 +293,8 @@ public class Fragment_b21 extends Fragment implements OnClickListener {
 								params.add(new BasicNameValuePair("qid",
 										singleItems.get(position).getQid()));
 								try {
-									JSONObject jsonObject = MyUtils
-											.getJson2(baseurl,params);
+									JSONObject jsonObject = MyUtils.getJson2(
+											baseurl, params);
 									mHandler.post(new Runnable() {
 
 										@Override

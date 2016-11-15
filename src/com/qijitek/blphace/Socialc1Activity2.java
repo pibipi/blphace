@@ -2,6 +2,7 @@ package com.qijitek.blphace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
@@ -24,12 +25,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qijitek.database.SocialArticle;
 import com.qijitek.utils.MyUtils;
+import com.qijitek.utils.SharedpreferencesUtil;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 public class Socialc1Activity2 extends Activity implements OnItemClickListener,
 		OnClickListener {
@@ -48,6 +50,11 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener,
 		init();
 		socialc1_list.setAdapter(myAdapter);
 		socialc1_list.setOnItemClickListener(this);
+//		MobclickAgent.onEvent(getApplicationContext(), "C_Page");
+		MobclickAgent.onEvent(getApplicationContext(), "C_Page",
+				new HashMap<String, String>().put("id",
+						new SharedpreferencesUtil(getApplicationContext())
+								.getUserid()));
 	}
 
 	private void init() {
@@ -196,5 +203,15 @@ public class Socialc1Activity2 extends Activity implements OnItemClickListener,
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

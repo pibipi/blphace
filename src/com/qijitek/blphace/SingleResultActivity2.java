@@ -21,9 +21,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -39,6 +39,7 @@ import com.qijitek.utils.GetTypeUtils;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.MyProgressBar;
+import com.umeng.analytics.MobclickAgent;
 
 public class SingleResultActivity2 extends Activity implements OnClickListener {
 	private final static String TAG = SingleResultActivity2.class
@@ -90,6 +91,7 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_single_result2);
 		// registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 		init();
+		MobclickAgent.onEvent(getApplicationContext(), "SingleResultActivity");
 		// type = getIntent().getIntExtra("type", 0);
 		// boolean isSingle=getIntent().getBooleanExtra("single", true);
 		// if(isSingle){
@@ -158,14 +160,14 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 		// TODO
 		String str = new SharedpreferencesUtil(getApplicationContext())
 				.getSkintypeStr();
-		
+
 		if (!str.equals("")) {
 			skin_type.setText(str + "肌肤");
-			if(str.equals("干性")){
+			if (str.equals("干性")) {
 				result_img.setBackgroundResource(R.drawable.skin_type1);
-			}else if(str.equals("混合性")){
+			} else if (str.equals("混合性")) {
 				result_img.setBackgroundResource(R.drawable.skin_type2);
-			}else if(str.equals("油性")){
+			} else if (str.equals("油性")) {
 				result_img.setBackgroundResource(R.drawable.skin_type3);
 			}
 		} else {
@@ -235,8 +237,18 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 			public void run() {
 				String url = "http://api.qijitek.com/getResultAnalysis/?water="
 						+ a + "&oil=" + b + "&light=" + c;
+				String url_result = "http://api.qijitek.com/uploadEveryTest/?water="
+						+ a
+						+ "&oil="
+						+ b
+						+ "&light="
+						+ c
+						+ "&userid="
+						+ new SharedpreferencesUtil(getApplicationContext())
+								.getUserid();
 				try {
 					JSONObject jsonObject = MyUtils.getJson(url);
+					JSONObject jsonObject2 = MyUtils.getJson(url_result);
 					final String str = jsonObject.optString("obj");
 
 					mHandler.post(new Runnable() {
@@ -497,14 +509,14 @@ public class SingleResultActivity2 extends Activity implements OnClickListener {
 
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

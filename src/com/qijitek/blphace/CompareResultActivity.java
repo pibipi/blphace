@@ -47,6 +47,7 @@ import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.qijitek.view.RoundProgressBar;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 public class CompareResultActivity extends Activity implements OnClickListener {
 	private final static String TAG = CompareResultActivity.class
@@ -116,10 +117,14 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 		if (!cd.getImgurl1().equals("")) {
 			Picasso.with(getApplicationContext()).load(cd.getImgurl1())
 					.into(img1);
+		} else {
+			img1.setBackgroundResource(R.drawable.no_img);
 		}
 		if (!cd.getImgurl2().equals("")) {
 			Picasso.with(getApplicationContext()).load(cd.getImgurl2())
 					.into(img2);
+		} else {
+			img2.setBackgroundResource(R.drawable.no_img);
 		}
 		submit.setVisibility(View.INVISIBLE);
 		p1.setVisibility(View.GONE);
@@ -186,6 +191,40 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 					si.setOil(fd.getOil() + "");
 					si.setLight(fd.getLight() + "");
 					showP1();
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							String url_result = "http://api.qijitek.com/uploadEveryTest/?water="
+									+ fd.getWater()
+									+ "&oil="
+									+ fd.getOil()
+									+ "&light="
+									+ fd.getLight()
+									+ "&userid="
+									+ new SharedpreferencesUtil(
+											getApplicationContext())
+											.getUserid();
+							try {
+								JSONObject jsonObject = MyUtils
+										.getJson(url_result);
+							} catch (ClientProtocolException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								mHandler.post(new Runnable() {
+
+									@Override
+									public void run() {
+										Toast.makeText(getApplicationContext(),
+												"请检查网络连接", 0).show();
+									}
+								});
+								e.printStackTrace();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}).start();
 					postDelayed(new Runnable() {
 
 						@Override
@@ -201,6 +240,40 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 					si2.setOil(fd2.getOil() + "");
 					si2.setLight(fd2.getLight() + "");
 					showP2();
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							String url_result = "http://api.qijitek.com/uploadEveryTest/?water="
+									+ fd2.getWater()
+									+ "&oil="
+									+ fd2.getOil()
+									+ "&light="
+									+ fd2.getLight()
+									+ "&userid="
+									+ new SharedpreferencesUtil(
+											getApplicationContext())
+											.getUserid();
+							try {
+								JSONObject jsonObject = MyUtils
+										.getJson(url_result);
+							} catch (ClientProtocolException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								mHandler.post(new Runnable() {
+
+									@Override
+									public void run() {
+										Toast.makeText(getApplicationContext(),
+												"请检查网络连接", 0).show();
+									}
+								});
+								e.printStackTrace();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					}).start();
 					postDelayed(new Runnable() {
 
 						@Override
@@ -547,6 +620,7 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 		unregisterReceiver(mGattUpdateReceiver);
 		Log.e(TAG, "on pause");
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -558,6 +632,7 @@ public class CompareResultActivity extends Activity implements OnClickListener {
 		new ScanThread().start();
 		Log.e(TAG, "on resume");
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 	class ScanThread extends Thread {

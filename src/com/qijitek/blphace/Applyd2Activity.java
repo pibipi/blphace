@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.qijitek.database.UserAddress;
 import com.qijitek.utils.MyUtils;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 public class Applyd2Activity extends Activity implements OnClickListener {
 	private String name = "";
@@ -100,6 +101,15 @@ public class Applyd2Activity extends Activity implements OnClickListener {
 		apply.setText("已申请");
 		apply.setClickable(false);
 	}
-	
-	
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 }

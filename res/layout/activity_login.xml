@@ -102,7 +102,8 @@
         android:layout_height="30dp"
         android:layout_below="@+id/login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" >
+        android:layout_marginTop="30dp"
+        android:visibility="invisible" >
 
         <TextView
             android:id="@+id/textView1"
@@ -142,11 +143,11 @@
             android:id="@+id/weibo_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="80dp"
             android:onClick="onClick"
-            android:src="@drawable/weibo_icon" />
+            android:src="@drawable/weibo_icon"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/wechat_login"
@@ -156,7 +157,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="80dp"
             android:onClick="onClick"
-            android:src="@drawable/weixin_icon" />
+            android:src="@drawable/weixin_icon"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -2,7 +2,6 @@ package com.qijitek.blphace;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
@@ -21,11 +20,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +32,7 @@ import com.qijitek.database.SingleItem;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 public class Manageb3Activity extends Activity implements OnClickListener {
 	private ArrayList<SingleItem> singleItems;
@@ -394,10 +392,16 @@ public class Manageb3Activity extends Activity implements OnClickListener {
 		private CheckBox checkBox;
 	}
 
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 	@Override
 	protected void onResume() {
 		singleItems.clear();
 		super.onResume();
+		MobclickAgent.onResume(this);
 		new Thread(new Runnable() {
 
 			@Override

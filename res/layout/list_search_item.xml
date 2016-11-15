@@ -29,24 +29,24 @@
                 android:src="@drawable/no_img" />
 
             <TextView
-                android:singleLine="true"
-                android:layout_marginRight="50dp"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/img"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="50dp"
                 android:layout_toRightOf="@+id/img"
                 android:text="悦诗风吟  轻视毛孔净扯爽肤液"
                 android:textColor="#393939"
                 android:textSize="12sp" />
 
             <TextView
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/name"
                 android:id="@+id/spec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/name"
-                android:layout_centerVertical="true"
                 android:text="100ML"
                 android:textColor="#393939"
                 android:textSize="12sp" />

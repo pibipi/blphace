@@ -37,6 +37,7 @@ import android.widget.Toast;
 import com.qijitek.service.BluetoothLeService;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class Personal_Setting_Activity extends Activity implements
 		OnClickListener {
@@ -306,6 +307,7 @@ public class Personal_Setting_Activity extends Activity implements
 	protected void onResume() {
 		initBind();
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 	private void showUpdateDialog() {
@@ -399,6 +401,11 @@ public class Personal_Setting_Activity extends Activity implements
 					}
 				});
 		log_Dialog.setCancelable(false);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }
 

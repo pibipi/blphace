@@ -1,11 +1,11 @@
 package com.qijitek.blphace;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +19,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,6 +40,7 @@ import com.qijitek.database.UserAddress;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 @SuppressLint("SimpleDateFormat")
 public class Applyd12Activity extends Activity implements OnClickListener,
@@ -62,6 +62,11 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 		setContentView(R.layout.activity_applyd12);
 		init();
 		applyd1_list.setAdapter(myAdapter);
+//		MobclickAgent.onEvent(getApplicationContext(), "D_Page");
+		MobclickAgent.onEvent(getApplicationContext(), "D_Page",
+				new HashMap<String, String>().put("id",
+						new SharedpreferencesUtil(getApplicationContext())
+								.getUserid()));
 	}
 
 	private void init() {
@@ -308,6 +313,11 @@ public class Applyd12Activity extends Activity implements OnClickListener,
 			}
 		}).start();
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

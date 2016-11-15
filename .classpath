@@ -5,6 +5,9 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/okhttp-3.2.0.jar"/>
 	<classpathentry kind="lib" path="libs/weiboSDKCore_3.1.4.jar"/>
+	<classpathentry kind="lib" path="libs/umeng-analytics-v6.0.3.jar"/>
+	<classpathentry kind="lib" path="libs/utdid4all-1.0.4.jar"/>
+	<classpathentry kind="lib" path="libs/jpush-android-2.2.0.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>

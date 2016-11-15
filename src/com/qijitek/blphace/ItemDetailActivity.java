@@ -24,6 +24,7 @@ import com.qijitek.database.SingleItem;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 public class ItemDetailActivity extends Activity implements OnClickListener {
 	private Handler mHandler;
@@ -68,9 +69,15 @@ public class ItemDetailActivity extends Activity implements OnClickListener {
 		add.setOnClickListener(this);
 	}
 
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onResume(this);
 		code = getIntent().getStringExtra("code");
 		try {
 			JSONObject jsonObject = new JSONObject(getIntent().getStringExtra(

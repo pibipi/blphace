@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class Starta4Activity extends Activity implements OnClickListener {
 	private Button next;
@@ -124,5 +125,15 @@ public class Starta4Activity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

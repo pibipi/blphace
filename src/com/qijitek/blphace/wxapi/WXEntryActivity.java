@@ -23,6 +23,7 @@ import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.umeng.analytics.MobclickAgent;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	private static String TAG = "WXEntryActivity";
@@ -153,4 +154,13 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
 	}
 
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

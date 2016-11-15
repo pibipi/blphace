@@ -3,8 +3,6 @@ package com.qijitek.blphace;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.qijitek.utils.SharedpreferencesUtil;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +19,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+
+import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 		implements OnCheckedChangeListener, OnClickListener {
@@ -45,7 +46,7 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 			title.setText("洁面");
 			break;
 		case 2:
-		 	title.setText("化妆水");
+			title.setText("化妆水");
 			break;
 		case 3:
 			title.setText("乳液");
@@ -53,7 +54,7 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 		case 4:
 			title.setText("面膜");
 			break;
-		case 5: 
+		case 5:
 			title.setText("眼部护理");
 			break;
 		case 6:
@@ -199,4 +200,13 @@ public class Manageb2Activity extends android.support.v4.app.FragmentActivity
 		});
 	}
 
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

@@ -26,9 +26,9 @@ import android.widget.Toast;
 import com.pickerview.OptionsPopupWindow;
 import com.pickerview.OptionsPopupWindow.OnOptionsSelectListener;
 import com.qijitek.database.UserAddress;
-import com.qijitek.utils.HttpUtils;
 import com.qijitek.utils.MyUtils;
 import com.qijitek.utils.SharedpreferencesUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class MyAddressActivity extends Activity implements OnClickListener {
 	private TextView skin_type;
@@ -356,7 +356,8 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 					params.add(new BasicNameValuePair("skintype", skintype_txt));
 
 					try {
-						JSONObject jsonObject = MyUtils.getJson2(baseurl,params);
+						JSONObject jsonObject = MyUtils.getJson2(baseurl,
+								params);
 						if (!applyFlag) {
 							mHandler.post(new Runnable() {
 
@@ -484,9 +485,14 @@ public class MyAddressActivity extends Activity implements OnClickListener {
 		Toast.makeText(getApplicationContext(), str, 0).show();
 	}
 
-	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 }
